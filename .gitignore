@@ -1,0 +1,112 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and Databases
+*.log
+*.db
+*.sqlite
+*.sqlite3
+logs/
+data/*.db
+data/*.sqlite
+
+# Cache and temporary files
+cache/
+voice_cache/
+audio_output/
+__temp__/
+*.tmp
+*.cache
+
+# Models and large files
+models/
+*.bin
+*.safetensors
+local_ai_models/
+swallow_models/
+
+# Backup and old files
+backups/
+*_backup.*
+*_old.*
+*.bak
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Project specific
+memories/
+storage/
+universe/
+vibration/
+boundary/
+comfort/
+rituals/
+team_workspace/
+tokenizer/
+translate/
+voice_models/
+~
+
+# Generated files
+log_*.txt
+metrics_*.json
+
+# Additional virtual environments
+saijjin-env/
+swallow-models/
+local_ai_models/
+
+# Nested Git repositories
+AI-Companion-Frontend/
+saijin-swallow/
+saijin-swallow-light/

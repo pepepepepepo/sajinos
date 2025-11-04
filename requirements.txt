@@ -1,0 +1,21 @@
+﻿# Web Framework
+fastapi==0.121.0
+uvicorn==0.38.0
+
+# HTTP Client
+httpx==0.28.1
+
+# Data Validation and Processing
+pydantic==2.12.3
+PyYAML==6.0.3
+
+# AI/ML Dependencies
+torch==2.5.1+cu121
+numpy==2.3.3
+
+# Utility
+python-dotenv==1.2.1
+filelock==3.19.1
+
+# Development
+watchfiles==1.1.1

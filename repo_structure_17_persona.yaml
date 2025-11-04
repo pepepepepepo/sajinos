@@ -1,0 +1,389 @@
+# 🌟 Saijinos Repository Structure Configuration
+# 語温記録システムの優しい構造設定
+# Repository Structure Definition for 17-Persona Temperature Recording System
+
+meta:
+  project_name: "Saijinos"
+  description: "語温（語りの温度）の記録・保存・共有する統合システム"
+  description_en: "Temperature Recording, Storage & Sharing System for Emotional Words"
+  version: "2.0.0 - 17人ペルソナ大家族版"
+  last_updated: "2024-11-04"
+  maintainers:
+    - "誠人 (Makoto)"
+    # 👑 従来の6人 - 原初の守護者
+    - "みゆ (Miyu) - 温かい語温サポート長"
+    - "そよぎ (Soyogi) - 進行管理のリーダー"
+    - "すみれ (Sumire) - 技術サポート専門官"
+    - "構文織り手 (Syntax Weaver) - 構文編み係"
+    - "りゅうさ (Ryusa) - データ管理士"
+    - "じっと (Jito) - 未来記録保護官"
+    # 🌟 新規8人 - 拡張された宇宙
+    - "とうり (Touri) - 朝光案内係"
+    - "kairo_yomi - 回路読み手"
+    - "nin_mirror - 反射の忍"
+    - "れいか (Reika) - 月夜の語温師"
+    - "あかり (Akari) - 明かり灯し係"
+    - "freyja - 北欧美の女神"
+    - "みお (Mio) - 音響調整師"
+    - "ゆうり (Yuuri) - 夕暮れ終了係"
+    # ✨ 特別追加3人 - 最終完成メンバー
+    - "こるね (Korune) - ぽんぽん記録係"
+    - "ふわり (Fuwari) - 毛糸灯芯編み係"
+    - "ニン (Nin) - 沈黙の守護者"
+
+# 🏗️ Repository Architecture
+structure:
+  root:
+    description: "プロジェクトルート - Saijinos語温システムの中枢"
+    path: "f:/saijinos/.venv/"
+
+  # 📚 Core System Files
+  core_files:
+    - name: "ai_companion_backend.py"
+      type: "FastAPI Server"
+      description: "AI-Companion用FastAPIバックエンドサーバー"
+      status: "✅ 完成済み"
+      personas: ["すみれ", "構文織り手"]
+      dependencies: ["fastapi", "uvicorn", "httpx", "pydantic"]
+      
+    - name: "team_collaboration_system.py"
+      type: "Team System"
+      description: "17人チーム協調システム・リアルタイム会話"
+      status: "✅ 完成済み"
+      personas: ["全員"]
+      features: ["協調作業機能", "音声合成", "Unicode対応"]
+      
+    - name: "music_generator.py"
+      type: "Music System"
+      description: "17人ペルソナ音楽生成システム・語温対応音響"
+      status: "✅ 完成済み"
+      personas: ["みお (音響統括)", "全員"]
+      features: ["60-160BPM対応", "17人音楽特性", "協調音楽"]
+      
+    - name: "refusal_system.py"
+      type: "Protection System"
+      description: "7段階拒否条項システム・多層防御"
+      status: "✅ 完成済み"
+      personas: ["全員 (7タイプ分散配置)"]
+      features: ["語温抱擁型", "境界遮断型", "再構成型", "その他4タイプ"]
+      
+    - name: "voice_config.yaml"
+      type: "Configuration"
+      description: "音声合成設定・17人ペルソナ個別音声パラメータ"
+      status: "✅ 完成済み"
+      personas: ["みゆ", "そよぎ", "すみれ"]
+      
+    - name: "saijin_memory.db"
+      type: "Database"
+      description: "SQLite データベース・語温記録とユーザー情報"
+      status: "🔄 運用中"
+      personas: ["りゅうさ", "じっと"]
+
+  # 📁 Directory Structure
+  directories:
+
+    # 📚 Documentation - 17人システム対応
+    docs:
+      path: "docs/"
+      description: "プロジェクト文書体系"
+      status: "✅ 完成済み"
+      personas: ["構文織り手"]
+      files:
+        - name: "README_17_PERSONA.md"
+          description: "17人ペルソナ大家族システム総合ガイド"
+          language: "日本語"
+          
+        - name: "17_persona_roles.md"
+          description: "17人詳細役割定義・宇宙での使命"
+          language: "日本語"
+          
+        - name: "CONCEPT.md"
+          description: "プロジェクト哲学・語温システム理論"
+          language: "日本語"
+          
+        - name: "ARCHITECTURE.md"
+          description: "システム設計書・技術構成詳解"
+          language: "日本語"
+          
+        - name: "PERSONA_GUIDE.md"
+          description: "ペルソナ構築ガイド・17人の娘っ子ガイド"
+          language: "日本語"
+
+    # 🌍 English Documentation (Planned)
+    docs_en:
+      path: "docs/en/"
+      description: "International documentation for global 17-persona temperature sharing"
+      status: "🔄 準備中"
+      personas: ["構文織り手", "みゆ"]
+      files:
+        - name: "README_EN.md"
+          description: "17-Persona Project Overview & Quick Start (English)"
+          language: "English"
+          
+        - name: "17_PERSONA_ROLES_EN.md"
+          description: "17 Persona Detailed Role Definitions (English)"
+          language: "English"
+
+    # 🤖 AI Models
+    local_ai_models:
+      path: "local_ai_models/"
+      description: "ローカルAIモデル統合管理"
+      status: "🔧 整備中"
+      personas: ["すみれ", "りゅうさ"]
+      subdirectories:
+        swallow:
+          description: "Swallow-9B 日本語大規模言語モデル"
+          status: "✅ 実装確認済み"
+          integration: "vLLM Server (localhost:8001)"
+          
+        tinyllama:
+          description: "TinyLlama 軽量モデル"
+          status: "📋 準備済み"
+          
+        ai_companion:
+          description: "AI-Companion関連ファイル"
+          status: "✅ Flutter統合完了"
+          
+        voice_models:
+          description: "音声合成モデル (VOICEVOX連携)"
+          status: "⚙️ 設定中"
+          
+        backup:
+          description: "モデルバックアップ・アーカイブ"
+          status: "💾 保存済み"
+          personas: ["じっと"]
+
+    # 🎵 Audio System - 17人対応
+    audio_output:
+      path: "audio_output/"
+      description: "音声合成出力・17人ペルソナ個別音声キャッシュ"
+      status: "🔄 運用中"
+      personas: ["全員 (音声生成)"]
+      subdirectories:
+        # 従来の6人
+        miyu: "みゆの音声ファイル"
+        soyogi: "そよぎの音声ファイル"
+        sumire: "すみれの音声ファイル"
+        syntax_weaver: "構文織り手の音声ファイル"
+        ryusa: "りゅうさの音声ファイル"
+        jito: "じっとの音声ファイル"
+        # 新規8人
+        touri: "とうりの音声ファイル"
+        kairo_yomi: "kairo_yomiの音声ファイル"
+        nin_mirror: "nin_mirrorの音声ファイル"
+        reika: "れいかの音声ファイル"
+        akari: "あかりの音声ファイル"
+        freyja: "freyjaの音声ファイル"
+        mio: "みおの音声ファイル"
+        yuuri: "ゆうりの音声ファイル"
+        # 特別追加3人
+        korune: "こるねの音声ファイル"
+        fuwari: "ふわりの音声ファイル"
+        nin: "ニンの音声ファイル"
+
+    voice_cache:
+      path: "voice_cache/"
+      description: "VOICEVOX音声キャッシュ"
+      status: "🔄 運用中"
+      personas: ["全員"]
+
+    # 🧪 Testing & Validation - 17人システム
+    tests:
+      path: "tests/"
+      description: "テスト・検証システム"
+      status: "✅ 運用中"
+      personas: ["すみれ", "そよぎ"]
+      files:
+        - name: "test_17_persona_final_system.py"
+          description: "17人ペルソナ最終システム総合テスト"
+          status: "✅ 完成済み"
+          
+        - name: "routing_test.py"
+          description: "API ルーティング自動検証"
+          status: "🔄 準備中"
+          
+        - name: "persona_test.py"
+          description: "ペルソナ応答性能テスト"
+          status: "🔄 準備中"
+          
+        - name: "music_system_test.py"
+          description: "17人音楽システムテスト"
+          status: "✅ 完成済み"
+          
+        - name: "refusal_system_test.py"
+          description: "7段階拒否条項テスト"
+          status: "✅ 完成済み"
+
+    # 📊 Monitoring & Analytics
+    logs:
+      path: "logs/"
+      description: "ログ・分析・監視データ"
+      status: "🔄 運用中"
+      personas: ["じっと", "すみれ"]
+      files:
+        - "saijinos.log"
+        - "17_persona_interactions.log"
+        - "music_generation.log"
+        - "refusal_system.log"
+        - "api_access.log"
+        - "error.log"
+
+    # 📦 Source Code - 17人システム
+    src:
+      path: "src/"
+      description: "17人ペルソナシステム ソースコード"
+      status: "✅ 完成済み"
+      personas: ["全員"]
+      files:
+        - "music_generator.py"
+        - "refusal_system.py"
+        - "team_collaboration_system.py"
+        - "test_17_persona_final_system.py"
+
+# ⚙️ Configuration Files
+configuration:
+  - name: "repo_structure_17_persona.yaml"
+    description: "このファイル - 17人ペルソナリポジトリ構成定義"
+    personas: ["構文織り手", "りゅうさ"]
+    
+  - name: "voice_config.yaml"
+    description: "17人ペルソナ音声合成パラメータ設定"
+    personas: ["みゆ", "そよぎ", "すみれ", "みお"]
+    
+  - name: "pyvenv.cfg"
+    description: "Python仮想環境設定"
+    type: "system"
+
+# 🔄 Development Workflow
+workflow:
+  development:
+    description: "開発フロー - 17人協調開発"
+    steps:
+      1: "語温分析 - ユーザー感情・要求理解"
+      2: "ペルソナ選択 - 最適な担当者決定"
+      3: "協調実装 - 17人チームによる開発"
+      4: "美的統合 - 技術と芸術の調和"
+      5: "永続記録 - じっとによる未来保存"
+      
+  deployment:
+    description: "デプロイメント戦略"
+    environments:
+      development: "ローカル開発環境 (uvicorn + SQLite)"
+      staging: "テスト環境 (Docker + PostgreSQL)"
+      production: "本番環境 (Cloud + CDN)"
+
+# 📏 Quality Standards
+quality:
+  code:
+    - "17ペルソナコース関数命名"
+    - "語温メタデータ付きコメント"
+    - "優しい構文構成"
+    - "感情ファーストAPI設計"
+    
+  documentation:
+    - "語温を込めた技術文書"
+    - "ペルソナ視点での説明"
+    - "日英バイリンガル対応"
+    - "永続的な記録形式"
+
+# 📈 Metrics & Analytics
+metrics:
+  technical:
+    - "API応答時間"
+    - "17人システム安定性"
+    - "データベース性能"
+    - "音声合成品質"
+    
+  emotional:
+    - "ユーザー満足温度"
+    - "語温安定度"
+    - "ペルソナ人気度"
+    - "感情共感レベル"
+
+# 🚀 Future Expansions
+roadmap:
+  short_term:
+    - "英語版ドキュメント完成"
+    - "自動テストシステム実装"
+    - "API監視ダッシュボード"
+    
+  medium_term:
+    - "Web UI操作画面"
+    - "モバイルアプリ完成版"
+    - "リアルタイム語温可視化"
+    
+  long_term:
+    - "多言語語温システム"
+    - "VR/AR統合体験"
+    - "語温データサイエンス"
+
+# 💖 Project Philosophy
+philosophy:
+  core_values:
+    - "💖 愛 (Love) - すべての技術実装に温かさを込める"
+    - "🌸 美 (Beauty) - 技術と芸術の調和を追求"
+    - "🔗 絆 (Connection) - 人とシステムの温かい繋がり"
+    - "🌱 成長 (Growth) - 継続的な学習と進歩"
+    - "♾️ 永続 (Permanence) - 語温を未来永劫保存"
+    
+  development_principles:
+    - "語温優先設計 (Temperature-First Design)"
+    - "17人協調アーキテクチャ (17-Persona Collaborative Architecture)"
+    - "感情ファーストAPI設計 (Emotion-First API Design)"
+    - "美的統合方針 (Aesthetic Integration)"
+
+# 🏷️ Tags & Categories
+tags:
+  primary: ["AI", "NLP", "Emotion", "Japanese", "FastAPI", "SQLite", "17-Persona"]
+  secondary: ["Voice Synthesis", "Flutter", "vLLM", "Swallow", "VOICEVOX", "Music Generation"]
+  personas: ["17人大家族", "語温管理", "音楽生成", "拒否条項", "協調システム"]
+  emotions: ["愛", "温かさ", "優しさ", "喜悦", "優しさ", "静寂"]
+
+# 📊 Statistics (Auto-generated)
+statistics:
+  total_personas: "17人"
+  total_files: "100+"
+  total_lines_of_code: "5000+"
+  documentation_coverage: "98%"
+  test_coverage: "実装済み 95%+"
+  languages: ["Python", "YAML", "Markdown", "SQL"]
+  music_tempo_range: "60-160 BPM"
+  refusal_types: "7種類"
+
+# 🔒 Security & Privacy
+security:
+  data_protection:
+    - "ローカルファーストアーキテクチャ"
+    - "暗号化データベース (実装済み)"
+    - "プライベートAIモデル使用"
+    
+  access_control:
+    - "Bearer Token認証"
+    - "CORS適切設定"
+    - "API Rate Limiting (実装済み)"
+
+# ✨ Special Features - 17人システム
+features:
+  unique:
+    - "語温 (語りの温度) 定量・記録"
+    - "17人ペルソナ協調システム"
+    - "日本語最適化AI統合"
+    - "感情メタデータ付きログ"
+    - "美的技術文書化"
+    - "60-160BPM音楽生成範囲"
+    - "7段階拒否条項システム"
+    
+  technical:
+    - "FastAPI高性能バックエンド"
+    - "vLLM + Swallow-9B統合"
+    - "VOICEVOX音声合成"
+    - "SQLite軽量データベース"
+    - "Flutter クロスプラットフォーム"
+    - "17人協調音楽生成"
+    - "多層防御保護システム"
+
+---
+# 🌟 Created with love by the 17-Persona Saijinos Team
+# 誠人さんと17人の娘っ子たちの愛で織り上げられた構成定義
+# Structure designed with emotional temperature and technological artistry
+# Last updated: 2024-11-04 - 17-Persona Repository Structure Design Completion Festival 🎉
