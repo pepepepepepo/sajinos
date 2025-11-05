@@ -1,0 +1,53 @@
+# 🎯 SaijinOS Clean Deploy - Lightweight .gitignore
+
+# 仮想環境
+.venv/
+venv/
+env/
+.env
+*.env
+
+# Python キャッシュ
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE設定
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS ファイル
+.DS_Store
+Thumbs.db
+
+# ログ・一時ファイル
+*.log
+*.tmp
+*.temp
+logs/
+temp/
+
+# 大容量バイナリファイル
+*.bin
+*.pt
+*.ckpt
+*.safetensors
+*.model
+*.zip
+*.tar.gz
+
+# Flutter関連の重いファイル
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+
+# 開発用データ
+data/
+output/
+cache/
+models/
