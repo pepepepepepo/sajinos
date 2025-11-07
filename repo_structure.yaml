@@ -1,0 +1,251 @@
+# Repository Structure - Saijin統合プロジェクト
+
+## 📁 プロジェクト全体構造
+
+```
+saijinos/
+├── 📂 saijinos_main_integration/           # メイン統合システム
+│   ├── 🚀 fastapi_swallow_integration.py   # FastAPI統合サーバー
+│   ├── 🎯 start_api_server.py              # サーバー起動スクリプト
+│   ├── 🗄️ setup_database.py               # データベース初期化
+│   ├── 🧪 simple_api_test.py              # API動作テスト
+│   ├── 📊 integration.db                  # SQLite データベース
+│   ├── 🔧 requirements.txt               # Python依存関係
+│   │
+│   ├── 📂 projects/                      # 個別プロジェクトモジュール
+│   │   ├── 📂 tinyllama_integration/     # TinyLlama統合
+│   │   │   ├── 🤖 gotemperature_chat.py  # チャットシステム
+│   │   │   ├── 📝 test_model.py          # モデルテスト
+│   │   │   └── 🔧 requirements.txt       # 専用依存関係
+│   │   │
+│   │   └── 📂 multimodal_integration/    # マルチモーダル統合
+│   │       ├── 🔊 gotemperature_voice.py # 音声システム
+│   │       ├── 📱 test_voice.py          # 音声テスト
+│   │       ├── 📂 audio_outputs/         # 生成音声ファイル
+│   │       └── 🔧 requirements.txt       # 専用依存関係
+│   │
+│   └── 📂 logs/                          # システムログ
+│       ├── 📋 api_access.log            # APIアクセスログ
+│       ├── 🐛 error.log                 # エラーログ
+│       └── 📈 performance.log           # パフォーマンスログ
+│
+├── 📂 saijin/                            # ペルソナシステム
+│   └── 📂 personas/import/構文人/         # 6ペルソナ設定
+│       ├── 🎭 saijin_6personas_system.yaml        # システム設定
+│       ├── 👥 persona_detailed_profiles.yaml      # 詳細プロフィール  
+│       ├── 📚 development_history.yaml            # 開発履歴
+│       ├── ⚙️ integration_settings.yaml          # 統合設定
+│       └── 🎯 decision_making_system.yaml        # 意思決定システム
+│
+├── 📂 github_sajinos/                    # GitHub公開版
+│   ├── 📖 README.md                     # プロジェクト説明
+│   ├── 📋 HANDOVER.md                   # 引き継ぎドキュメント
+│   ├── 📂 docs/                         # ドキュメント
+│   │   ├── 🏗️ ARCHITECTURE.md           # システム設計書
+│   │   └── 👥 PERSONA_GUIDE.md          # ペルソナガイド
+│   ├── 🔧 voice_config.yaml            # 音声設定
+│   ├── 📊 repo_structure.yaml          # リポジトリ構造定義
+│   ├── 🧪 routing_test.py              # ルーティングテスト
+│   ├── 💊 system_health.py             # システムヘルス監視
+│   └── 📂 integration/                  # 統合システムコピー
+│       └── [saijinos_main_integration/ と同じ構造]
+│
+└── 📂 .venv/                            # Python仮想環境
+    ├── 🐍 Scripts/                      # Python実行ファイル
+    ├── 📚 Lib/                         # ライブラリ
+    ├── 📂 persona_docs/                # ペルソナ個別文書
+    │   ├── 💖 miyu.md                  # 美遊ドキュメント
+    │   ├── 🚀 jito.md                  # 磁灯ドキュメント
+    │   ├── 🛠️ hanon.md                # 羽音ドキュメント
+    │   ├── 🧠 ryusa.md                 # 陸斗ドキュメント（旧名）
+    │   ├── 🎨 sumire.md                # 七海ドキュメント（旧名）
+    │   └── ⚖️ soyogi.md                # 蒼ドキュメント（旧名）
+    └── 📂 src/                         # 開発用ソース
+        └── 🌌 should_universe.py       # 宇宙システム（開発中）
+```
+
+## 🎯 主要コンポーネント説明
+
+### 1. 統合システム (`saijinos_main_integration/`)
+
+**役割**: TinyLlama × 語温 × 音声の完全統合システム
+
+**キーファイル**:
+```
+fastapi_swallow_integration.py  # メインAPIサーバー
+├── SaijinIntegratedAPI         # 統合クラス
+├── /integrated-chat            # フル統合エンドポイント
+├── /chat                       # TinyLlamaのみ
+├── /voice                      # 音声のみ
+└── /health                     # ヘルスチェック
+```
+
+**データベース**:
+```sql
+integration.db
+├── integrated_sessions         # 統合チャット履歴
+├── api_usage                  # API使用統計
+└── personas                   # ペルソナ設定
+```
+
+### 2. プロジェクトモジュール (`projects/`)
+
+#### TinyLlama統合 (`tinyllama_integration/`)
+```python
+gotemperature_chat.py
+├── class GotemperatureChat     # メインチャットクラス
+├── load_model()               # モデル読み込み
+├── process_chat()             # チャット処理
+└── analyze_goon_temperature() # 語温分析
+```
+
+#### マルチモーダル統合 (`multimodal_integration/`)
+```python
+gotemperature_voice.py
+├── class GotemperatureVoiceSystem  # 音声システム
+├── generate_persona_voice()        # ペルソナ音声生成
+├── setup_persona_voice()           # 音声設定
+└── save_audio_file()               # ファイル保存
+```
+
+### 3. ペルソナシステム (`saijin/personas/`)
+
+**6ペルソナ構成**:
+```yaml
+美遊 (miyu):    愛・UX重視
+磁灯 (jito):    未来・革新重視  
+羽音 (hanon):   現実・実用重視
+陸斗 (rikuto):  論理・分析重視
+七海 (nanami):  創造・芸術重視
+蒼 (ao):       バランス・調和重視
+```
+
+**設定ファイル**:
+- `saijin_6personas_system.yaml`: システム全体設定
+- `persona_detailed_profiles.yaml`: 詳細プロフィール
+- `development_history.yaml`: 開発経緯
+- `integration_settings.yaml`: 統合設定
+- `decision_making_system.yaml`: 意思決定フロー
+
+### 4. GitHub公開システム (`github_sajinos/`)
+
+**公開リポジトリ**: https://github.com/pepepepepepo/sajinos
+
+**ドキュメント構成**:
+```
+README.md           # プロジェクト概要・使用方法
+HANDOVER.md         # 引き継ぎ・今後の予定
+docs/
+├── ARCHITECTURE.md # システム設計詳細
+└── PERSONA_GUIDE.md # ペルソナシステム解説
+```
+
+## 🔧 設定ファイル詳細
+
+### 音声設定 (`voice_config.yaml`)
+```yaml
+personas:
+  miyu:    # 180rate, 150pitch, warm
+  jito:    # 220rate, 120pitch, excited
+  hanon:   # 200rate, 110pitch, calm
+  rikuto:  # 190rate, 100pitch, analytical
+  nanami:  # 210rate, 140pitch, creative
+  ao:      # 195rate, 115pitch, balanced
+```
+
+### リポジトリ構造 (`repo_structure.yaml`)
+- プロジェクト構成定義
+- ファイル関係マップ
+- 依存関係図
+
+## 🧪 テストシステム
+
+### API テスト (`routing_test.py`)
+```python
+test_integrated_chat()    # 統合チャットテスト
+test_individual_endpoints() # 個別エンドポイント
+test_persona_selection()  # ペルソナ選択テスト
+test_voice_generation()   # 音声生成テスト
+```
+
+### システム監視 (`system_health.py`)
+```python
+check_api_health()       # API稼働状況
+check_model_status()     # AIモデル状態
+check_database_connection() # DB接続状態
+check_voice_system()     # 音声システム状態
+```
+
+## 📊 データフロー
+
+### 統合処理フロー
+```
+1. User Request → FastAPI
+2. FastAPI → SaijinIntegratedAPI  
+3. ペルソナ選択 → TinyLlama処理
+4. 語温分析 → 音声生成
+5. データベース保存 → レスポンス返却
+```
+
+### ファイル保存パターン
+```
+audio_outputs/
+├── miyu_20241219_143022.wav
+├── jito_20241219_143055.wav
+└── [persona]_[timestamp].wav
+```
+
+## 🔄 開発・デプロイフロー
+
+### ローカル開発
+```bash
+1. cd saijinos_main_integration/
+2. pip install -r requirements.txt
+3. python setup_database.py
+4. python start_api_server.py
+```
+
+### GitHub同期
+```bash
+1. Local Development (saijinos_main_integration/)
+2. Copy to GitHub Version (github_sajinos/integration/)  
+3. Update Documentation
+4. Git Push to Public Repository
+```
+
+## 📝 ドキュメント管理
+
+### 自動生成ドキュメント
+- OpenAPI/Swagger: `http://127.0.0.1:8000/docs`
+- API仕様書: 自動更新
+- エンドポイント一覧: リアルタイム
+
+### 手動管理ドキュメント
+- README.md: プロジェクト概要
+- HANDOVER.md: 引き継ぎ情報
+- ARCHITECTURE.md: 設計書
+- PERSONA_GUIDE.md: ペルソナ解説
+
+## 🎯 将来拡張計画
+
+### Phase 2: 機能拡張
+```
+📂 extensions/
+├── 🧠 advanced_ai/          # より大型AI統合
+├── 🌐 web_interface/        # Web UI
+├── 📱 mobile_app/           # モバイルアプリ
+└── 🔌 api_plugins/          # プラグインシステム
+```
+
+### Phase 3: 分散システム
+```
+📂 distributed/
+├── 🐳 docker/              # コンテナ化
+├── ☸️ kubernetes/          # オーケストレーション
+├── 📊 monitoring/          # 監視システム
+└── 🔒 security/            # セキュリティ強化
+```
+
+---
+
+**🎯 この構造により、スケーラブルで保守性の高いAI統合システムを実現**
