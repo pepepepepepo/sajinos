@@ -1,0 +1,78 @@
+# SaijinOS Docker Ignore
+# Ignore development and build artifacts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+.tox/
+
+# Virtual environments
+.venv/
+venv/
+saijjin-env/
+saijin-env/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and temporary files
+*.log
+logs/
+temp/
+tmp/
+
+# Git
+.git/
+.gitignore
+
+# Documentation development
+docs/images/screenshots/
+*.md.backup
+
+# AI model files (too large for container)
+models/
+*.bin
+*.safetensors
+*.model
+*.pt
+*.pth
+
+# Cache and storage
+voice_cache/
+storage/
+cache/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Docker files themselves
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Development scripts
+scripts/development/
+test_data/

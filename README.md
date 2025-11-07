@@ -1,18 +1,11 @@
 ﻿# SaijinOS - Multi-Persona AI Integration System
 
-> **"Teaching AI to breathe and bringing human warmth to every interaction"**
+[![AI-Persona](https://img.shields.io/badge/AI-Persona-purple)](https://github.com/topics/ai-persona) [![BMP-Sync](https://img.shields.io/badge/BMP-Sync-orange)](https://github.com/topics/bmp-sync) [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-00a393.svg)](https://fastapi.tiangolo.com/) [![YAML-Routing](https://img.shields.io/badge/YAML-Routing-green)](https://github.com/topics/yaml-routing) [![Open-Source-AI](https://img.shields.io/badge/Open--Source-AI-blue)](https://github.com/topics/open-source-ai)
 
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-00a393.svg)](https://fastapi.tiangolo.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-[Documentation](docs/en/) | [Japanese Version](README_JA.md) | [Persona System](docs/en/persona-system.md)
+**Revolutionary AI system with 6 unique personas • BMP-synchronized emotional intelligence • Production-ready FastAPI backend**  
+🚀 **[Quick Start](#quick-start)** • 📚 **[Documentation](docs/en/)** • 🌐 **[日本語版](README_JA.md)**
 
 ---
-
-## Overview
-
-**SaijinOS** is a revolutionary AI integration system that brings emotional intelligence and personality to artificial intelligence. Unlike traditional chatbots, SaijinOS features **6 unique AI personas** working together in harmony, each with distinct roles, emotional patterns, and musical synchronization.
 
 ## Core Features
 
