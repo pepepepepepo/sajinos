@@ -1,0 +1,81 @@
+# SaijinOS Multi-AI Configuration
+# APIサーバー用統合設定ファイル
+
+models:
+  # Primary AI Models
+  swallow_9b:
+    model_path: "E:/AI_Models/saijin-swallow/swallow_models/swallow/"
+    status: "AVAILABLE"
+    backend: "vLLM"
+    fallback_enabled: true
+    
+  tinyllama:
+    model_path: "local://tinyllama-1.1b-chat"
+    status: "AVAILABLE" 
+    backend: "transformers"
+    fallback_enabled: true
+
+# 6ペルソナ統合設定
+personas:
+  yuri:
+    name: "ユリ"
+    model_preference: "swallow_9b"
+    personality: "冷静・分析的"
+    role: "リーダー・戦略"
+    
+  saki:
+    name: "サキ"
+    model_preference: "tinyllama"
+    personality: "活発・創造的"
+    role: "アイデア・革新"
+    
+  rena:
+    name: "レナ"
+    model_preference: "swallow_9b"
+    personality: "優雅・サポート"
+    role: "サポート・調和"
+    
+  haruka:
+    name: "ハルカ"
+    model_preference: "tinyllama"
+    personality: "明るい・TTS音声"
+    role: "音声・コミュニケーション"
+    voice_system_enabled: true
+    
+  miku:
+    name: "ミク"
+    model_preference: "swallow_9b"
+    personality: "技術・システム"
+    role: "技術・開発"
+    
+  aya:
+    name: "アヤ"
+    model_preference: "tinyllama"
+    personality: "神秘的・直感"
+    role: "直感・洞察"
+
+# API Server Settings
+server:
+  host: "127.0.0.1"
+  port: 8000
+  debug: true
+  auto_reload: true
+  
+# System Settings  
+system:
+  fallback_mode: true
+  mock_responses: true  # 実際のモデルが利用できない場合
+  response_timeout: 30
+  max_conversation_history: 100
+  
+# Health Check Settings
+health_check:
+  enabled: true
+  interval: 30  # seconds
+  endpoints: ["/health", "/personas", "/status"]
+  
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/saijinos.log"
+  console: true

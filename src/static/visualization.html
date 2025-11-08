@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 SaijinOS - データ可視化ダッシュボード</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-primary: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 226, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            25% { filter: hue-rotate(90deg); }
+            50% { filter: hue-rotate(180deg); }
+            75% { filter: hue-rotate(270deg); }
+        }
+
+        /* パーティクル背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.6), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 10s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .header {
+            background: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%),
+                rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 2rem 3rem;
+            border-bottom: 2px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 25px 25px;
+            margin: 0 1rem;
+            animation: headerGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            0% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.1); }
+            100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 255, 255, 0.2); }
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(255, 255, 255, 0.2);
+            background: linear-gradient(45deg, #ffffff, #f0f0f0, #ffffff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titlePulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            0% { transform: scale(1); text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            100% { transform: scale(1.02); text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(79, 172, 254, 0.4);
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            background: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: var(--shadow-primary);
+            border: 2px solid var(--glass-border);
+            transition: all 0.4s ease;
+            animation: chartFloat 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes chartFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .chart-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .chart-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .chart-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .chart-canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .full-width .chart-canvas {
+            height: 400px !important;
+        }
+
+        .status-indicators {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-card {
+            background: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid var(--glass-border);
+            box-shadow: var(--shadow-primary);
+            transition: all 0.4s ease;
+            min-width: 150px;
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .status-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--success-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1.5rem 2rem;
+                margin: 0 0.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌈 SaijinOS データ可視化ダッシュボード</h1>
+        <p>✨ リアルタイム感情・システム・ペルソナ分析 ✨</p>
+        <div class="nav-buttons">
+            <a href="/control-panel" class="nav-btn">🎛️ コントロールパネル</a>
+            <a href="/system-monitor" class="nav-btn">📊 システム監視</a>
+            <button class="nav-btn" onclick="toggleAutoRefresh()">🔄 自動更新: ON</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- ステータス指標 -->
+        <div class="status-indicators">
+            <div class="status-card">
+                <div class="status-value" id="active-personas">15</div>
+                <div class="status-label">アクティブペルソナ</div>
+            </div>
+            <div class="status-card">
+                <div class="status-value" id="avg-emotion">78%</div>
+                <div class="status-label">平均感情レベル</div>
+            </div>
+            <div class="status-card">
+                <div class="status-value" id="system-health">98%</div>
+                <div class="status-label">システム健全性</div>
+            </div>
+            <div class="status-card">
+                <div class="status-value" id="data-points">2.4K</div>
+                <div class="status-label">データポイント</div>
+            </div>
+        </div>
+
+        <!-- チャートグリッド -->
+        <div class="dashboard-grid">
+            <!-- ペルソナ感情レベル -->
+            <div class="chart-container">
+                <div class="chart-title">💖 ペルソナ感情レベル</div>
+                <canvas id="emotionChart" class="chart-canvas"></canvas>
+            </div>
+
+            <!-- システムリソース -->
+            <div class="chart-container">
+                <div class="chart-title">⚡ システムリソース</div>
+                <canvas id="resourceChart" class="chart-canvas"></canvas>
+            </div>
+
+            <!-- ペルソナ活動履歴 -->
+            <div class="chart-container full-width">
+                <div class="chart-title">📈 ペルソナ活動履歴（24時間）</div>
+                <canvas id="activityChart" class="chart-canvas"></canvas>
+            </div>
+
+            <!-- ペルソナ分布 -->
+            <div class="chart-container">
+                <div class="chart-title">🎯 ペルソナ状態分布</div>
+                <canvas id="statusChart" class="chart-canvas"></canvas>
+            </div>
+
+            <!-- 感情温度マップ -->
+            <div class="chart-container">
+                <div class="chart-title">🌡️ 感情温度マップ</div>
+                <canvas id="heatmapChart" class="chart-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let autoRefresh = true;
+        let refreshInterval;
+        let charts = {};
+
+        // WebSocket接続
+        let ws = null;
+
+        function connectWebSocket() {
+            try {
+                ws = new WebSocket('ws://localhost:8002/ws/visualization');
+                
+                ws.onopen = function(event) {
+                    console.log('Visualization WebSocket接続成功');
+                };
+
+                ws.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    updateCharts(data);
+                };
+
+                ws.onclose = function(event) {
+                    console.log('WebSocket接続終了、5秒後に再接続');
+                    setTimeout(connectWebSocket, 5000);
+                };
+
+            } catch (error) {
+                console.error('WebSocket接続エラー:', error);
+            }
+        }
+
+        // チャート初期化
+        function initializeCharts() {
+            // ペルソナ感情レベル（レーダーチャート）
+            charts.emotion = new Chart(document.getElementById('emotionChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['美遊💖', 'そよぎ🍃', 'ななみ🌸', 'こはく⭐', 'しずく💧', 'あかり🔥'],
+                    datasets: [{
+                        label: '感情レベル',
+                        data: [85, 78, 92, 65, 88, 76],
+                        backgroundColor: 'rgba(79, 172, 254, 0.2)',
+                        borderColor: 'rgba(79, 172, 254, 1)',
+                        pointBackgroundColor: 'rgba(79, 172, 254, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(79, 172, 254, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#666'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // システムリソース（ドーナツチャート）
+            charts.resource = new Chart(document.getElementById('resourceChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['CPU', 'メモリ', 'GPU', '空き容量'],
+                    datasets: [{
+                        data: [42, 68, 23, 77],
+                        backgroundColor: [
+                            'rgba(240, 147, 251, 0.8)',
+                            'rgba(245, 87, 108, 0.8)',
+                            'rgba(67, 233, 123, 0.8)',
+                            'rgba(79, 172, 254, 0.8)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 12,
+                                    weight: '600'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // ペルソナ活動履歴（ラインチャート）
+            const timeLabels = Array.from({length: 24}, (_, i) => `${i}:00`);
+            charts.activity = new Chart(document.getElementById('activityChart'), {
+                type: 'line',
+                data: {
+                    labels: timeLabels,
+                    datasets: [{
+                        label: 'アクティブペルソナ数',
+                        data: [8, 6, 4, 3, 2, 4, 8, 12, 15, 18, 20, 22, 21, 19, 17, 20, 18, 16, 15, 14, 13, 12, 10, 9],
+                        borderColor: 'rgba(67, 233, 123, 1)',
+                        backgroundColor: 'rgba(67, 233, 123, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 25,
+                            ticks: {
+                                color: '#666'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#666'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // ペルソナ状態分布（バーチャート）
+            charts.status = new Chart(document.getElementById('statusChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['アクティブ', '待機中', 'スリープ', 'エラー'],
+                    datasets: [{
+                        data: [15, 5, 2, 0],
+                        backgroundColor: [
+                            'rgba(67, 233, 123, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(108, 117, 125, 0.8)',
+                            'rgba(220, 53, 69, 0.8)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#666'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // 感情温度マップ（ポーラーエリアチャート）
+            charts.heatmap = new Chart(document.getElementById('heatmapChart'), {
+                type: 'polarArea',
+                data: {
+                    labels: ['喜び', '悲しみ', '怒り', '驚き', '恐れ', '嫌悪'],
+                    datasets: [{
+                        data: [80, 20, 15, 60, 10, 5],
+                        backgroundColor: [
+                            'rgba(255, 206, 84, 0.8)',
+                            'rgba(79, 172, 254, 0.8)',
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(153, 102, 255, 0.8)',
+                            'rgba(255, 159, 64, 0.8)',
+                            'rgba(201, 203, 207, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 11,
+                                    weight: '600'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // チャート更新
+        function updateCharts(data) {
+            if (data.personas) {
+                // ペルソナ数更新
+                document.getElementById('active-personas').textContent = 
+                    data.personas.filter(p => p.status === 'ACTIVE').length;
+                
+                // 平均感情レベル更新
+                const avgEmotion = data.personas.reduce((sum, p) => sum + p.emotion_level, 0) / data.personas.length;
+                document.getElementById('avg-emotion').textContent = Math.round(avgEmotion * 100) + '%';
+            }
+
+            if (data.system_status) {
+                document.getElementById('system-health').textContent = '98%';
+            }
+
+            // データポイント更新
+            document.getElementById('data-points').textContent = 
+                (Math.random() * 1000 + 2000).toFixed(1) + 'K';
+        }
+
+        // 自動更新切り替え
+        function toggleAutoRefresh() {
+            autoRefresh = !autoRefresh;
+            const btn = document.querySelector('.nav-btn:last-child');
+            btn.textContent = `🔄 自動更新: ${autoRefresh ? 'ON' : 'OFF'}`;
+            
+            if (autoRefresh) {
+                startAutoRefresh();
+            } else {
+                stopAutoRefresh();
+            }
+        }
+
+        function startAutoRefresh() {
+            refreshInterval = setInterval(() => {
+                // チャートデータを更新
+                updateRandomData();
+            }, 5000);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        }
+
+        // ランダムデータ更新（デモ用）
+        function updateRandomData() {
+            // 感情レベルチャート更新
+            if (charts.emotion) {
+                charts.emotion.data.datasets[0].data = charts.emotion.data.datasets[0].data.map(() => 
+                    Math.random() * 40 + 60);
+                charts.emotion.update('none');
+            }
+
+            // システムリソース更新
+            if (charts.resource) {
+                charts.resource.data.datasets[0].data = [
+                    Math.random() * 30 + 20,  // CPU
+                    Math.random() * 40 + 40,  // Memory
+                    Math.random() * 50 + 10,  // GPU
+                    Math.random() * 30 + 60   // 空き容量
+                ];
+                charts.resource.update('none');
+            }
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('SaijinOS データ可視化ダッシュボード初期化');
+            initializeCharts();
+            connectWebSocket();
+            startAutoRefresh();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+core_system:
+  api_port: 8000
+  personas: 6
+emotion_system:
+  emotion_analysis: true
+  emotion_path: F:/sajinos_17persona
+  personas: 17
+  temperature_recording: true
+integration:
+  cross_system_communication: true
+  performance_monitoring: true
+  realtime_emotion_recording: true
+  unified_logging: true
+music_system:
+  audio_quality: high
+  bmp_range: 60-180
+  supported_keys:
+  - C
+  - G
+  - Am
+  - Em
+  - D
+  - F
+  sync_enabled: true
+voice_system:
+  haruka_tts: true
+  haruka_voice_path: F:/saijin-swallow-light
+  voice_personas: 12

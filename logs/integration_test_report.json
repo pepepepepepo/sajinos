@@ -1,0 +1,160 @@
+{
+  "test_summary": {
+    "total_tests": 16,
+    "passed_tests": 14,
+    "failed_tests": 2,
+    "success_rate": 87.5,
+    "test_timestamp": "2025-11-08T22:01:09.611555"
+  },
+  "detailed_results": [
+    {
+      "timestamp": "2025-11-08T22:00:37.194113",
+      "test_name": "Phase 2 サーバー接続",
+      "success": false,
+      "details": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000014D3E5FBF10>: Failed to establish a new connection: [WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。'))"
+    },
+    {
+      "timestamp": "2025-11-08T22:00:41.230723",
+      "test_name": "23ペルソナシステム",
+      "success": false,
+      "details": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/v2/personas/extended (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000014D3E606450>: Failed to establish a new connection: [WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。'))"
+    },
+    {
+      "timestamp": "2025-11-08T22:00:43.259403",
+      "test_name": "感情記録 - haruka",
+      "success": true,
+      "details": {
+        "record_id": 1,
+        "temperature": 75.5,
+        "emotion_type": "happy"
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:45.292918",
+      "test_name": "感情記録 - yuri",
+      "success": true,
+      "details": {
+        "record_id": 2,
+        "temperature": 60.0,
+        "emotion_type": "analytical"
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:47.320781",
+      "test_name": "感情記録 - makoto",
+      "success": true,
+      "details": {
+        "record_id": 3,
+        "temperature": 80.2,
+        "emotion_type": "excited"
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:49.365556",
+      "test_name": "BMP同期 - haruka (80BMP)",
+      "success": true,
+      "details": {
+        "sync_status": "synchronized",
+        "music_key": "F",
+        "bmp": 80
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:51.386958",
+      "test_name": "BMP同期 - yuri (120BMP)",
+      "success": true,
+      "details": {
+        "sync_status": "synchronized",
+        "music_key": "G",
+        "bmp": 120
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:53.411736",
+      "test_name": "BMP同期 - miku (95BMP)",
+      "success": true,
+      "details": {
+        "sync_status": "synchronized",
+        "music_key": "Em",
+        "bmp": 95
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:55.432109",
+      "test_name": "BMP同期 - makoto (150BMP)",
+      "success": true,
+      "details": {
+        "sync_status": "synchronized",
+        "music_key": "C",
+        "bmp": 150
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:57.455231",
+      "test_name": "感情履歴 - haruka",
+      "success": true,
+      "details": {
+        "record_count": 1,
+        "has_history": true
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:00:59.484130",
+      "test_name": "感情履歴 - yuri",
+      "success": true,
+      "details": {
+        "record_count": 1,
+        "has_history": true
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:01:01.499031",
+      "test_name": "感情履歴 - makoto",
+      "success": true,
+      "details": {
+        "record_count": 1,
+        "has_history": true
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:01:03.526800",
+      "test_name": "統合システム状態",
+      "success": true,
+      "details": {
+        "phase": "Phase 2 - コア + 音声 + 感情・音楽システム統合",
+        "total_personas": 23,
+        "core_personas": 6,
+        "emotion_personas": 17,
+        "integration_progress": "85%",
+        "emotion_system_status": "available"
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:01:05.558560",
+      "test_name": "パフォーマンス - ルートAPI",
+      "success": true,
+      "details": {
+        "response_time_ms": 2030.75,
+        "acceptable": false
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:01:07.577518",
+      "test_name": "パフォーマンス - ペルソナ一覧",
+      "success": true,
+      "details": {
+        "response_time_ms": 2017.46,
+        "acceptable": false
+      }
+    },
+    {
+      "timestamp": "2025-11-08T22:01:09.611555",
+      "test_name": "パフォーマンス - 統合状態",
+      "success": true,
+      "details": {
+        "response_time_ms": 2034.04,
+        "acceptable": false
+      }
+    }
+  ]
+}
