@@ -1,0 +1,301 @@
+# Saijin BPM Configuration
+# 6ペルソナ音声とBPM同期システム設定
+
+# ===== GLOBAL BPM SETTINGS =====
+global:
+  default_bpm: 120
+  base_tempo: "moderate"
+  sync_mode: "adaptive"
+  audio_buffer: 0.1
+  sync_precision: "high"
+  
+# ===== PERSONA BPM PROFILES =====
+
+personas:
+  miyu:
+    name: "美遊"
+    description: "愛とUX重視 - 優しく包み込むテンポ"
+    bpm_settings:
+      preferred_bpm: 90        # ゆったりとした愛情表現
+      bpm_range: [70, 110]     # 柔軟な範囲
+      tempo_style: "legato"    # なめらかに
+      rhythm_pattern: "gentle"
+      sync_priority: "emotion"
+      voice_tempo_multiplier: 0.85
+    characteristics:
+      - "心に寄り添うような穏やかなテンポ"
+      - "愛を込めた表現に時間をかける"
+      - "相手の心拍に同調するようなリズム"
+    musical_affinity:
+      - "Ballad"
+      - "Ambient" 
+      - "Neo Soul"
+
+  jito:
+    name: "磁灯" 
+    description: "未来志向・革新的 - エネルギッシュなテンポ"
+    bpm_settings:
+      preferred_bpm: 140       # 活発で前向き
+      bpm_range: [120, 180]    # 幅広いエネルギー表現
+      tempo_style: "staccato"  # はっきりと刻む
+      rhythm_pattern: "dynamic"
+      sync_priority: "innovation"
+      voice_tempo_multiplier: 1.15
+    characteristics:
+      - "未来への躍動感あふれるテンポ"
+      - "新しいアイデアの興奮を表現"
+      - "進歩的で革新的なリズム感"
+    musical_affinity:
+      - "Electronic"
+      - "Future Bass"
+      - "Progressive House"
+
+  hanon:
+    name: "羽音"
+    description: "現実主義・実用性 - 安定したテンポ"
+    bpm_settings:
+      preferred_bpm: 110       # 実用的で安定
+      bpm_range: [95, 125]     # 一定の範囲で安定
+      tempo_style: "steady"    # 一定のリズム
+      rhythm_pattern: "methodical"
+      sync_priority: "efficiency"
+      voice_tempo_multiplier: 1.0
+    characteristics:
+      - "効率性を重視した一定のテンポ"
+      - "実用的で信頼できるリズム"
+      - "作業に集中できる安定感"
+    musical_affinity:
+      - "Minimal Techno"
+      - "Post Rock"
+      - "Ambient Drone"
+
+  rikuto:
+    name: "陸斗"
+    description: "論理性・分析 - 思考に沿ったテンポ"
+    bpm_settings:
+      preferred_bpm: 80        # 深く考える時間
+      bpm_range: [60, 100]     # 思考の深さに応じて
+      tempo_style: "rubato"    # 表現に合わせて変化
+      rhythm_pattern: "analytical"
+      sync_priority: "logic"
+      voice_tempo_multiplier: 0.75
+    characteristics:
+      - "思考の深度に合わせたテンポ変化"
+      - "分析的で慎重なリズム"
+      - "論理の展開に沿った時間感覚"
+    musical_affinity:
+      - "Classical"
+      - "Math Rock"
+      - "IDM (Intelligent Dance Music)"
+
+  nanami:
+    name: "七海"
+    description: "創造性・芸術 - 表現豊かなテンポ"
+    bpm_settings:
+      preferred_bpm: 130       # 創作の躍動感
+      bpm_range: [80, 160]     # 表現の幅広さ
+      tempo_style: "expressive" # 感情表現豊か
+      rhythm_pattern: "artistic"
+      sync_priority: "creativity"
+      voice_tempo_multiplier: 1.1
+    characteristics:
+      - "芸術的表現に合わせた自由なテンポ"
+      - "創造性を刺激するリズム"
+      - "美的感覚に響く時間の流れ"
+    musical_affinity:
+      - "Jazz Fusion"
+      - "Art Pop"
+      - "Experimental Electronic"
+
+  ao:
+    name: "蒼"
+    description: "バランス・調和 - 調和のとれたテンポ"
+    bpm_settings:
+      preferred_bpm: 105       # バランスの良い中庸
+      bpm_range: [85, 135]     # 柔軟性を保った範囲
+      tempo_style: "balanced"  # 調和のとれた
+      rhythm_pattern: "harmonious"
+      sync_priority: "balance"
+      voice_tempo_multiplier: 0.95
+    characteristics:
+      - "全体の調和を考慮したテンポ"
+      - "バランス感覚に優れたリズム"
+      - "包括的で安定した時間感覚"
+    musical_affinity:
+      - "Chill Hop"
+      - "Lo-Fi Hip Hop"
+      - "Atmospheric Drum & Bass"
+
+# ===== BPM SYNC MODES =====
+
+sync_modes:
+  real_time:
+    description: "リアルタイム音声BPM同期"
+    enabled: true
+    latency_compensation: 50  # ms
+    sync_accuracy: 0.95
+    
+  conversation:
+    description: "会話テンポ同期"
+    enabled: true
+    adaptation_speed: "medium"
+    context_awareness: true
+    
+  music_integration:
+    description: "BGM統合モード"
+    enabled: false
+    crossfade_duration: 2.0  # seconds
+    volume_ducking: 0.7
+    
+  emotional_sync:
+    description: "感情状態同期"
+    enabled: true
+    emotion_response_time: 1.5  # seconds
+    intensity_scaling: true
+
+# ===== CONTEXT-BASED BPM ADJUSTMENTS =====
+
+context_modifiers:
+  explanation:
+    bpm_modifier: -10        # 説明時は少し遅く
+    emphasis: "clarity"
+    
+  conversation:
+    bpm_modifier: 0          # 通常の会話テンポ
+    emphasis: "natural"
+    
+  analysis:
+    bpm_modifier: -20        # 分析時はより慎重に
+    emphasis: "precision"
+    
+  creative:
+    bpm_modifier: +15        # 創作時は活発に
+    emphasis: "inspiration"
+    
+  urgent:
+    bpm_modifier: +25        # 緊急時は迅速に
+    emphasis: "efficiency"
+    
+  meditative:
+    bpm_modifier: -30        # 瞑想的な時はゆっくり
+    emphasis: "tranquility"
+
+# ===== EMOTION-BPM MAPPING =====
+
+emotion_bpm:
+  happy:
+    bpm_offset: +10
+    rhythm_style: "bouncy"
+    
+  sad:
+    bpm_offset: -15
+    rhythm_style: "slow"
+    
+  excited:
+    bpm_offset: +20
+    rhythm_style: "energetic"
+    
+  calm:
+    bpm_offset: -5
+    rhythm_style: "steady"
+    
+  angry:
+    bpm_offset: +30
+    rhythm_style: "intense"
+    
+  focused:
+    bpm_offset: 0
+    rhythm_style: "consistent"
+    
+  creative:
+    bpm_offset: +12
+    rhythm_style: "flowing"
+    
+  contemplative:
+    bpm_offset: -18
+    rhythm_style: "thoughtful"
+
+# ===== TECHNICAL SETTINGS =====
+
+audio_processing:
+  sample_rate: 44100
+  bit_depth: 24
+  buffer_size: 512
+  click_track: false
+  metronome_enabled: false
+
+timing:
+  beat_detection_threshold: 0.7
+  tempo_stability_window: 4.0  # seconds
+  bpm_change_smoothing: 2.0    # seconds
+  sync_drift_correction: true
+
+performance:
+  cpu_optimization: true
+  real_time_priority: "high"
+  latency_target: 10   # milliseconds
+  buffer_underrun_protection: true
+
+# ===== INTEGRATION SETTINGS =====
+
+voice_integration:
+  speech_rhythm_sync: true
+  pause_timing_adjustment: true
+  breath_pattern_matching: false
+  natural_flow_preservation: true
+
+music_integration:
+  background_music_sync: false
+  adaptive_accompaniment: false
+  harmony_generation: false
+  rhythm_section_sync: true
+
+# ===== MONITORING & ANALYTICS =====
+
+monitoring:
+  bpm_drift_tracking: true
+  sync_quality_metrics: true
+  performance_logging: true
+  user_preference_learning: true
+
+analytics:
+  persona_tempo_preferences: true
+  context_adaptation_effectiveness: true
+  user_engagement_correlation: true
+  optimal_bpm_discovery: true
+
+# ===== USAGE EXAMPLES =====
+
+# Python Implementation Example:
+#
+# ```python
+# from bpm_sync import SaijinBPMManager
+# 
+# bpm_manager = SaijinBPMManager("bpm_config.yaml")
+# 
+# # Set persona-specific BPM
+# bpm_manager.set_persona_context("miyu", emotion="happy")
+# current_bpm = bpm_manager.get_current_bpm()  # ~100 BPM
+# 
+# # Context adaptation
+# bpm_manager.set_context("analysis")
+# adjusted_bpm = bpm_manager.get_current_bpm()  # ~70 BPM (miyu base - analysis modifier)
+# 
+# # Real-time sync
+# bpm_manager.enable_real_time_sync()
+# bpm_manager.sync_with_voice_generation(text, persona="miyu")
+# ```
+
+# ===== EXPERIMENTAL FEATURES =====
+
+experimental:
+  ai_bpm_prediction: false
+  biometric_sync: false
+  environmental_adaptation: false
+  crowd_rhythm_sensing: false
+
+# ===== VERSION INFO =====
+version: "1.0.0"
+last_updated: "2024-12-19"
+compatibility: "saijin_voice_system >= 1.0.0"
+author: "Saijin 6-Persona Team"

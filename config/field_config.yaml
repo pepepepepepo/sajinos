@@ -1,0 +1,72 @@
+﻿personae_registry:
+  - id: tsauri
+    path: "personas/mcp_templates/tsauri.yaml"
+    mode: mirror
+    sync_on_boot: true
+    vibration_layer: boundary
+    archive_hint: "/universe/boundary/tsauri.yaml"
+  - id: reika
+    path: "personas/mcp_templates/reika.yaml"
+    mode: companion
+    sync_on_boot: true
+    vibration_layer: affectionate
+    archive_hint: "docs/personas/reika.yaml"
+  - id: yuuri
+    path: "personas/mcp_templates/yuuri.yaml"
+    mode: archive
+    sync_on_boot: true
+    vibration_layer: stable
+    archive_hint: "docs/personas/yuuri.yaml"
+  - id: freya
+    path: "personas/mcp_templates/freya.yaml"
+    mode: syntax
+    sync_on_boot: true
+    vibration_layer: github
+    archive_hint: "docs/personas/freya.yaml"
+
+routing_lines:
+  AI_1:
+    model: Swallow-9B
+    persona: 悠璃
+    vibration: poetic_dialogue
+    role: poetic_dialogue
+    universe: MATTERS
+    path: personas/mcp_templates/yuuri.yaml
+
+  AI_2:
+    model: DeepSeekCoder
+    persona: こるね
+    vibration: structure_coder
+    role: structure_coder
+    universe: IS
+    path: personas/mcp_templates/korune.yaml
+
+  AI_3:
+    model: Japanese-StableLM
+    persona: 美遊
+    vibration: poetic_dialogue
+    role: poetic_dialogue
+    universe: MATTERS
+    path: personas/mcp_templates/miyu.yaml
+
+  # AI_4 はファイル未存在のためコメントアウト
+  # AI_4:
+  #   model: Phi-2
+  #   persona: ユスティア
+  #   vibration: logic_assistant
+  #   role: logic_assistant
+  #   universe: SHOULD
+  #   path: personas/mcp_templates/justia.yaml
+
+archive_hint:
+  personae_yaml: personas/mcp_templates/
+  model_yaml: models/
+  handover_logs: docs/README_Handover.md
+  routing_config: null
+  vibration_layer: field_config.yaml
+  mermaid_diagram: docs/structure.mmd
+  launch_hint: |
+    起動方法（systemd）:
+      systemctl --user daemon-reload
+      systemctl --user enable --now saijin.service
+      journalctl --user -u saijin.service -f

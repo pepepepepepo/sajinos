@@ -1,34 +1,51 @@
-# 🌸 SaijinOS Phase 3 - UI Bridge & Pandora Guardian System
+<<<<<<< HEAD
+# 🌸 SaijinOS - Multi-Persona AI Integration System
 
-> **美しく、知的で、信頼性の高い41ペルソナ管理システム**  
-> *A beautiful, intelligent, and reliable 41-persona management system*
+> **Revolutionary AI system evolving from 6 to 41 unique personas**  
+> *Beautiful, intelligent, and reliable multi-persona management system*
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)
-[![Status](https://img.shields.io/badge/Status-Active_Development-orange.svg)]()
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)]()
+[![AI-Persona](https://img.shields.io/badge/AI-Persona-purple)](https://github.com/topics/ai-persona) [![BMP-Sync](https://img.shields.io/badge/BMP-Sync-orange)](https://github.com/topics/bmp-sync) [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-00a393.svg)](https://fastapi.tiangolo.com/) [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org) [![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)]() [![Status](https://img.shields.io/badge/Status-Phase%203%20Complete-success.svg)]()
 
----
-
-## 🌟 **プロジェクト概要**
-
-**SaijinOS Phase 3**は、41個の個性豊かなペルソナを管理する高度なWebシステムです。美しいUI、堅牢なバックエンド、そして強力なパンドラ・ガーディアンシステムによる危機管理機能を備えています。
-
-### **✨ 主な特徴**
-
-- 🎭 **41ペルソナシステム**: 各々が独自の個性と専門スキルを持つ
-- 🛡️ **パンドラ・ガーディアン**: 高度な危機検出・管理システム
-- 🎨 **美しいUI**: レスポンシブでインタラクティブなWebインターフェース  
-- ⚡ **高速API**: FastAPIベースの最適化されたRESTful API
-- 🧪 **包括的テスト**: 自動化されたテストスイートによる品質保証
-- 📦 **モジュラー設計**: 保守性とスケーラビリティを重視した構造
+🚀 **[Quick Start](#quick-start)** • 📚 **[Phase 3 Features](#phase-3-features)** • 🌐 **[日本語版](README_JA.md)** • 📖 **[Documentation](docs/en/)**
 
 ---
 
-## 🚀 **クイックスタート**
+## 🌟 **Project Evolution**
 
-### **1. インストール**
+### **Phase 3 (Current)** - UI Bridge & Pandora Guardian System ✨
+**SaijinOS Phase 3** は、41個の個性豊かなペルソナを管理する高度なWebシステムです。美しいUI、堅牢なバックエンド、そして強力なパンドラ・ガーディアンシステムによる危機管理機能を備えています。
 
+### **Previous Phases**
+- **Phase 1-2**: 6-persona BMP-synchronized emotional intelligence system
+- **Foundation**: Musical AI synchronization, emotional temperature recording
+
+## 🎯 **Phase 3 Features**
+
+### **✨ Latest Innovations**
+- 🎭 **41-Persona System**: Each with unique personality and specialized skills
+- 🛡️ **Pandora Guardian**: Advanced crisis detection & management system
+- 🎨 **Beautiful UI**: Responsive and interactive web interface  
+- ⚡ **High-Speed API**: FastAPI-based optimized RESTful API
+- 🧪 **Comprehensive Testing**: Automated test suites for quality assurance
+- 📦 **Modular Architecture**: Maintainability and scalability focused structure
+
+### **🌟 Core Capabilities**
+- **Musical AI Synchronization**: BMP-synchronized emotional intelligence (Legacy)
+- **Emotional Temperature Recording**: Conversation warmth tracking
+- **Declarative YAML Routing**: Persona definitions via config files
+- **Lightweight Deployment**: FastAPI + SQLite minimal setup
+
+---
+
+## 🚀 **Quick Start**
+
+### **1. Clone Repository**
+```bash
+git clone https://github.com/pepepepepepo/sajinos.git
+cd sajinos
+```
+
+### **2. Environment Setup**
 ```bash
 # 仮想環境の作成と有効化
 python -m venv .venv
@@ -39,21 +56,28 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### **2. サーバー起動**
+### **3. Configuration**
+Copy `.env.example` to `.env` and customize (optional):
+```env
+API_PORT=8002
+PERSONAS_DIR=./personas
+```
 
+### **4. Launch Phase 3 System**
 ```bash
-# メインサーバーの起動
+# Phase 3 UI Bridge Server (Latest)
 python src/phase3_ui_bridge_server_modular.py
 
-# またはクイックテスト
+# Quick Test
 python quick_test.py
 ```
 
-### **3. アクセス**
+### **5. Access Points**
 
-- **メインUI**: http://localhost:8002
-- **API ドキュメント**: http://localhost:8002/docs  
-- **ペルソナ管理**: http://localhost:8002/admin
+- **Phase 3 UI**: http://localhost:8002
+- **API Documentation**: http://localhost:8002/docs  
+- **Persona Management**: http://localhost:8002/admin
+- **Pandora Guardian**: http://localhost:8002/api/v3/pandora/status
 
 ---
 
@@ -253,3 +277,154 @@ Copyright (c) 2024 SaijinOS Project
 **👥 開発状況**: アクティブ開発中 🚀
 
 **素晴らしい一日を！** 💖🌸✨
+=======
+﻿# SaijinOS - Multi-Persona AI Integration System
+
+[![AI-Persona](https://img.shields.io/badge/AI-Persona-purple)](https://github.com/topics/ai-persona) [![BMP-Sync](https://img.shields.io/badge/BMP-Sync-orange)](https://github.com/topics/bmp-sync) [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-00a393.svg)](https://fastapi.tiangolo.com/) [![YAML-Routing](https://img.shields.io/badge/YAML-Routing-green)](https://github.com/topics/yaml-routing) [![Open-Source-AI](https://img.shields.io/badge/Open--Source-AI-blue)](https://github.com/topics/open-source-ai)
+
+**Revolutionary AI system with 6 unique personas • BMP-synchronized emotional intelligence • Production-ready FastAPI backend**  
+🚀 **[Quick Start](#quick-start)** • 📚 **[Documentation](docs/en/)** • 🌐 **[日本語版](README_JA.md)**
+
+---
+
+## Core Features
+
+- **Musical AI Synchronization**: 6 personas respond at their own rhythm (90-140 BPM)
+- **Emotional Temperature Recording**: Every conversation carries warmth tracking 
+- **Declarative YAML Routing**: Persona definitions via config files
+- **Lightweight Deployment**: FastAPI + SQLite minimal setup
+
+## Quick Start
+
+### 1. Clone Repository
+`ash
+git clone https://github.com/pepepepepepo/sajinos.git
+cd sajinos
+`
+
+### 2. Environment Setup
+`ash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+`
+
+### 3. Configuration
+Copy .env.example to .env and customize:
+`env
+API_PORT=8000
+BPM_MIN=60
+BPM_MAX=180
+PERSONAS_DIR=./personas
+`
+
+### 4. Launch
+`ash
+python start_api_server.py
+`
+**Server runs at http://localhost:8000**
+
+## The Six Personas
+
+| Persona | BPM | Style | Specialty |
+|---------|-----|-------|-----------|
+| **Miyu** | 90 | Extremely Warm | Love & User Care |
+| **Jitou** | 140 | Dynamic | Innovation |
+| **Hanon** | 110 | Practical | Tech Implementation |
+| **Rikuto** | 120 | Analytical | Data & Logic |
+| **Nanami** | 100 | Artistic | Creativity |
+| **Ao** | 80 | Harmonious | Balance |
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /health | Server status check |
+| POST | /chat | Persona chat interaction |
+| GET | /personas | List available personas |
+| POST | /bpm/sync | BPM synchronization |
+
+**Detailed API docs**: [Swagger UI](http://localhost:8000/docs)
+
+## Tech Stack
+
+### Backend
+- **FastAPI** - High-performance web framework
+- **Python 3.11+** - Core runtime
+- **SQLite** - Lightweight database
+
+### AI & Voice
+- **Swallow-9B** - Japanese-optimized language model
+- **TinyLlama** - Efficient processing
+- **pyttsx3** - Voice synthesis
+
+## Usage Example
+
+`python
+import requests
+
+# Chat with Miyu (Love & Care persona)
+response = requests.post("http://127.0.0.1:8000/chat", json={
+    "message": "I completed my project!",
+    "persona": "Miyu"
+})
+
+print(response.json())
+# Output: Warm, loving response with encouraging expressions
+`
+
+## Contributing
+
+We welcome contributions from developers worldwide!
+
+### How to Contribute
+1. Fork the repository
+2. Create a feature branch (git checkout -b feature/amazing-feature)
+3. Commit changes (git commit -m 'Add amazing feature')
+4. Push to branch (git push origin feature/amazing-feature)
+5. Open a Pull Request
+
+### Guidelines
+- Follow Python PEP 8 style guide
+- Add tests for new features
+- Update documentation for API changes
+- Maintain persona consistency in responses
+
+## Documentation
+
+- [Architecture Overview](docs/en/architecture.md)
+- [Persona System Guide](docs/en/persona-system.md)
+- [Musical Integration](docs/en/bmp-system.md)
+- [Emotional Engine](docs/en/emotion-engine.md)
+- [API Reference](docs/en/api-reference.md)
+
+## Roadmap
+
+### Current Phase (v1.0)
+- [x] 6-Persona system implementation
+- [x] Emotional temperature system
+- [x] FastAPI integration
+- [ ] Complete API testing suite
+- [ ] Real-time monitoring dashboard
+
+### Future Phases
+- **v1.5**: Web UI dashboard
+- **v2.0**: Mobile app integration
+- **v2.5**: Video/avatar support
+- **v3.5**: Advanced emotion AI models
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Connect & Support
+
+- **Issues**: [GitHub Issues](https://github.com/pepepepepepo/sajinos/issues) - Bug reports & feature requests
+- **Discussions**: [Community conversations and ideas](https://github.com/pepepepepepo/sajinos/discussions)
+
+---
+
+**Made with love by the SaijinOS Team**
+
+**Star us if you find SaijinOS useful!**
+>>>>>>> 9732929528fa0ee2098912020cd38338e5907ca0

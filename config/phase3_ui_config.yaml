@@ -1,0 +1,142 @@
+# SaijinOS Phase 3 Flutter UI統合設定
+# 作成日: 2025年11月8日
+
+# 🎨 Flutter UI統合システム設定
+ui_integration:
+  bridge_server_port: 8002
+  flutter_ui_path: "F:/sajinos_lightweight/saijinos_kawaii_ui"
+  phase2_api_url: "http://localhost:8001"
+  websocket_enabled: true
+  realtime_updates: true
+  
+# 🌐 WebSocket設定
+websocket:
+  endpoint: "/ws/ui/realtime"
+  ping_interval: 30
+  reconnect_attempts: 3
+  buffer_size: 1024
+  
+# 🎭 ペルソナUI設定
+persona_ui:
+  display_mode: "grid"
+  cards_per_row: 4
+  animation_duration: 300
+  avatar_size: 120
+  color_theme: "kawaii"
+  
+# 🎨 kawaii デザインテーマ
+kawaii_theme:
+  primary_colors:
+    - "#FF6B9D"  # ピンク（ハルカ）
+    - "#4ECDC4"  # ターコイズ（ユリ） 
+    - "#45B7D1"  # ブルー（ミク）
+    - "#96CEB4"  # グリーン（レナ）
+    - "#FFEAA7"  # イエロー（サキ）
+    - "#DDA0DD"  # プラム（アヤ）
+    
+  secondary_colors:
+    - "#FF7675"  # レッド（まこと）
+    - "#74B9FF"  # ライトブルー（みゆ）
+    - "#81ECEC"  # アクア（そよぎ）
+    - "#A29BFE"  # パープル（すみれ）
+    
+  background_gradient:
+    - "#FFE8F1"  # 薄ピンク
+    - "#E8F7FF"  # 薄ブルー
+    
+  font_family: "Noto Sans JP"
+  border_radius: 16
+  shadow_blur: 8
+  
+# 📊 感情可視化設定
+emotion_visualization:
+  chart_type: "line"
+  update_interval: 1000  # ミリ秒
+  history_limit: 50
+  temperature_range: [0, 100]
+  color_coding:
+    happy: "#FFD93D"
+    sad: "#6C5CE7"
+    excited: "#FF6B6B"
+    calm: "#4ECDC4"
+    analytical: "#45B7D1"
+    
+# 🎵 音楽同期UI設定  
+music_sync_ui:
+  visualizer_type: "waveform"
+  bmp_range: [60, 180]
+  key_display: true
+  sync_indicator: true
+  color_by_key:
+    C: "#FF6B9D"
+    G: "#4ECDC4" 
+    Am: "#45B7D1"
+    Em: "#96CEB4"
+    D: "#FFEAA7"
+    F: "#DDA0DD"
+    
+# 🎯 統合コントロール設定
+control_panel:
+  layout: "sidebar"
+  collapsible: true
+  quick_actions:
+    - "emotion_record"
+    - "music_sync"
+    - "persona_select"
+    - "system_status"
+    
+# 📱 レスポンシブ設定
+responsive_design:
+  breakpoints:
+    mobile: 480
+    tablet: 768
+    desktop: 1024
+    large: 1440
+    
+  mobile_layout:
+    cards_per_row: 1
+    sidebar_collapsed: true
+    font_scale: 0.9
+    
+  tablet_layout:
+    cards_per_row: 2
+    sidebar_width: 300
+    font_scale: 1.0
+    
+  desktop_layout:
+    cards_per_row: 4
+    sidebar_width: 350
+    font_scale: 1.1
+    
+# ⚡ パフォーマンス設定
+performance:
+  lazy_loading: true
+  image_caching: true
+  animation_reduced_motion: false
+  debounce_search: 300
+  virtual_scrolling: true
+  
+# 🔒 セキュリティ設定
+security:
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"  
+    - "http://127.0.0.1:3000"
+  websocket_origin_check: false
+  api_rate_limit: 100  # requests per minute
+  
+# 📝 ログ設定
+logging:
+  ui_interactions: true
+  api_requests: true
+  websocket_events: true
+  performance_metrics: true
+  error_tracking: true
+  
+# 🧪 開発設定
+development:
+  hot_reload: true
+  debug_mode: true
+  mock_data: false
+  api_timeout: 10000
+  console_logging: true

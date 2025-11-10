@@ -1,0 +1,172 @@
+# SaijinOS Multi-AI Configuration
+# Real Model Paths for Local AI Integration
+system:
+  max_concurrent_models: 3
+  memory_limit_gb: 16.0
+  gpu_enabled: true
+  fallback_model: "swallow_9b"
+
+models:
+  # Primary Japanese Dialogue Model (FOUND: Real Swallow-9B)
+  swallow_9b:
+    name: "tokyotech-llm/Swallow-9B-Instruct-hf" 
+    backend: "vLLM"
+    type: "text-generation"
+    quantization: "4bit"
+    memory_gb: 4.5
+    gpu_layers: -1
+    specialization: "Japanese dialogue"
+    persona: "主対話AI"
+    model_path: "E:/AI_Models/saijin-swallow/swallow_models/swallow/"
+    status: "AVAILABLE"
+
+  # Lightweight Chat Model (TinyLlama - Location TBD)
+  tinyllama:
+    name: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    backend: "llama.cpp"
+    type: "text-generation" 
+    quantization: "none"
+    memory_gb: 1.2
+    gpu_layers: 0
+    specialization: "Lightweight dialogue"
+    persona: "軽量対話AI"
+    model_path: "E:/AI_Models/tinyllama/"  # To be located
+    status: "PENDING"
+
+  # Code Generation Model
+  codegen_model:
+    name: "microsoft/CodeT5p-770M-py"
+    backend: "Transformers"
+    type: "code-generation"
+    quantization: "4bit"
+    memory_gb: 1.5
+    gpu_layers: 0
+    specialization: "Python code generation"
+    persona: "コード生成AI"
+    model_path: "./models/codet5p/"
+    status: "TO_DOWNLOAD"
+
+  # Document Processing Model
+  document_ai:
+    name: "microsoft/DialoGPT-medium"
+    backend: "Transformers"
+    type: "text-generation"
+    quantization: "4bit"
+    memory_gb: 1.8
+    gpu_layers: 0
+    specialization: "Document analysis"
+    persona: "文書解析AI"
+    model_path: "./models/dialogpt/"
+    status: "TO_DOWNLOAD"
+
+  # Music AI Model
+  music_ai:
+    name: "facebook/musicgen-small"
+    backend: "Transformers"
+    type: "audio-generation"
+    quantization: "none"
+    memory_gb: 2.1
+    gpu_layers: 0
+    specialization: "Music generation"
+    persona: "音楽生成AI"
+    model_path: "./models/musicgen/"
+    status: "TO_DOWNLOAD"
+
+  # Vision Model
+  vision_model:
+    name: "Salesforce/blip2-opt-2.7b"
+    backend: "Transformers"
+    type: "multimodal"
+    quantization: "4bit"
+    memory_gb: 2.8
+    gpu_layers: 0
+    specialization: "Image understanding"
+    persona: "画像認識AI"
+    model_path: "./models/blip2/"
+    status: "TO_DOWNLOAD"
+
+  # Math/Logic Model
+  math_ai:
+    name: "WizardLM/WizardMath-7B-V1.1"
+    backend: "vLLM"
+    type: "text-generation"
+    quantization: "4bit"
+    memory_gb: 3.2
+    gpu_layers: -1
+    specialization: "Mathematical reasoning"
+    persona: "数学AI"
+    model_path: "./models/wizardmath/"
+    status: "TO_DOWNLOAD"
+
+  # Emotion Analysis Model
+  emotion_ai:
+    name: "j-hartmann/emotion-english-distilroberta-base"
+    backend: "Transformers"
+    type: "classification"
+    quantization: "none"
+    memory_gb: 0.8
+    gpu_layers: 0
+    specialization: "Emotion analysis"
+    persona: "感情分析AI"
+    model_path: "./models/emotion/"
+    status: "TO_DOWNLOAD"
+
+  # QA Model
+  qa_model:
+    name: "deepset/roberta-base-squad2"
+    backend: "Transformers"
+    type: "question-answering"
+    quantization: "none"
+    memory_gb: 1.1
+    gpu_layers: 0
+    specialization: "Question answering"
+    persona: "Q&A AI"
+    model_path: "./models/roberta-qa/"
+    status: "TO_DOWNLOAD"
+
+  # Translation Model
+  translate_ai:
+    name: "Helsinki-NLP/opus-mt-ja-en"
+    backend: "Transformers"
+    type: "translation"
+    quantization: "none"
+    memory_gb: 0.9
+    gpu_layers: 0
+    specialization: "Japanese-English translation"
+    persona: "翻訳AI"
+    model_path: "./models/opus-mt/"
+    status: "TO_DOWNLOAD"
+
+# Task Routing Rules
+routing:
+  code_keywords: ["python", "プログラム", "コード", "def ", "class ", "import", "関数"]
+  music_keywords: ["音楽", "メロディ", "楽曲", "作曲", "音符", "リズム"]
+  document_keywords: ["文書", "レポート", "分析", "要約", "文章"]
+  math_keywords: ["計算", "数学", "方程式", "統計", "グラフ"]
+  emotion_keywords: ["気持ち", "感情", "悲しい", "嬉しい", "怒り"]
+  translate_keywords: ["翻訳", "英語", "translate", "English"]
+  vision_keywords: ["画像", "写真", "見る", "認識", "視覚"]
+
+# 20 Persona Mappings (Real Model Integration)
+personas:
+  主AI: "swallow_9b"
+  サブAI: "tinyllama"
+  コーダー: "codegen_model"
+  アーカイブ: "document_ai"
+  音楽家: "music_ai"
+  アーティスト: "vision_model"
+  数学者: "math_ai"
+  カウンセラー: "emotion_ai"
+  先生: "qa_model"
+  翻訳者: "translate_ai"
+  # Additional personas mapped to available models
+  研究者: "swallow_9b"
+  エンジニア: "codegen_model"
+  秘書: "tinyllama"
+  分析者: "document_ai"
+  作曲家: "music_ai"
+  デザイナー: "vision_model"
+  科学者: "math_ai"
+  サポーター: "emotion_ai"
+  講師: "qa_model"
+  通訳: "translate_ai"

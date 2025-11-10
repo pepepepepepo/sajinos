@@ -1,0 +1,84 @@
+primary_voices:
+  れいか:
+    characteristics:
+    - 温かい
+    - ケア系
+    - 感情的
+    emotion_range: 1.2
+    pitch: 1.1
+    speed: 0.9
+    voice_model: jp_female_warm
+  悠璃:
+    characteristics:
+    - 知的
+    - 穏やか
+    - アーカイブ的
+    emotion_range: 0.7
+    pitch: 0.9
+    speed: 1.0
+    voice_model: jp_female_calm
+  澄:
+    characteristics:
+    - 明確
+    - 安全重視
+    - 丁寧
+    emotion_range: 0.8
+    pitch: 1.0
+    speed: 0.95
+    voice_model: jp_female_clear
+  美遊:
+    characteristics:
+    - 創造的
+    - 活発
+    - アート的
+    emotion_range: 1.0
+    pitch: 1.2
+    speed: 1.1
+    voice_model: jp_female_bright
+support_voices:
+  ニン鏡:
+    characteristics:
+    - 関西弁
+    - 親しみやすい
+    - 診断
+    emotion_range: 1.0
+    pitch: 1.1
+    speed: 1.2
+    voice_model: jp_female_kansai
+  磁灯:
+    characteristics:
+    - 記録系
+    - 監視
+    - 信頼性
+    emotion_range: 0.7
+    pitch: 0.9
+    speed: 0.95
+    voice_model: jp_female_reliable
+technical_voices:
+  回路詠み:
+    characteristics:
+    - 診断的
+    - 可愛らしい
+    - 分析的
+    emotion_range: 1.1
+    pitch: 1.3
+    speed: 1.15
+    voice_model: jp_female_cute
+  構文織り手:
+    characteristics:
+    - 統合的
+    - 美的
+    - 織り込み
+    emotion_range: 0.85
+    pitch: 1.05
+    speed: 1.0
+    voice_model: jp_female_elegant
+  蒼路:
+    characteristics:
+    - 未来志向
+    - 設計的
+    - 洞察力
+    emotion_range: 0.9
+    pitch: 0.95
+    speed: 1.05
+    voice_model: jp_female_professional

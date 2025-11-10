@@ -1,0 +1,89 @@
+# SaijinOS Phase 1 統合システム設定
+# 作成日: 2025年11月8日
+
+# 🎯 コアシステム設定
+core_system:
+  personas: 6
+  api_port: 8000
+  system_name: "SaijinOS Core"
+  version: "1.0.0"
+  
+# 🔊 音声システム設定  
+voice_system:
+  haruka_tts: true
+  voice_personas: 12
+  tts_port: 8001
+  haruka_voice_path: "F:/saijin-swallow-light"
+  voice_engine: "microsoft_haruka"
+  voice_quality: "high"
+  
+# 🔗 統合システム設定
+integration:
+  cross_system_communication: true
+  unified_logging: true  
+  performance_monitoring: true
+  api_timeout: 30
+  retry_attempts: 3
+  
+# 🎭 ペルソナ統合マッピング
+persona_voice_mapping:
+  yuri:
+    voice_id: "yuri"
+    tts_engine: "haruka_base"
+    voice_speed: 1.0
+    voice_pitch: 0.0
+    
+  haruka:
+    voice_id: "haruka" 
+    tts_engine: "microsoft_haruka"
+    voice_speed: 1.1
+    voice_pitch: 0.1
+    
+  miku:
+    voice_id: "miyu"
+    tts_engine: "haruka_technical"
+    voice_speed: 1.2
+    voice_pitch: -0.1
+    
+  rena:
+    voice_id: "reika"
+    tts_engine: "haruka_elegant"
+    voice_speed: 0.9
+    voice_pitch: 0.2
+    
+  # 新規作成予定
+  saki:
+    voice_id: "saki_new"
+    tts_engine: "haruka_emotional"
+    voice_speed: 1.0
+    voice_pitch: 0.15
+    
+  aya:
+    voice_id: "aya_new"
+    tts_engine: "haruka_mystical"
+    voice_speed: 0.8
+    voice_pitch: 0.05
+
+# 📊 パフォーマンス設定
+performance:
+  max_concurrent_requests: 10
+  voice_generation_timeout: 10
+  memory_limit_mb: 1024
+  log_rotation_days: 7
+  
+# 🔒 セキュリティ設定  
+security:
+  api_key_required: false
+  cors_enabled: true
+  allowed_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+    - "http://127.0.0.1:3000"
+    
+# 📝 ログ設定
+logging:
+  level: "INFO" 
+  file_path: "logs/integrated_system.log"
+  max_file_size_mb: 50
+  backup_count: 5
+  format: "%(asctime)s - [SAIJIN-INTEGRATED] - %(levelname)s - %(message)s"

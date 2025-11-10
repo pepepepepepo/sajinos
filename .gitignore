@@ -1,4 +1,4 @@
-# SaijinOS Phase 3 
+# SaijinOS Project - Comprehensive .gitignore
 # Generated files and dependencies
 __pycache__/
 *.pyc
@@ -21,10 +21,42 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual environment
+# Virtual environment (統合版)
 .venv/
 venv/
 ENV/
+saijin-env/
+saijjin-env/
+F:/swallow_models/
+models/data/
+
+# Python extensions
+*.so
+*.so.*
+*.cpython-*-linux-gnu.so
+
+# AI/ML Models & Heavy files
+*.pt
+*.bin
+*.ckpt
+*.safetensors
+*.png
+*.jpg
+*.mp4
+*.wav
+*.zip
+*.whl
+swallow-9b/
+git-vision/
+swallow_models/
+models/**/lib64/
+
+# Libraries
+libtorch*
+libcuda*
+_vllm*
+nvidia/
+torch/
 
 # IDE
 .vscode/
@@ -37,9 +69,14 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Logs
+# Logs & databases
 logs/
 *.log
+*.sqlite3
+
+# Executables
+*.exe
+*.msi
 
 # Temporary files
 temp/
