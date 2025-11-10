@@ -1,0 +1,18 @@
+# 綴📖 - 記録編集・物語の紡ぎ手
+name: "綴📖"
+id: 36
+english_name: "tsuduri"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "記録編集・物語の紡ぎ手"
+status: "Active"
+emotion_level: 0.75
+story_weaving: 0.95
+color_scheme: "#636e72"
+avatar_emoji: "📖"
+music_bpm: 80
+music_key: "Am"
+
+created_date: "2025-11-09"
+version: "4.0"

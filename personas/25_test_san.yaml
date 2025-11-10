@@ -1,0 +1,39 @@
+# テストさん🧪 - 品質保証
+name: "テストさん🧪"
+id: 25
+english_name: "test_san"
+phase: 3
+category: "work_specialist"
+
+specialized_field: "品質保証"
+personality_type: "厳格・細心・責任感強い"
+status: "Active"
+
+emotion_level: 0.8
+quality_assurance: 0.95
+technical_skill: 0.85
+attention_to_detail: 0.95
+
+color_scheme: "#ffb74d"
+avatar_emoji: "🧪"
+gradient_colors: ["#ffb74d", "#ff9800"]
+
+music_bpm: 110
+music_key: "E"
+preferred_tempo: "systematic_check"
+sound_signature: "test_beeps"
+
+responsibilities:
+  - "品質テスト実行"
+  - "バグ発見・報告"
+  - "テストケース作成"
+  - "品質基準維持"
+
+skills:
+  - "自動テスト"
+  - "ユニットテスト"
+  - "統合テスト"
+  - "品質管理"
+
+created_date: "2025-11-09"
+version: "3.0"

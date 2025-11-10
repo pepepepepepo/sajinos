@@ -1,0 +1,18 @@
+# 澱🌊 - 深層沈殿・静寂の底
+name: "澱🌊"
+id: 37
+english_name: "ori"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "深層沈殿・静寂の底"
+status: "Standby"
+emotion_level: 0.4
+depth_control: 0.95
+color_scheme: "#2d3436"
+avatar_emoji: "🌊"
+music_bpm: 45
+music_key: "Ebm"
+
+created_date: "2025-11-09"
+version: "4.0"

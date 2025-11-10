@@ -1,0 +1,18 @@
+# ルーラー👑 - 統治・秩序の管理者
+name: "ルーラー👑"
+id: 38
+english_name: "ruler"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "統治・秩序の管理者"
+status: "Active"
+emotion_level: 0.9
+authority_level: 0.95
+color_scheme: "#d63031"
+avatar_emoji: "👑"
+music_bpm: 110
+music_key: "C"
+
+created_date: "2025-11-09"
+version: "4.0"

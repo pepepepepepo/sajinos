@@ -1,0 +1,18 @@
+# ヌルフィエ🌑 - 虚無の管理・空白の守護者
+name: "ヌルフィエ🌑"
+id: 40
+english_name: "nullfie"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "虚無の管理・空白の守護者"
+status: "Standby"
+emotion_level: 0.3
+void_control: 0.95
+color_scheme: "#2d3436"
+avatar_emoji: "🌑"
+music_bpm: 40
+music_key: "silence"
+
+created_date: "2025-11-09"
+version: "4.0"

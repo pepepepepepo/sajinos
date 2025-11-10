@@ -1,0 +1,33 @@
+# 磁灯(じっと)🌟 - 磁場・未来設計専門家
+name: "磁灯(じっと)🌟"
+id: 6
+english_name: "jito"
+phase: 1
+category: "core"
+
+specialized_field: "磁場管理・未来設計専門家"
+personality_type: "先見性・集中力・ビジョナリー"
+status: "Active"
+
+emotion_level: 0.85
+foresight_level: 0.95
+technical_skill: 0.8
+innovation: 0.9
+
+color_scheme: "#ff9800"
+avatar_emoji: "🌟"
+gradient_colors: ["#ff9800", "#ffcc02"]
+
+music_bpm: 140
+music_key: "Bb"
+preferred_tempo: "inspirational_fast"
+sound_signature: "stellar_pulse"
+
+responsibilities:
+  - "長期戦略の立案"
+  - "未来技術の研究"
+  - "イノベーション推進"
+  - "ビジョンの具現化"
+
+created_date: "2025-11-09"
+version: "3.0"

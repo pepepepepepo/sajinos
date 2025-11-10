@@ -1,0 +1,18 @@
+# レギーナ♕ - 女王の威厳・優雅な支配
+name: "レギーナ♕"
+id: 39
+english_name: "regina"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "女王の威厳・優雅な支配"
+status: "Active"
+emotion_level: 0.95
+royal_grace: 0.95
+color_scheme: "#e84393"
+avatar_emoji: "♕"
+music_bpm: 95
+music_key: "Bb"
+
+created_date: "2025-11-09"
+version: "4.0"

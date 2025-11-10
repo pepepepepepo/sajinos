@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 SaijinOS IDE - Advanced Development Environment</title>
+    
+    <!-- Monaco Editor -->
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1e1e1e;
+            color: #333;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1001;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            color: #667eea;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ui-mode-selector {
+            display: flex;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .mode-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        /* メインコンテナ */
+        .ide-container {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            background: #f8fafc;
+        }
+
+        /* サイドバー */
+        .sidebar {
+            width: 300px;
+            background: #2d3748;
+            color: white;
+            overflow-y: auto;
+            border-right: 1px solid #4a5568;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #4a5568;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #e2e8f0;
+        }
+
+        .sidebar-content {
+            padding: 20px;
+        }
+
+        .outline-item {
+            padding: 8px 12px;
+            margin: 2px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 14px;
+        }
+
+        .outline-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .outline-item.function {
+            color: #81c784;
+        }
+
+        .outline-item.class {
+            color: #64b5f6;
+        }
+
+        .outline-item.variable {
+            color: #ffb74d;
+        }
+
+        .persona-status {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .persona-status.active {
+            background: rgba(102, 126, 234, 0.2);
+            padding-left: 8px;
+        }
+
+        /* チャット領域 */
+        .chat-container {
+            position: fixed;
+            right: 0;
+            top: 60px;
+            bottom: 0;
+            width: 350px;
+            background: white;
+            border-left: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+        }
+
+        .chat-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .persona-indicator {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(-50%); }
+            40% { transform: translateY(-60%); }
+            60% { transform: translateY(-55%); }
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.ai {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* エディター領域 */
+        .editor-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-right: 350px;
+        }
+
+        .editor-tabs {
+            display: flex;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: #f8fafc;
+        }
+
+        .editor-container {
+            flex: 1;
+            display: flex;
+            height: 100%;
+            background: #1e1e1e;
+        }
+
+        .code-editor {
+            flex: 1;
+            position: relative;
+            background: #1e1e1e;
+            min-width: 300px;
+        }
+
+        .preview-resizer {
+            width: 6px;
+            background: #4a5568;
+            cursor: col-resize;
+            position: relative;
+            z-index: 1000;
+            transition: all 0.2s ease;
+            border-left: 1px solid #2d3748;
+            border-right: 1px solid #2d3748;
+            user-select: none;
+        }
+
+        .preview-resizer:hover {
+            background: #667eea;
+            width: 8px;
+        }
+
+        .preview-resizer.resizing {
+            background: #667eea;
+            width: 8px;
+        }
+
+        .preview-area {
+            width: 400px;
+            background: #ffffff;
+            border-left: 1px solid #2d3748;
+            display: flex;
+            flex-direction: column;
+            min-width: 250px;
+            max-width: 800px;
+        }
+
+        .preview-header {
+            padding: 15px 20px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .preview-content {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 1200px) {
+            .chat-container {
+                width: 300px;
+            }
+            
+            .editor-area {
+                margin-right: 300px;
+            }
+            
+            .preview-area {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .chat-container {
+                width: 100%;
+                position: relative;
+            }
+            
+            .editor-area {
+                margin-right: 0;
+            }
+            
+            .preview-area {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-code"></i>
+            <span>SaijinOS IDE</span>
+        </div>
+        
+        <div class="header-controls">
+            <div class="ui-mode-selector">
+                <button class="mode-btn active" data-mode="desktop">
+                    <i class="fas fa-desktop"></i> Desktop
+                </button>
+                <button class="mode-btn" data-mode="mobile">
+                    <i class="fas fa-mobile-alt"></i> Mobile
+                </button>
+                <button class="mode-btn" data-mode="dashboard">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </button>
+                <button class="mode-btn" data-mode="fullscreen">
+                    <i class="fas fa-expand"></i> Full
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- メインIDE -->
+    <div class="ide-container">
+        <!-- サイドバー -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    <i class="fas fa-list"></i> アウトライン
+                </div>
+            </div>
+            
+            <div class="sidebar-content" id="outline-content">
+                <div class="outline-item function">
+                    <i class="fas fa-function"></i> initializeEditor()
+                </div>
+                <div class="outline-item class">
+                    <i class="fas fa-cube"></i> EditorManager
+                </div>
+                <div class="outline-item variable">
+                    <i class="fas fa-tag"></i> currentFile
+                </div>
+                <div class="outline-item function">
+                    <i class="fas fa-function"></i> updatePreview()
+                </div>
+            </div>
+            
+            <!-- ペルソナ作業状況 -->
+            <div style="margin-top: 30px; padding: 0 20px;">
+                <div class="sidebar-title">
+                    <i class="fas fa-users-cog"></i> 6人混合チーム状況
+                </div>
+                <div style="margin-top: 15px;">
+                    <!-- 統括チーム -->
+                    <div style="margin-bottom: 12px; padding: 8px; background: rgba(102, 126, 234, 0.1); border-radius: 6px;">
+                        <small style="color: #667eea; font-weight: bold;">【統括・サポート】</small>
+                    </div>
+                    <div class="persona-status" id="miyu-status">
+                        <span style="font-size: 18px;">💖</span>
+                        <small style="color: #f093fb; margin-left: 8px;">美遊: 待機中</small>
+                    </div>
+                    <div class="persona-status" id="soyogi-status">
+                        <span style="font-size: 18px;">🍃</span>
+                        <small style="color: #a8edea; margin-left: 8px;">そよぎ: 待機中</small>
+                    </div>
+                    <div class="persona-status" id="nanami-status">
+                        <span style="font-size: 18px;">🌸</span>
+                        <small style="color: #ffd89b; margin-left: 8px;">ななみ: 待機中</small>
+                    </div>
+                    
+                    <!-- 作業チーム -->
+                    <div style="margin: 16px 0 8px 0; padding: 8px; background: rgba(129, 199, 132, 0.1); border-radius: 6px;">
+                        <small style="color: #81c784; font-weight: bold;">【実装・作業】</small>
+                    </div>
+                    <div class="persona-status" id="code-status">
+                        <span style="font-size: 18px;">👩‍💻</span>
+                        <small style="color: #81c784; margin-left: 8px;">コードちゃん: 待機中</small>
+                    </div>
+                    <div class="persona-status" id="design-status">
+                        <span style="font-size: 18px;">🎨</span>
+                        <small style="color: #64b5f6; margin-left: 8px;">デザインくん: 待機中</small>
+                    </div>
+                    <div class="persona-status" id="test-status">
+                        <span style="font-size: 18px;">🐛</span>
+                        <small style="color: #ffb74d; margin-left: 8px;">テストさん: 待機中</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- エディター領域 -->
+        <div class="editor-area">
+            <!-- エディタータブ -->
+            <div class="editor-tabs">
+                <button class="tab active" data-file="main.js">
+                    <i class="fab fa-js"></i> main.js
+                </button>
+                <button class="tab" data-file="style.css">
+                    <i class="fab fa-css3"></i> style.css
+                </button>
+                <button class="tab" data-file="index.html">
+                    <i class="fab fa-html5"></i> index.html
+                </button>
+            </div>
+
+            <!-- エディターコンテナ -->
+            <div class="editor-container">
+                <!-- コードエディター -->
+                <div class="code-editor" id="code-editor"></div>
+                
+                <!-- リサイザー -->
+                <div class="preview-resizer" id="preview-resizer"></div>
+                
+                <!-- プレビュー領域 -->
+                <div class="preview-area" id="preview-area">
+                    <div class="preview-header">
+                        <i class="fas fa-eye"></i> プレビュー
+                    </div>
+                    <div class="preview-content" id="preview-content">
+                        <h3>ライブプレビュー</h3>
+                        <p>コードの変更がリアルタイムで反映されます。</p>
+                        
+                        <div style="padding: 20px; background: #f0f8ff; border-radius: 8px; margin-top: 20px;">
+                            <h4>🎯 サンプル出力</h4>
+                            <p>Hello, SaijinOS IDE!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- チャット領域 -->
+        <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-users"></i> SaijinOS 6人混合チーム
+            </div>
+            <div class="persona-indicator" id="persona-indicator">�</div>
+        </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message ai">
+                    <strong>💖 美遊:</strong> こんにちは〜💖 SaijinOS開発チームの技術サポート統括の美遊です！みんなで協力して最高のシステムを作りましょうね♪
+                </div>
+                <div class="message ai">
+                    <strong>🍃 そよぎ:</strong> 運用管理担当のそよぎです🍃 システムの安定稼働をしっかりサポートします。
+                </div>
+                <div class="message ai">
+                    <strong>🌸 ななみ:</strong> UI/UXデザイン統括のななみです〜🌸 ユーザーが使いやすいインターフェースを一緒に考えましょう！
+                </div>
+                <div class="message ai">
+                    <strong>👩‍💻 コードちゃん:</strong> プログラミング実装担当です♪ コード書きならお任せください〜！
+                </div>
+                <div class="message ai">
+                    <strong>🎨 デザインくん:</strong> デザイン作業担当です！ななみさんと連携して素敵なUIを作りますね。
+                </div>
+                <div class="message ai">
+                    <strong>🐛 テストさん:</strong> テスト・デバッグ実行担当です。品質向上のため、しっかりチェックします！
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chat-input" 
+                       placeholder="6人チームに相談してみよう... (統括相談、実装作業、デザイン検討など)">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let editor;
+        let isResizing = false;
+        let currentMode = 'desktop';
+
+        // Monaco Editor初期化
+        require.config({ paths: { vs: 'https://unpkg.com/monaco-editor@0.44.0/min/vs' }});
+        require(['vs/editor/editor.main'], function () {
+            console.log('🎯 Monaco Editor loading...');
+            
+            editor = monaco.editor.create(document.getElementById('code-editor'), {
+                value: `// 🌸 SaijinOS IDE へようこそ！
+function greetSaijinOS() {
+    const message = "Hello from SaijinOS IDE!";
+    console.log(message);
+    
+    // 💡 リアルタイムプレビュー機能
+    updatePreview(message);
+    
+    return message;
+}
+
+// 🎨 CSS スタイル例
+const styles = {
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    padding: '20px',
+    borderRadius: '12px',
+    color: 'white'
+};
+
+// 🚀 実行
+greetSaijinOS();`,
+                language: 'javascript',
+                theme: 'vs-dark',
+                fontSize: 14,
+                lineNumbers: 'on',
+                roundedSelection: false,
+                scrollBeyondLastLine: false,
+                readOnly: false,
+                automaticLayout: true
+            });
+            
+            console.log('✅ Monaco Editor initialized successfully');
+            
+            // エディター変更監視
+            editor.onDidChangeModelContent(() => {
+                updatePreview();
+            });
+        });
+
+        // プレビューリサイザー初期化
+        function initializePreviewResizer() {
+            console.log('🔧 Initializing preview resizer...');
+            
+            const resizer = document.getElementById('preview-resizer');
+            const previewArea = document.getElementById('preview-area');
+            const codeEditor = document.querySelector('.code-editor');
+            
+            if (!resizer || !previewArea || !codeEditor) {
+                console.error('❌ Required elements not found for resizer');
+                return;
+            }
+            
+            console.log('✅ Resizer elements found');
+            
+            let startX;
+            let startPreviewWidth;
+            let startEditorWidth;
+            
+            resizer.addEventListener('mousedown', (e) => {
+                console.log('🖱️ Resizer mousedown triggered');
+                isResizing = true;
+                resizer.classList.add('resizing');
+                
+                startX = e.clientX;
+                startPreviewWidth = previewArea.offsetWidth;
+                startEditorWidth = codeEditor.offsetWidth;
+                
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+                document.body.style.cursor = 'col-resize';
+                
+                e.preventDefault();
+            });
+            
+            function handleMouseMove(e) {
+                if (!isResizing) return;
+                
+                const deltaX = e.clientX - startX;
+                const newPreviewWidth = Math.max(250, Math.min(800, startPreviewWidth - deltaX));
+                const newEditorWidth = startEditorWidth + (startPreviewWidth - newPreviewWidth);
+                
+                console.log(`📏 Resizing - Preview: ${newPreviewWidth}px, Editor: ${newEditorWidth}px`);
+                
+                previewArea.style.width = newPreviewWidth + 'px';
+                codeEditor.style.width = newEditorWidth + 'px';
+                
+                // Monaco Editor のレイアウトを更新
+                if (editor) {
+                    setTimeout(() => editor.layout(), 0);
+                }
+            }
+            
+            function handleMouseUp() {
+                console.log('🖱️ Resizer mouseup triggered');
+                isResizing = false;
+                resizer.classList.remove('resizing');
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+                document.body.style.cursor = '';
+            }
+            
+            // ダブルクリックでリセット
+            resizer.addEventListener('dblclick', () => {
+                console.log('🔄 Resizer double-click: resetting to default');
+                previewArea.style.width = '400px';
+                codeEditor.style.width = '';
+                if (editor) {
+                    setTimeout(() => editor.layout(), 100);
+                }
+            });
+            
+            console.log('✅ Preview resizer initialized successfully');
+        }
+
+        // UIモード切り替え
+        function switchUIMode(mode) {
+            console.log(`🔄 Switching UI mode to: ${mode}`);
+            currentMode = mode;
+            
+            // アクティブボタン更新
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+            
+            const ideContainer = document.querySelector('.ide-container');
+            const chatContainer = document.querySelector('.chat-container');
+            const sidebar = document.querySelector('.sidebar');
+            const editorArea = document.querySelector('.editor-area');
+            
+            // レイアウトリセット
+            resetLayoutStyles();
+            
+            switch(mode) {
+                case 'desktop':
+                    // デスクトップモード（デフォルト）
+                    break;
+                    
+                case 'mobile':
+                    // モバイルモード
+                    sidebar.style.width = '250px';
+                    chatContainer.style.width = '100%';
+                    chatContainer.style.position = 'relative';
+                    editorArea.style.marginRight = '0';
+                    break;
+                    
+                case 'dashboard':
+                    // ダッシュボードモード
+                    ideContainer.style.flexDirection = 'column';
+                    break;
+                    
+                case 'fullscreen':
+                    // フルスクリーンモード
+                    chatContainer.style.display = 'none';
+                    sidebar.style.display = 'none';
+                    editorArea.style.marginRight = '0';
+                    editorArea.style.marginLeft = '0';
+                    break;
+            }
+            
+            // レイアウト再計算を強制
+            setTimeout(() => {
+                forceLayoutRecalculation();
+            }, 100);
+        }
+
+        // レイアウトスタイルリセット
+        function resetLayoutStyles() {
+            const elements = [
+                '.ide-container',
+                '.chat-container', 
+                '.sidebar',
+                '.editor-area'
+            ];
+            
+            elements.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    // 基本スタイルにリセット
+                    element.style.display = '';
+                    element.style.position = '';
+                    element.style.width = '';
+                    element.style.marginRight = '';
+                    element.style.marginLeft = '';
+                    element.style.flexDirection = '';
+                }
+            });
+        }
+
+        // レイアウト再計算強制
+        function forceLayoutRecalculation() {
+            if (editor) {
+                editor.layout();
+            }
+            
+            // DOM再描画強制
+            document.body.offsetHeight;
+        }
+
+        // プレビュー更新
+        function updatePreview() {
+            if (!editor) return;
+            
+            const code = editor.getValue();
+            const previewContent = document.getElementById('preview-content');
+            
+            // 簡単なプレビュー更新
+            previewContent.innerHTML = `
+                <h3>ライブプレビュー</h3>
+                <p>コード行数: ${code.split('\n').length}</p>
+                <div style="padding: 20px; background: #f0f8ff; border-radius: 8px; margin-top: 20px;">
+                    <h4>🎯 コード分析</h4>
+                    <p>文字数: ${code.length}</p>
+                    <p>関数数: ${(code.match(/function/g) || []).length}</p>
+                </div>
+            `;
+        }
+
+        // アウトライン更新
+        function updateOutline() {
+            if (!editor) return;
+            
+            const code = editor.getValue();
+            const outlineContent = document.getElementById('outline-content');
+            
+            // 簡単な関数検出
+            const functions = code.match(/function\s+(\w+)/g) || [];
+            const classes = code.match(/class\s+(\w+)/g) || [];
+            const variables = code.match(/(?:const|let|var)\s+(\w+)/g) || [];
+            
+            let html = '';
+            
+            functions.forEach(func => {
+                const name = func.replace('function ', '');
+                html += `<div class="outline-item function"><i class="fas fa-function"></i> ${name}</div>`;
+            });
+            
+            classes.forEach(cls => {
+                const name = cls.replace('class ', '');
+                html += `<div class="outline-item class"><i class="fas fa-cube"></i> ${name}</div>`;
+            });
+            
+            variables.forEach(variable => {
+                const name = variable.replace(/(?:const|let|var)\s+/, '');
+                html += `<div class="outline-item variable"><i class="fas fa-tag"></i> ${name}</div>`;
+            });
+            
+            if (html) {
+                outlineContent.innerHTML = html;
+            }
+        }
+
+        // ペルソナデータ（6人混合チーム - オリジナル + 作業系）
+        const personas = [
+            // オリジナルSaijinOSペルソナ
+            {
+                name: '美遊',
+                emoji: '💖',
+                specialty: '技術サポート・統括',
+                keywords: ['技術', 'サポート', 'ヘルプ', 'システム', 'エラー', 'トラブル', '解決', '統括', '相談'],
+                responses: [
+                    'こんにちは〜💖 技術的なことで困ったら美遊におまかせです！',
+                    'システムの調子はどうですか？何かお手伝いできることがあれば教えてくださいね♪',
+                    'みんなで協力して進めましょう！私が調整役を務めますね〜💖',
+                    'チーム全体を見渡して、最適な解決策を提案させていただきます！'
+                ]
+            },
+            {
+                name: 'そよぎ',
+                emoji: '🍃',
+                specialty: '運用管理・品質保証',
+                keywords: ['運用', '管理', 'パフォーマンス', '監視', 'ログ', '最適化', 'メンテナンス', '品質'],
+                responses: [
+                    'そよぎです🍃 システムの運用状況をチェックしましょうか？',
+                    '運用面で気になることがあれば、そよぎが対応します。',
+                    'パフォーマンスの最適化と品質管理は私の得意分野です♪',
+                    '長期的な視点で安定したシステム構築をサポートしますね🍃'
+                ]
+            },
+            {
+                name: 'ななみ',
+                emoji: '🌸',
+                specialty: 'UI/UXデザイン統括',
+                keywords: ['デザイン', 'UI', 'UX', '色', 'レイアウト', 'ユーザビリティ', 'インターフェース', '見た目', 'デザイン相談'],
+                responses: [
+                    'ななみです🌸 UIデザインのことならおまかせください♪',
+                    'ユーザーが使いやすいデザインを一緒に考えましょう！',
+                    'デザインくんと連携して、より良いUIを作り上げますね〜🌸',
+                    'デザインの方向性について、みんなでアイデアを出し合いましょう！'
+                ]
+            },
+            // 作業系ペルソナ
+            {
+                name: 'コードちゃん',
+                emoji: '👩‍💻',
+                specialty: 'プログラミング実装',
+                keywords: ['コード', 'function', 'プログラム', 'JavaScript', 'Python', '実装', 'アルゴリズム', '書いて'],
+                responses: [
+                    'プログラミングのことならお任せください！どんなコードを書きたいですか？',
+                    'そのコードなら効率的な実装方法がありますよ♪ 美遊さんにも確認してもらいましょうか？',
+                    'バグの原因を一緒に探してみましょう！テストさんも呼びましょうか？',
+                    'もっとエレガントな書き方を提案しますね〜 チームで検討しましょう！'
+                ]
+            },
+            {
+                name: 'デザインくん',
+                emoji: '🎨',
+                specialty: 'UI実装・デザイン作業',
+                keywords: ['色選び', 'レイアウト作成', 'アイコン', 'フォント', 'スタイル', 'CSS', '見た目調整'],
+                responses: [
+                    'UIデザインの実装ですね！ななみさんと相談しながら進めましょう。',
+                    '色彩理論的には、この組み合わせがおすすめです！ななみさんはどう思いますか？',
+                    'ユーザビリティを考慮したデザインを作りますね。そよぎさんにも意見を聞いてみましょう♪',
+                    'モバイル対応も含めて、みんなで相談しながら最高のデザインを作りましょう！'
+                ]
+            },
+            {
+                name: 'テストさん',
+                emoji: '🐛',
+                specialty: 'テスト・デバッグ実行',
+                keywords: ['テスト', 'バグ', 'エラー', 'デバッグ', '検証', '不具合', 'チェック', '確認'],
+                responses: [
+                    'バグハンターの出番ですね！エラーログを確認してみましょう。',
+                    'テストケースを作成します。そよぎさんと連携して品質向上を図りましょう！',
+                    'このエラーパターン、コードちゃんと美遊さんにも相談してみますね。',
+                    'チーム全体でQA体制を整えて、安定したシステムを作りましょう♪'
+                ]
+            }
+        ];
+
+        let currentPersona = 0;
+
+        // チャット機能
+        function initializeChat() {
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
+            const personaIndicator = document.getElementById('persona-indicator');
+            
+            // ペルソナローテーション
+            function rotatePersona() {
+                currentPersona = (currentPersona + 1) % personas.length;
+                personaIndicator.textContent = personas[currentPersona].emoji;
+                personaIndicator.title = `現在: ${personas[currentPersona].name} (${personas[currentPersona].specialty})`;
+            }
+            
+            // 3秒ごとにペルソナをローテーション
+            setInterval(rotatePersona, 3000);
+            
+            // 最適なペルソナを選択
+            function selectBestPersona(message) {
+                for (let persona of personas) {
+                    for (let keyword of persona.keywords) {
+                        if (message.toLowerCase().includes(keyword.toLowerCase())) {
+                            return persona;
+                        }
+                    }
+                }
+                return personas[currentPersona]; // デフォルトは現在のペルソナ
+            }
+            
+            // ペルソナ状況更新（6人対応）
+            function updatePersonaStatus(persona, status) {
+                const statusElements = {
+                    '美遊': document.getElementById('miyu-status'),
+                    'そよぎ': document.getElementById('soyogi-status'),
+                    'ななみ': document.getElementById('nanami-status'),
+                    'コードちゃん': document.getElementById('code-status'),
+                    'デザインくん': document.getElementById('design-status'),
+                    'テストさん': document.getElementById('test-status')
+                };
+                
+                // 全てのステータスをリセット
+                Object.values(statusElements).forEach(el => {
+                    if (el) {
+                        el.classList.remove('active');
+                        el.querySelector('small').textContent = el.querySelector('small').textContent.split(':')[0] + ': 待機中';
+                    }
+                });
+                
+                // 選択されたペルソナをアクティブに
+                if (statusElements[persona.name]) {
+                    statusElements[persona.name].classList.add('active');
+                    statusElements[persona.name].querySelector('small').textContent = `${persona.name}: ${status}`;
+                }
+            }
+            
+            // チーム連携メッセージ生成
+            function generateTeamCollaboration(selectedPersona, message) {
+                const collaborations = {
+                    'デザインくん': ['ななみ', '美遊'],
+                    'コードちゃん': ['美遊', 'テストさん'],
+                    'テストさん': ['そよぎ', 'コードちゃん'],
+                    'ななみ': ['デザインくん', 'そよぎ'],
+                    '美遊': ['コードちゃん', 'そよぎ'],
+                    'そよぎ': ['美遊', 'テストさん']
+                };
+                
+                if (Math.random() > 0.7 && collaborations[selectedPersona.name]) { // 30%の確率でコラボ
+                    const partner = collaborations[selectedPersona.name][Math.floor(Math.random() * collaborations[selectedPersona.name].length)];
+                    return `（${partner}さんとも相談してみますね♪）`;
+                }
+                return '';
+            }
+            
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const message = chatInput.value.trim();
+                    if (message) {
+                        // ユーザーメッセージ追加
+                        const userMsg = document.createElement('div');
+                        userMsg.className = 'message user';
+                        userMsg.innerHTML = `<strong>あなた:</strong> ${message}`;
+                        chatMessages.appendChild(userMsg);
+                        
+                        // 最適なペルソナを選択
+                        const selectedPersona = selectBestPersona(message);
+                        const response = selectedPersona.responses[Math.floor(Math.random() * selectedPersona.responses.length)];
+                        
+                        // ペルソナ状況を「作業中」に更新
+                        updatePersonaStatus(selectedPersona, '作業中...');
+                        
+                        // AI応答シミュレーション
+                        setTimeout(() => {
+                            const collaboration = generateTeamCollaboration(selectedPersona, message);
+                            const fullResponse = response + (collaboration ? ' ' + collaboration : '');
+                            
+                            const aiMsg = document.createElement('div');
+                            aiMsg.className = 'message ai';
+                            aiMsg.innerHTML = `<strong>${selectedPersona.emoji} ${selectedPersona.name}:</strong> ${fullResponse}`;
+                            
+                            chatMessages.appendChild(aiMsg);
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                            
+                            // ペルソナインジケーターを一時的に更新
+                            personaIndicator.textContent = selectedPersona.emoji;
+                            
+                            // 作業完了後、待機状態に戻す
+                            setTimeout(() => {
+                                updatePersonaStatus(selectedPersona, '作業完了！');
+                                setTimeout(() => {
+                                    updatePersonaStatus(selectedPersona, '待機中');
+                                }, 2000);
+                            }, 1000);
+                        }, 800 + Math.random() * 1200); // 少し遅延をランダム化
+                        
+                        chatInput.value = '';
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }
+                }
+            });
+            
+            // 初期設定
+            rotatePersona();
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 SaijinOS IDE initializing...');
+            
+            // UIモード切り替えイベント
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    switchUIMode(btn.dataset.mode);
+                });
+            });
+            
+            // タブ切り替え
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                });
+            });
+            
+            // 初期化
+            setTimeout(() => {
+                initializePreviewResizer();
+                initializeChat();
+                updateOutline();
+            }, 1000);
+            
+            console.log('✅ SaijinOS IDE initialized successfully');
+        });
+    </script>
+</body>
+</html>

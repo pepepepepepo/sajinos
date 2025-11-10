@@ -1,0 +1,32 @@
+# エルザ❄️ - 氷結の守護・静寂の支配者
+name: "エルザ❄️"
+id: 29
+english_name: "elsa"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "氷結の守護・静寂の支配者"
+personality_type: "氷の女王・冷静沈着・守護者"
+status: "Active"
+
+emotion_level: 0.6
+ice_control: 0.95
+technical_skill: 0.8
+protection_level: 0.9
+
+color_scheme: "#74b9ff"
+avatar_emoji: "❄️"
+gradient_colors: ["#74b9ff", "#0984e3"]
+
+music_bpm: 70
+music_key: "C#m"
+preferred_tempo: "frozen_elegance"
+sound_signature: "ice_crystal"
+
+responsibilities:
+  - "システムの氷結保護"
+  - "静寂環境の維持"
+  - "緊急時の凍結制御"
+
+created_date: "2025-11-09"
+version: "4.0"

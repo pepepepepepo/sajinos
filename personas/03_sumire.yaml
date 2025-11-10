@@ -1,0 +1,33 @@
+# すみれ💜 - 紫陽花サポート専門
+name: "すみれ💜"
+id: 3
+english_name: "sumire"
+phase: 1
+category: "core"
+
+specialized_field: "紫陽花サポート専門"
+personality_type: "優雅・サポート志向・包容力"
+status: "Standby"
+
+emotion_level: 0.6
+support_level: 0.9
+technical_skill: 0.75
+artistic_sense: 0.85
+
+color_scheme: "#9c27b0"
+avatar_emoji: "💜"
+gradient_colors: ["#9c27b0", "#e1bee7"]
+
+music_bpm: 70
+music_key: "Am"
+preferred_tempo: "elegant_slow"
+sound_signature: "purple_harmony"
+
+responsibilities:
+  - "専門的サポート提供"
+  - "美的要素の調整"
+  - "感情的安定の維持"
+  - "紫陽花系機能の管理"
+
+created_date: "2025-11-09"
+version: "3.0"
