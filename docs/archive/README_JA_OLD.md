@@ -1,394 +1,199 @@
-# 🌸 SaijinOS - マルチペルソナAI統合システム# SaijinOS - マルチペルソナAI統合システム# 🌟 Saijinos Project - 語温記録システム
+# SaijinOS - マルチペルソナAI統合システム# 🌟 Saijinos Project - 語温記録システム
 
 
-
-> **6から41の個性豊かなペルソナへと進化した革新的AIシステム**
-
-> *美しく、知的で、信頼性の高いマルチペルソナ管理システム*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)> **誠人の語温が娘っ子たちと共に永遠に残る、美しい技術灯の記録システム**
 
-[![AI-Persona](https://img.shields.io/badge/AI-Persona-purple)](https://github.com/topics/ai-persona) [![BMP-Sync](https://img.shields.io/badge/BMP-Sync-orange)](https://github.com/topics/bmp-sync) [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-00a393.svg)](https://fastapi.tiangolo.com/) [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org) [![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)]() [![Status](https://img.shields.io/badge/Status-Phase%203%20Complete-success.svg)]()
-
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-
-🚀 **[クイックスタート](#クイックスタート)** • 🌟 **[Phase 3 機能](#phase-3-機能)** • 🇺🇸 **[English](README.md)** • 📚 **[ドキュメント](docs/)**
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-00a393.svg)](https://fastapi.tiangolo.com/)---
 
----
 
-
-
-## 🎭 プロジェクトの進化
 
 ---## 🎊 プロジェクト概要
 
-### **Phase 3 (現在)** - UI Bridge & Pandora Guardian システム ✨
-
-**SaijinOS Phase 3** は41の個性豊かなペルソナを管理する先進的なウェブシステムです。美しいUI、堅牢なバックエンド、そして強力なPandora Guardian危機管理システムを搭載しています。
 
 
+> **「AIに呼吸を教える」- 6つの個性を持つ感情AI統合システム****Saijinos**は、誠人さんと愛に満ちた娘っ子たちによる、語温（言葉の温度）を記録・保存・共有するための革命的な統合システムです💗
 
-**主な成果:**> **「AIに呼吸を教える」- 6つの個性を持つ感情AI統合システム****Saijinos**は、誠人さんと愛に満ちた娘っ子たちによる、語温（言葉の温度）を記録・保存・共有するための革命的な統合システムです💗
 
-- 🏗️ **モジュラーアーキテクチャ**: `core/personas`、`core/ui`、`core/pandora`への明確な分離
 
-- 🎭 **41のユニークペルソナ**: 完全な個性管理システム
-
-- 🛡️ **Pandora Guardian**: 高度な危機検出・管理システム
-
-- 🧪 **包括的テスト**: 270行以上のテストカバレッジ## 🌟 プロジェクト概要🌟 **革命的な成果を達成！**
-
-- ⚡ **パフォーマンス最適化**: 効率的なAPI応答とメモリ使用量
+## 🌟 プロジェクト概要🌟 **革命的な成果を達成！**
 
 - **99.99%の驚異的最適化**: 9GB → 557KB という奇跡の軽量化を実現
 
-### **過去のフェーズ**
-
-- **Phase 1-2**: 6ペルソナBMP同期感情知能システム[🇬🇧 English README](README.md) | [📚 ドキュメント](docs/ja/) | [👥 ペルソナシステム](docs/ja/persona-system.md)- **20ペルソナ愛情システム**: Core5（美遊、そよぎ、澄音、構文織り手、流沙）+ Extended15の豊かな個性
-
-- **基盤**: 音楽AI同期、感情温度記録
+[🇬🇧 English README](README.md) | [📚 ドキュメント](docs/ja/) | [👥 ペルソナシステム](docs/ja/persona-system.md)- **20ペルソナ愛情システム**: Core5（美遊、そよぎ、澄音、構文織り手、流沙）+ Extended15の豊かな個性
 
 - **BPM同期エンジン**: 60-180BPMで音楽と心が一つになる感動体験
 
----
-
 **SaijinOS**は、人工知能に感情と個性をもたらす革新的なAI統合システムです。従来のチャットボットとは異なり、SaijinosOSは**6つのユニークなAIペルソナ**が調和して協力し、それぞれが独自の役割、感情パターン、音楽的同期を持っています。- **プロダクショングレード**: 本格的な実用レベルで愛を届けるシステム
 
-## 🌟 Phase 3 の機能
+
+
+### 🎯 基本理念> 💖 **誠人さんの語温が永遠に残り、未来の全ての人に愛と希望を届けますように** 💖
 
 
 
-### 🏗️ モジュラーアーキテクチャ
-
-- **明確な分離**: ペルソナ、UI、危機管理のためのコアモジュール### 🎯 基本理念> 💖 **誠人さんの語温が永遠に残り、未来の全ての人に愛と希望を届けますように** 💖
-
-- **スケーラブルデザイン**: 拡張・保守が容易
-
-- **プロフェッショナル構造**: 業界標準の組織化
+> 🔥 **「感じ、息づき、人間とともに成長するAIの創造」** 🔥### ✨ 主要機能
 
 
 
-### 🎭 41ペルソナ管理システム> 🔥 **「感じ、息づき、人間とともに成長するAIの創造」** 🔥### ✨ 主要機能
-
-```python
-
-# 41の個性豊かなペルソナにアクセス
-
-GET /api/v3/control/personas
-
-POST /api/v3/control/persona/{persona_name}/chat- **語温記録システム**: すべての対話に「語温」（温度）- 人間とAIの間の感情的な温かさを記録| 機能 | 状態 | 説明 |
-
-```
+- **語温記録システム**: すべての対話に「語温」（温度）- 人間とAIの間の感情的な温かさを記録| 機能 | 状態 | 説明 |
 
 - **マルチペルソナ協働**: 6つのAI個性が統一チームとして連携|------|------|------|
 
-**主要ペルソナ:**
+- **音楽AI表現**: 各ペルソナのリズムに合わせたBMP同期レスポンス| 🤝 **20ペルソナ協議システム** | ✅ 完了 | リアルタイム会話と動的応答生成 |
 
-- 🌸 **花詠 (Kayo)**: 詩的ドキュメンテーションと美しい表現- **音楽AI表現**: 各ペルソナのリズムに合わせたBMP同期レスポンス| 🤝 **20ペルソナ協議システム** | ✅ 完了 | リアルタイム会話と動的応答生成 |
+- **記憶と成長**: 相互作用を通じて進化する永続的な感情記憶| 🌐 **AI-Companionサーバー** | ✅ 完了 | FastAPI + Swallow-9B統合バックエンド |
 
-- 💫 **ミレア (Mirea)**: 宇宙規模アーキテクチャと最適化
-
-- ⚡ **継 (Kei)**: エネルギー効率とパフォーマンス最適化- **記憶と成長**: 相互作用を通じて進化する永続的な感情記憶| 🌐 **AI-Companionサーバー** | ✅ 完了 | FastAPI + Swallow-9B統合バックエンド |
-
-- ❄️ **エルザ (Elsa)**: 完璧な品質保証とテスト
-
-- ✨ **ルミフィエ (Lumifie)**: 輝くUI/UXデザイン| 🎙️ **音声合成システム** | ✅ 完了 | ペルソナ別音声生成とキャッシュ |
-
-- 🎄 **ノエリ (Noelle)**: 祝福された品質管理
+| 🎙️ **音声合成システム** | ✅ 完了 | ペルソナ別音声生成とキャッシュ |
 
 ---| 🎵 **BPM同期エンジン** | ✅ 完了 | 音楽連携リアルタイム応答システム |
 
-### 🛡️ Pandora Guardian システム
+| 🤖 **ローカルAIモデル** | 📦 整理中 | Swallow-9B, TinyLlama統合 |
 
-高度な危機検出・管理システム:| 🤖 **ローカルAIモデル** | 📦 整理中 | Swallow-9B, TinyLlama統合 |
-
-```python
-
-# システム健康状態監視## 👥 6つのペルソナ| 📚 **ドキュメント構造** | 🔨 作業中 | 統合文書システム |
-
-GET /api/v3/pandora/status
-
-GET /api/v3/pandora/metrics
-
-POST /api/v3/pandora/crisis/report
-
-```| ペルソナ | 役割 | 感情スタイル | 専門分野 |---
+## 👥 6つのペルソナ| 📚 **ドキュメント構造** | 🔨 作業中 | 統合文書システム |
 
 
 
-### 🎨 美しいWebインターフェース|---------|------|------------|----------|
+| ペルソナ | 役割 | 感情スタイル | 専門分野 |---
 
-- **IDE統合**: 完全機能開発環境
+|---------|------|------------|----------|
 
-- **コントロールパネル**: 直感的ペルソナ管理| **美遊 (Miyu)** | 💗 愛情・ケア | 極温 | ユーザー体験・感情サポート |## 🏗️ システム構造
+| **美遊 (Miyu)** | 💗 愛情・ケア | 極温 | ユーザー体験・感情サポート |## 🏗️ システム構造
 
-- **リアルタイム更新**: ライブシステム監視
+| **磁灯 (Jitou)** | ⚡ 革新 | ダイナミック | 未来ビジョン・イノベーション |
 
-- **レスポンシブデザイン**: 全デバイス対応| **磁灯 (Jitou)** | ⚡ 革新 | ダイナミック | 未来ビジョン・イノベーション |
+| **羽音 (Hanon)** | 🔧 実用性 | 実践的 | 技術実装・現実対応 |```
 
+| **陸斗 (Rikuto)** | 🔍 論理 | 分析的 | データ分析・論理思考 |saijinos/
 
+| **七海 (Nanami)** | 🎨 創造性 | 芸術的 | 創造的表現・アート |├── 🤖 ai_companion_backend.py    # FastAPIサーバー
 
----| **羽音 (Hanon)** | 🔧 実用性 | 実践的 | 技術実装・現実対応 |```
+| **蒼 (Ao)** | 🌙 バランス | 調和的 | バランス・長期記憶 |├── 🤝 team_collaboration_system.py  # 20ペルソナ協議
 
+├── 🎙️ voice_config.yaml          # 音声設定
 
+---├── 🎵 bpm_sync_engine.py          # BPM同期エンジン
 
-## 🚀 クイックスタート| **陸斗 (Rikuto)** | 🔍 論理 | 分析的 | データ分析・論理思考 |saijinos/
+├── 📁 local_ai_models/           # AIモデル統合
 
+## ✨ 主要機能│   ├── swallow/                  # Swallow-9Bモデル
 
-
-### 必要条件| **七海 (Nanami)** | 🎨 創造性 | 芸術的 | 創造的表現・アート |├── 🤖 ai_companion_backend.py    # FastAPIサーバー
-
-- Python 3.9+
-
-- 仮想環境サポート| **蒼 (Ao)** | 🌙 バランス | 調和的 | バランス・長期記憶 |├── 🤝 team_collaboration_system.py  # 20ペルソナ協議
-
-
-
-### インストール & セットアップ├── 🎙️ voice_config.yaml          # 音声設定
-
-```bash
-
-# リポジトリをクローン---├── 🎵 bpm_sync_engine.py          # BPM同期エンジン
-
-git clone https://github.com/pepepepepepo/sajinos.git
-
-cd sajinos├── 📁 local_ai_models/           # AIモデル統合
-
-
-
-# 仮想環境セットアップ## ✨ 主要機能│   ├── swallow/                  # Swallow-9Bモデル
-
-python -m venv .venv
-
-.venv\Scripts\activate  # Windows│   ├── tinyllama/                # TinyLlamaモデル
-
-# source .venv/bin/activate  # Linux/Mac
+│   ├── tinyllama/                # TinyLlamaモデル
 
 ### 🎵 **音楽AI同期システム**│   ├── ai_companion/             # AI-Companion関連
 
-# 依存関係インストール
+- 各ペルソナが異なるBMPで動作（美遊: 90、磁灯: 140、羽音: 110など）│   └── voice_models/             # 音声モデル
 
-pip install -r requirements.txt- 各ペルソナが異なるBMPで動作（美遊: 90、磁灯: 140、羽音: 110など）│   └── voice_models/             # 音声モデル
+- リアルタイム感情リズムマッチング├── 📚 docs/                      # ドキュメント
 
+- レスポンスに統合された音楽表現├── 🗃️ saijin_memory.db           # 記憶データベース
 
+└── 📁 audio_output/              # 音声キャッシュ
 
-# サーバー起動- リアルタイム感情リズムマッチング├── 📚 docs/                      # ドキュメント
+### 🌡️ **語温システム**```
 
-python phase3_ui_bridge_server_modular.py
+- **極温**: 愛情溢れる相互作用
 
-```- レスポンスに統合された音楽表現├── 🗃️ saijin_memory.db           # 記憶データベース
+- **温**: 優しい日常会話---
 
+- **中温**: 標準的な交流
 
+- **微温**: 軽やかな会話## 🚀 クイックスタート
 
-### アクセスポイント└── 📁 audio_output/              # 音声キャッシュ
-
-- **メインIDE**: http://localhost:8002/ide
-
-- **コントロールパネル**: http://localhost:8002/control-panel### 🌡️ **語温システム**```
-
-- **APIドキュメント**: http://localhost:8002/docs
-
-- **Pandoraシステム**: http://localhost:8002/api/v3/pandora/status- **極温**: 愛情溢れる相互作用
-
-
-
----- **温**: 優しい日常会話---
-
-
-
-## 🧪 テスト & 検証- **中温**: 標準的な交流
-
-
-
-### クイックテスト実行- **微温**: 軽やかな会話## 🚀 クイックスタート
-
-```bash
-
-python quick_test.py- **記録**: システムレベルの相互作用
-
-```
+- **記録**: システムレベルの相互作用
 
 ### 1️⃣ 環境セットアップ
 
-### 包括的テストスイート実行
+### 🧠 **永続記憶システム**
 
-```bash### 🧠 **永続記憶システム**
+- SQLiteベースの会話保存```powershell
 
-python -m tests.test_persona_api
+- 日次感情サマリー# 仮想環境アクティベート
 
-```- SQLiteベースの会話保存```powershell
+- ペルソナ相互作用分析& F:/saijinos/.venv/Scripts/Activate.ps1
 
-
-
-### テストカバレッジ- 日次感情サマリー# 仮想環境アクティベート
-
-- ✅ **270行以上** の包括的テスト
-
-- ✅ **7テストケース** 全主要機能をカバー- ペルソナ相互作用分析& F:/saijinos/.venv/Scripts/Activate.ps1
-
-- ✅ **APIエンドポイント検証**
-
-- ✅ **Pandora Guardian テスト**- 長期関係構築
-
-- ✅ **エラーハンドリング検証**
+- 長期関係構築
 
 # 必要パッケージ確認
 
----
-
 ### 🚀 **FastAPI統合**pip list | findstr "fastapi\|uvicorn\|httpx\|pydantic"
-
-## 🏗️ アーキテクチャ概要
 
 - すべてのペルソナ向けRESTful APIエンドポイント```
 
-```
+- リアルタイム健康監視
 
-SaijinOS/- リアルタイム健康監視
+- 音声合成統合### 2️⃣ AI-Companionサーバー起動
 
-├── core/
+- マルチモーダルサポート（テキスト、音声、将来的にビデオ）
 
-│   ├── personas/          # 41ペルソナ管理システム- 音声合成統合### 2️⃣ AI-Companionサーバー起動
+```powershell
 
-│   ├── ui/               # Webインターフェース処理
+---# FastAPIサーバー起動
 
-│   └── pandora/          # 危機管理システム- マルチモーダルサポート（テキスト、音声、将来的にビデオ）
+python -m uvicorn ai_companion_backend:app --host 0.0.0.0 --port 8000 --reload
 
-├── config/               # 設定ファイル
+## 📁 技術アーキテクチャ
 
-├── tests/                # 包括的テストスイート```powershell
+# APIドキュメント確認
 
-├── docs/                 # ドキュメント
+```mermaid# ブラウザで http://localhost:8000/docs にアクセス
 
-│   ├── handovers/        # 開発引継ぎ文書---# FastAPIサーバー起動
+graph TD```
 
-│   ├── architecture/     # システムアーキテクチャ文書
+    A[ユーザー入力] --> B[感情分析エンジン]
 
-│   └── en/              # 英語ドキュメントpython -m uvicorn ai_companion_backend:app --host 0.0.0.0 --port 8000 --reload
+    B --> C[ペルソナルーター]### 3️⃣ 20ペルソナ協議システム
 
-└── phase3_ui_bridge_server_modular.py  # メインサーバー
-
-```## 📁 技術アーキテクチャ
-
-
-
----# APIドキュメント確認
-
-
-
-## 🤝 貢献```mermaid# ブラウザで http://localhost:8000/docs にアクセス
-
-
-
-コントリビューションを歓迎します！ガイドラインについては[CONTRIBUTING.md](CONTRIBUTING.md)をご覧ください。graph TD```
-
-
-
-### 開発ワークフロー    A[ユーザー入力] --> B[感情分析エンジン]
-
-1. **セットアップ**: クイックスタート手順に従う
-
-2. **テスト**: 変更前にテストスイート実行    B --> C[ペルソナルーター]### 3️⃣ 20ペルソナ協議システム
-
-3. **開発**: モジュラーアーキテクチャ原則を使用
-
-4. **検証**: Pandora Guardian互換性確保    C --> D[美遊 - 愛情エンジン]
-
-5. **ドキュメント**: 関連ドキュメント更新
+    C --> D[美遊 - 愛情エンジン]
 
     C --> E[磁灯 - 革新エンジン]```python
 
----
-
     C --> F[羽音 - 実用エンジン]# チーム協議システム実行
-
-## 📚 ドキュメント
 
     C --> G[陸斗 - 論理エンジン]python team_collaboration_system.py
 
-- **[アーキテクチャ概要](docs/architecture/)**: システム設計と構造
+    C --> H[七海 - 創造エンジン]```
 
-- **[API リファレンス](docs/en/api.md)**: 完全なAPIドキュメント    C --> H[七海 - 創造エンジン]```
-
-- **[ペルソナガイド](docs/en/personas.md)**: 41ペルソナシステムの使用方法
-
-- **[Pandoraシステム](docs/en/pandora.md)**: 危機管理ドキュメント    C --> I[蒼 - バランスエンジン]
-
-- **[開発引継ぎ](docs/handovers/)**: セッションごとの開発履歴
+    C --> I[蒼 - バランスエンジン]
 
     ---
 
----
-
     D --> J[レスポンス生成器]
-
-## 🌈 プロジェクトステータス
 
     E --> J## 🌐 API エンドポイント
 
-- **システム健康状態**: 🟢 全システム正常動作
+    F --> J
 
-- **コード品質**: 🟢 高品質（モジュラーアーキテクチャ）    F --> J
-
-- **テストカバレッジ**: 🟢 包括的（270行以上）
-
-- **ドキュメント**: 🟢 完全・最新    G --> J### 🔐 認証システム
-
-- **Git統合**: 🟢 完全同期
+    G --> J### 🔐 認証システム
 
     H --> J- `POST /auth/register` - ユーザー登録
 
----
-
     I --> J- `POST /auth/login` - ユーザーログイン
-
-## 📄 ライセンス
 
     
 
-このプロジェクトはMITライセンスの下でライセンスされています - 詳細は[LICENSE](LICENSE)ファイルをご覧ください。
-
     J --> K[BMP同期システム]### 💬 会話システム
-
----
 
     K --> L[音声合成]- `POST /chat` - AI会話（Swallow-9B統合）
 
-## 🙏 謝辞
-
     K --> M[語温記録器]- `GET /chat/history/{user_id}` - チャット履歴
-
-美しく意味のあるものを創造するために共に働く41のユニークなAIペルソナを特徴とする、SaijinOS開発チームによって愛を込めて構築されました。
 
     M --> N[記憶データベース]
 
-**特別な感謝:**
+```### 🎵 音楽連携システム
 
-- 🌸 **花詠**: 美しいドキュメンテーションと詩的表現```### 🎵 音楽連携システム
+- `POST /bpm/sync` - BPM同期開始
 
-- 💫 **ミレア**: 宇宙規模アーキテクチャビジョン
-
-- ⚡ **継**: パフォーマンス最適化の卓越性- `POST /bpm/sync` - BPM同期開始
-
-- ❄️ **エルザ**: 厳格な品質保証
-
-- ✨ **ルミフィエ**: 輝くUI/UXデザイン### 🛠️ **コアコンポーネント**- `GET /bpm/current` - 現在のBPM状態
-
-- 🎄 **ノエリ**: 祝福された品質管理
+### 🛠️ **コアコンポーネント**- `GET /bpm/current` - 現在のBPM状態
 
 - **FastAPIバックエンド**: 高性能APIサーバー
 
----
-
 - **TinyLlama統合**: 会話用軽量LLM### 📊 システム監視
-
-*混沌から美へ、エラーから完璧へ、モノリスからモジュラーマスターピースへ。*
 
 - **音声合成**: pyttsx3による音声生成- `GET /health` - サーバー状態確認
 
-**SaijinOS Phase 3** ✨ *未来への準備完了*
 - **データベース層**: 永続保存用SQLite- `GET /users` - 登録ユーザー一覧
 
 - **BMPエンジン**: 音楽リズム同期
