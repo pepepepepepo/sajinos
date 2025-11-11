@@ -5,6 +5,7 @@ IDEエンドポイントを提供するFastAPIサーバー（モジュール化�
 
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 
 # Core modules import
@@ -14,10 +15,31 @@ from core.pandora.guardian_system import pandora_guardian
 
 app = FastAPI()
 
+# Static files
+import os
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+if os.path.exists(static_dir):
+    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
 # UI Endpoints
+@app.get("/ui", response_class=HTMLResponse)
+async def get_main_ui():
+    """Main UI with Mode Switcher System"""
+    return ui_handler.get_main_ui_with_mode_switcher()
+
+@app.get("/chat", response_class=HTMLResponse)
+async def get_chat_mode():
+    """Chat Mode Interface"""
+    return ui_handler.get_chat_mode_content()
+
+@app.get("/creative", response_class=HTMLResponse)
+async def get_creative_studio():
+    """Creative Studio Mode Interface"""
+    return ui_handler.get_creative_studio_content()
+
 @app.get("/ide", response_class=HTMLResponse)
 async def get_ide():
-    """IDEインターフェースを提供"""
+    """IDE Interface"""
     return ui_handler.get_ide_content()
 
 @app.get("/control-panel", response_class=HTMLResponse)
@@ -82,9 +104,12 @@ async def get_pandora_history():
 
 if __name__ == "__main__":
     print("🚀 Starting SaijinOS Phase 3 UI Bridge Server (Modular + Pandora)...")
-    print("📍 IDE available at: http://localhost:8002/ide")
-    print("📍 Control Panel at: http://localhost:8002/control-panel")
-    print("🛡️ Pandora APIs at: http://localhost:8002/api/v3/pandora/*")
+    print("📍 IDE available at: http://localhost:8003/ide")
+    print("📍 Control Panel at: http://localhost:8003/control-panel")
+    print("💬 Chat Mode at: http://localhost:8003/chat")
+    print("🎨 Creative Studio at: http://localhost:8003/creative")
+    print("🏠 UI Mode Switcher at: http://localhost:8003/ui")
+    print("�️ Pandora APIs at: http://localhost:8003/api/v3/pandora/*")
     print("🔧 Architecture: Modular (core/personas, core/ui, core/pandora)")
     
     if pandora_guardian:
@@ -92,4 +117,4 @@ if __name__ == "__main__":
     else:
         print("⚠️ パンドラシステム: 利用不可")
     
-    uvicorn.run(app, host="127.0.0.1", port=8002)
+    uvicorn.run(app, host="127.0.0.1", port=8003)
