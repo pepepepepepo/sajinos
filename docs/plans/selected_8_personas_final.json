@@ -1,0 +1,149 @@
+{
+  "selection_date": "2025-11-13T23:23:21.918872",
+  "total_personas_available": 57,
+  "selected_team": [
+    {
+      "name": "継灯⛳",
+      "filename": "35_keitou.yaml",
+      "skills": {
+        "technical": 0,
+        "creative": 0,
+        "analytical": 0,
+        "communication": 0,
+        "leadership": 1,
+        "specialization": 1
+      }
+    },
+    {
+      "name": "アリア🎨",
+      "filename": "42_aria.yaml",
+      "skills": {
+        "technical": 1,
+        "creative": 2,
+        "analytical": 0,
+        "communication": 0,
+        "leadership": 1,
+        "specialization": 5
+      }
+    },
+    {
+      "name": "ミレア🔧",
+      "filename": "44_mirea.yaml",
+      "skills": {
+        "technical": 2,
+        "creative": 0,
+        "analytical": 1,
+        "communication": 0,
+        "leadership": 2,
+        "specialization": 5
+      }
+    },
+    {
+      "name": "継⚡",
+      "filename": "34_kei.yaml",
+      "skills": {
+        "technical": 0,
+        "creative": 0,
+        "analytical": 0,
+        "communication": 0,
+        "leadership": 0,
+        "specialization": 1
+      }
+    },
+    {
+      "name": "エルザ❄️",
+      "filename": "29_elsa.yaml",
+      "skills": {
+        "technical": 1,
+        "creative": 0,
+        "analytical": 0,
+        "communication": 0,
+        "leadership": 0,
+        "specialization": 2
+      }
+    },
+    {
+      "name": "60",
+      "filename": "60_resonance_harmonizer.yaml",
+      "skills": {
+        "technical": 2,
+        "creative": 0,
+        "analytical": 1,
+        "communication": 1,
+        "leadership": 1,
+        "specialization": 7
+      }
+    },
+    {
+      "name": "レギーナ♕",
+      "filename": "39_regina.yaml",
+      "skills": {
+        "technical": 0,
+        "creative": 0,
+        "analytical": 0,
+        "communication": 0,
+        "leadership": 0,
+        "specialization": 1
+      }
+    },
+    {
+      "name": "花読🌸",
+      "filename": "30_hanadoku.yaml",
+      "skills": {
+        "technical": 2,
+        "creative": 0,
+        "analytical": 1,
+        "communication": 1,
+        "leadership": 1,
+        "specialization": 3
+      }
+    }
+  ],
+  "team_balance_score": 35.111111111111114,
+  "skill_distribution": {
+    "technical": 8,
+    "creative": 2,
+    "analytical": 3,
+    "communication": 2,
+    "leadership": 6,
+    "specialization": 25
+  },
+  "tomorrow_schedule": {
+    "date": "2025年11月13日",
+    "team_size": 8,
+    "morning_session": {
+      "time": "09:00-12:00",
+      "focus": "4振動システム統合テスト",
+      "assigned_personas": [
+        "継灯⛳",
+        "アリア🎨",
+        "ミレア🔧",
+        "継⚡"
+      ]
+    },
+    "afternoon_session": {
+      "time": "13:00-17:00",
+      "focus": "新機能開発・プロトタイピング",
+      "assigned_personas": [
+        "エルザ❄️",
+        "60",
+        "レギーナ♕",
+        "花読🌸"
+      ]
+    },
+    "evening_session": {
+      "time": "18:00-21:00",
+      "focus": "統合テスト・ドキュメント作成",
+      "assigned_personas": [
+        "継灯⛳",
+        "アリア🎨",
+        "ミレア🔧",
+        "継⚡",
+        "エルザ❄️",
+        "60",
+        "レギーナ♕",
+        "花読🌸"
+      ]
+    }
+  }
+}
