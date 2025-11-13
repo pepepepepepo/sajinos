@@ -3,15 +3,22 @@ SaijinOS Phase 3 UI Bridge Server (Modular Version with Pandora)
 IDEエンドポイントを提供するFastAPIサーバー（モジュール化版 + パンドラ統合）
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 import uvicorn
+
+# Request Models
+class ChatRequest(BaseModel):
+    prompt: str
+    max_length: int = 512
 
 # Core modules import
 from core.personas.persona_manager import persona_manager
 from core.ui.ui_handler import ui_handler
 from core.pandora.guardian_system import pandora_guardian
+from core.ai.ai_model_manager import ai_model_manager
 
 app = FastAPI()
 
@@ -102,19 +109,41 @@ async def get_pandora_history():
         return pandora_guardian.get_seal_history()
     return {"success": False, "message": "パンドラシステムが利用できません"}
 
+# AI API Endpoints
+@app.get("/api/v3/ai/status")
+async def get_ai_status():
+    """AIモデル状態取得"""
+    return ai_model_manager.get_model_info()
+
+@app.post("/api/v3/ai/load")
+async def load_ai_model():
+    """AIモデル読み込み"""
+    return await ai_model_manager.load_model()
+
+@app.post("/api/v3/ai/chat")
+async def ai_chat(request: ChatRequest):
+    """AIチャット（テキスト生成）"""
+    return await ai_model_manager.generate_response(request.prompt, request.max_length)
+
 if __name__ == "__main__":
-    print("🚀 Starting SaijinOS Phase 3 UI Bridge Server (Modular + Pandora)...")
+    print("🚀 Starting SaijinOS Phase 3 UI Bridge Server (Modular + Pandora + AI)...")
     print("📍 IDE available at: http://localhost:8003/ide")
     print("📍 Control Panel at: http://localhost:8003/control-panel")
     print("💬 Chat Mode at: http://localhost:8003/chat")
     print("🎨 Creative Studio at: http://localhost:8003/creative")
     print("🏠 UI Mode Switcher at: http://localhost:8003/ui")
-    print("�️ Pandora APIs at: http://localhost:8003/api/v3/pandora/*")
-    print("🔧 Architecture: Modular (core/personas, core/ui, core/pandora)")
+    print("🛡️ Pandora APIs at: http://localhost:8003/api/v3/pandora/*")
+    print("🤖 AI APIs at: http://localhost:8003/api/v3/ai/*")
+    print("🔧 Architecture: Modular (core/personas, core/ui, core/pandora, core/ai)")
     
     if pandora_guardian:
         print("💖 パンドラ危機管理システム: 正常稼働")
     else:
         print("⚠️ パンドラシステム: 利用不可")
+    
+    # AIモデル情報表示
+    ai_info = ai_model_manager.get_model_info()
+    print(f"🧠 AIモデル: {ai_info['model_name']}")
+    print(f"💾 デバイス: {ai_info['device']} (CUDA: {'✅' if ai_info['cuda_available'] else '❌'})")
     
     uvicorn.run(app, host="127.0.0.1", port=8003)
