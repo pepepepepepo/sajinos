@@ -1,0 +1,13 @@
+model_settings:
+  auto_unload_timeout: 1800
+  max_concurrent_models: 3
+  memory_limit_gb: 8
+performance:
+  batch_size: 1
+  cache_enabled: true
+  response_timeout: 30
+vibration_models:
+  auto: deepseek
+  goonro: tinyllama
+  musumekko: rinna
+  structure: qwen
