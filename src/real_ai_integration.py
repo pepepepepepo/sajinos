@@ -18,25 +18,36 @@ import asyncio
 from typing import Dict, List, Optional
 from datetime import datetime
 from yaml_prompt_manager import YAMLPromptManager
+from persona_master_manager import PersonaMasterManager
 
 class RealAIIntegration:
-    """実際のローカルAI統合システム"""
+    """実際のローカルAI統合システム - 78ペルソナ対応"""
     
     def __init__(self):
         self.ollama_url = "http://localhost:11434"
         self.prompt_manager = YAMLPromptManager()
+        self.persona_master = PersonaMasterManager()
         
-        self.persona_model_mapping = {
-            "code-chan": "MiyuJP:latest",        # コーディング特化 - 日本語対応
-            "yurika": "MiyuJP:latest",           # 日本語・デザイン
-            "ana": "llama3.1:8b-instruct-q4_K_M", # 分析・論理思考
-            "haruka": "Miyu:latest",             # クリエイティブ・音楽
-            "misaki": "MiyuJP:latest",           # 品質・技術検証 - 日本語対応
-            "ren": "llama3.1:8b-instruct-q4_K_M" # インフラ・システム
+        # 78ペルソナの自動マッピング使用
+        self.persona_model_mapping = self.persona_master.persona_model_mapping
+        
+        # フォールバック用の基本ペルソナ（後方互換性）
+        basic_personas = {
+            "code-chan": "qwen2.5-coder:7b-instruct-q4_K_M",
+            "yurika": "MiyuJP:latest",
+            "ana": "llama3.1:8b-instruct-q4_K_M", 
+            "haruka": "Miyu:latest",
+            "misaki": "MiyuJP:latest",
+            "ren": "llama3.1:8b-instruct-q4_K_M",
+            "serena": "MiyuJP:latest",
+            "organ": "llama3.1:8b-instruct-q4_K_M",
+            "ignis": "qwen2.5-coder:7b-instruct-q4_K_M"
         }
         
-        # YAMLからプロンプトを読み込み
-        self.persona_prompts = self.prompt_manager.get_all_persona_prompts()
+        # 基本ペルソナを統合
+        self.persona_model_mapping.update(basic_personas)
+        
+        print(f"🌟 {len(self.persona_model_mapping)}ペルソナを読み込みました")
 
     
     async def test_connection(self) -> bool:
@@ -47,10 +58,27 @@ class RealAIIntegration:
         except:
             return False
     
+    def get_available_personas(self) -> List[Dict]:
+        """利用可能なペルソナリストを取得"""
+        return self.persona_master.get_persona_list()
+    
+    def get_persona_prompt(self, persona: str) -> str:
+        """ペルソナプロンプトを取得（78ペルソナ + 基本ペルソナ対応）"""
+        # まず78ペルソナから探す
+        if persona in self.persona_master.personas:
+            return self.persona_master.get_persona_prompt(persona)
+        
+        # 基本ペルソナから探す
+        if persona in self.prompt_manager.prompts.get("personas", {}):
+            return self.prompt_manager.get_persona_prompt(persona)
+        
+        # デフォルトプロンプト
+        return "親切な日本語AIアシスタントです。必ず日本語で回答します。"
+    
     async def chat_with_persona(self, persona: str, message: str) -> Dict:
         """ペルソナとの実際のAIチャット"""
-        model = self.persona_model_mapping.get(persona, "tinyllama:latest")
-        system_prompt = self.persona_prompts.get(persona, "親切なアシスタントです。")
+        model = self.persona_model_mapping.get(persona, "MiyuJP:latest")
+        system_prompt = self.get_persona_prompt(persona)
         
         try:
             # 日本語強制のための追加システムメッセージ

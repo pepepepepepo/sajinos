@@ -28,6 +28,15 @@ from core.persona_manager import PersonaManager
 from core.workspace_manager import WorkspaceManager
 from core.vibration_system import VibrationSystem
 
+# 78ペルソナ統合システム
+try:
+    from real_ai_integration import RealAIIntegration
+    ai_integration = RealAIIntegration()
+    print(f"✅ 78ペルソナシステム初期化完了")
+except Exception as e:
+    print(f"⚠️ ペルソナシステム初期化エラー: {e}")
+    ai_integration = None
+
 # FastAPI アプリケーション
 app = FastAPI(
     title="SaijinOS Creative Studio",
@@ -48,7 +57,7 @@ vibration_system = VibrationSystem()
 app.include_router(chat_router, prefix="/api/chat", tags=["chat"])
 app.include_router(workspace_router, prefix="/api/workspace", tags=["workspace"])
 app.include_router(persona_router, prefix="/api/persona", tags=["persona"])
-app.include_router(enhanced_workspace_router, prefix="/enhanced", tags=["enhanced"])
+app.include_router(enhanced_workspace_router, prefix="/enhanced-workspace", tags=["enhanced"])
 app.include_router(ai_router, prefix="/api/ai", tags=["ai"])
 app.include_router(real_ai_router, prefix="/api/real-ai", tags=["real-ai"])
 app.include_router(code_execution_router, prefix="/api", tags=["code-execution"])
@@ -83,14 +92,36 @@ async def workspace(request: Request, workspace_name: str):
 @app.get("/api/system/status")
 async def system_status():
     """システム状況API"""
+    persona_count = persona_manager.get_persona_count()
+    if ai_integration:
+        persona_count += len(ai_integration.persona_model_mapping)
+    
     return {
         "status": "active",
         "version": "2.0.0",
-        "personas_loaded": persona_manager.get_persona_count(),
+        "personas_loaded": persona_count,
+        "ai_personas": len(ai_integration.persona_model_mapping) if ai_integration else 0,
         "workspaces_available": len(workspace_manager.get_available_workspaces()),
         "vibration_modes": len(vibration_system.get_vibration_modes()),
-        "integration_type": "hybrid"
+        "integration_type": "hybrid_78personas"
     }
+
+@app.get("/api/personas/all")
+async def get_all_personas_list():
+    """78ペルソナ完全リスト"""
+    if ai_integration:
+        try:
+            personas = ai_integration.get_available_personas()
+            return {
+                "status": "success",
+                "total": len(personas),
+                "personas": personas,
+                "models_available": ai_integration.persona_master.available_models
+            }
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+    else:
+        return {"status": "error", "message": "78ペルソナシステムが利用できません"}
 
 if __name__ == "__main__":
     uvicorn.run(

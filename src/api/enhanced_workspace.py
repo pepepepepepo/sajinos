@@ -11,7 +11,7 @@ class WorkspaceRequest(BaseModel):
     persona: Optional[str] = "code-chan"
     action: Optional[str] = "switch"
 
-@router.get("/enhanced", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse)
 async def enhanced_workspace():
     """🌸 新世代ペルソナ対応 Enhanced Workspace"""
     try:
