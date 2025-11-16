@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .system-status {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .status-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .status-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .personas-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .personas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .persona-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .persona-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vibrations-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vibrations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .vibration-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .vibration-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .success { color: #28a745; }
+        .warning { color: #ffc107; }
+        .error { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌸 {{ title }}</h1>
+            <p>Ultimate Creative Studio with Hybrid Persona System</p>
+            <p><strong>Version 2.0.0</strong> - Modular Architecture</p>
+        </div>
+        
+        <div class="system-status">
+            <h2>🚀 System Status</h2>
+            <div class="status-grid">
+                <div class="status-card">
+                    <h3>📊 System</h3>
+                    <p>✅ Active</p>
+                    <p>Hybrid Integration</p>
+                </div>
+                <div class="status-card">
+                    <h3>👥 Personas</h3>
+                    <p>{{ personas|length }} Core</p>
+                    <p>+ 57 Extended</p>
+                </div>
+                <div class="status-card">
+                    <h3>🌈 Vibrations</h3>
+                    <p>{{ vibrations|length }} Modes</p>
+                    <p>4-Vibration System</p>
+                </div>
+                <div class="status-card">
+                    <h3>🖥️ Workspaces</h3>
+                    <p>{{ workspaces|length }} Available</p>
+                    <p>Multi-Mode Ready</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="personas-section">
+            <h2>👥 Core Persona Team</h2>
+            <div class="personas-grid">
+                {% for persona in personas %}
+                <div class="persona-card" onclick="selectPersona('{{ persona.id }}')">
+                    <h3>{{ persona.name }}</h3>
+                    <p><strong>{{ persona.role }}</strong></p>
+                    <button class="btn">Select</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="vibrations-section">
+            <h2>🌈 4-Vibration System</h2>
+            <div class="vibrations-grid">
+                {% for mode, config in vibrations.items() %}
+                <div class="vibration-card" onclick="selectVibration('{{ mode }}')">
+                    <h3>{{ config.label }}</h3>
+                    <p>{{ config.model }}</p>
+                    <p><small>{{ config.description }}</small></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="personas-section">
+            <h2>🖥️ Workspaces</h2>
+            <div class="personas-grid">
+                {% for workspace in workspaces %}
+                <div class="persona-card" onclick="openWorkspace('{{ workspace }}')">
+                    <h3>
+                        {% if workspace == 'chat' %}💬 Chat
+                        {% elif workspace == 'development' %}🖥️ Development  
+                        {% elif workspace == 'design' %}🎨 Design
+                        {% elif workspace == 'analysis' %}📊 Analysis
+                        {% elif workspace == 'music' %}🎵 Music
+                        {% endif %}
+                    </h3>
+                    <p>
+                        {% if workspace == 'chat' %}基本的な会話・相談
+                        {% elif workspace == 'development' %}プログラミング・開発
+                        {% elif workspace == 'design' %}UIデザイン・制作
+                        {% elif workspace == 'analysis' %}データ分析・統計
+                        {% elif workspace == 'music' %}音楽制作・作曲
+                        {% endif %}
+                    </p>
+                    <button class="btn">Open</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function selectPersona(personaId) {
+            console.log('Selected persona:', personaId);
+            alert(`Selected persona: ${personaId}`);
+        }
+        
+        function selectVibration(vibrationMode) {
+            console.log('Selected vibration:', vibrationMode);
+            alert(`Selected vibration: ${vibrationMode}`);
+        }
+        
+        function openWorkspace(workspaceName) {
+            console.log('Opening workspace:', workspaceName);
+            window.location.href = `/workspace/${workspaceName}`;
+        }
+        
+        // システム状況を定期的に更新
+        async function updateSystemStatus() {
+            try {
+                const response = await fetch('/api/system/status');
+                const status = await response.json();
+                console.log('System status:', status);
+            } catch (error) {
+                console.error('Failed to fetch system status:', error);
+            }
+        }
+        
+        // 5秒ごとにシステム状況更新
+        setInterval(updateSystemStatus, 5000);
+        
+        // 初回読み込み時に状況確認
+        document.addEventListener('DOMContentLoaded', updateSystemStatus);
+    </script>
+</body>
+</html>

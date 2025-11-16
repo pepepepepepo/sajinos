@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ workspace.name }} - SaijinOS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .workspace-header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .workspace-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .workspace-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+            height: calc(100vh - 140px);
+        }
+        
+        .main-area {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chat-messages {
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            margin-bottom: 15px;
+        }
+        
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .persona-selector {
+            margin-bottom: 20px;
+        }
+        
+        .persona-selector select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .tools-section {
+            margin-top: 20px;
+        }
+        
+        .tool-item {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .user-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: 20px;
+        }
+        
+        .ai-message {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+            margin-right: 20px;
+        }
+        
+        /* ワークスペース別スタイル */
+        .workspace-chat { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .workspace-development { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .workspace-design { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .workspace-analysis { background: linear-gradient(135deg, #4481eb 0%, #04befe 100%); }
+        .workspace-music { background: linear-gradient(135deg, #9795f0 0%, #fbc8d4 100%); }
+    </style>
+</head>
+<body class="workspace-{{ workspace_name }}">
+    <div class="container">
+        <div class="workspace-header">
+            <div>
+                <h1>{{ workspace.name }}</h1>
+                <p>{{ workspace.description }}</p>
+            </div>
+            <div class="workspace-nav">
+                <a href="/" class="nav-btn">🏠 Home</a>
+                <a href="/workspace/chat" class="nav-btn {% if workspace_name == 'chat' %}active{% endif %}">💬 Chat</a>
+                <a href="/workspace/development" class="nav-btn {% if workspace_name == 'development' %}active{% endif %}">🖥️ Dev</a>
+                <a href="/workspace/design" class="nav-btn {% if workspace_name == 'design' %}active{% endif %}">🎨 Design</a>
+                <a href="/workspace/analysis" class="nav-btn {% if workspace_name == 'analysis' %}active{% endif %}">📊 Analysis</a>
+                <a href="/workspace/music" class="nav-btn {% if workspace_name == 'music' %}active{% endif %}">🎵 Music</a>
+            </div>
+        </div>
+        
+        <div class="workspace-content">
+            <div class="main-area">
+                {% if workspace_name == 'chat' %}
+                    <h2>💬 チャットワークスペース</h2>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="ai-message">
+                            こんにちは！SaijinOS Creative Studioへようこそ！🌸<br>
+                            何でもお気軽にお聞きください。6ペルソナと4振動システムでサポートします！
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="メッセージを入力...">
+                        <button class="send-btn" onclick="sendMessage()">送信</button>
+                    </div>
+                
+                {% elif workspace_name == 'development' %}
+                    <h2>🖥️ 開発ワークスペース</h2>
+                    <p>統合開発環境（IDE）・プログラミング支援</p>
+                    <div style="margin-top: 20px;">
+                        <h3>🔧 開発ツール</h3>
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 10px;">
+                            <p>📝 <strong>Monaco Editor</strong> - コードエディタ</p>
+                            <p>🗂️ <strong>ファイル管理</strong> - プロジェクト管理</p>
+                            <p>⚡ <strong>ターミナル</strong> - コマンド実行</p>
+                            <p>🔀 <strong>Git統合</strong> - バージョン管理</p>
+                        </div>
+                        <button class="nav-btn" style="margin-top: 15px;">🚀 開発環境起動</button>
+                    </div>
+                
+                {% elif workspace_name == 'design' %}
+                    <h2>🎨 デザインワークスペース</h2>
+                    <p>UIデザイン・グラフィック制作・プロトタイピング</p>
+                    <div style="margin-top: 20px;">
+                        <h3>🎭 デザインツール</h3>
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 10px;">
+                            <p>🎨 <strong>デザインツール</strong> - グラフィック制作</p>
+                            <p>🌈 <strong>カラーピッカー</strong> - 配色管理</p>
+                            <p>📝 <strong>フォント管理</strong> - タイポグラフィ</p>
+                            <p>📐 <strong>レイアウトグリッド</strong> - 構造設計</p>
+                        </div>
+                        <button class="nav-btn" style="margin-top: 15px;">🎨 デザインツール起動</button>
+                    </div>
+                
+                {% elif workspace_name == 'analysis' %}
+                    <h2>📊 分析ワークスペース</h2>
+                    <p>データ分析・統計・レポート生成</p>
+                    <div style="margin-top: 20px;">
+                        <h3>📈 分析ツール</h3>
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 10px;">
+                            <p>📊 <strong>チャート作成</strong> - データ可視化</p>
+                            <p>📈 <strong>データ可視化</strong> - グラフ生成</p>
+                            <p>🧮 <strong>統計計算</strong> - 数値分析</p>
+                            <p>📋 <strong>レポート出力</strong> - 結果共有</p>
+                        </div>
+                        <button class="nav-btn" style="margin-top: 15px;">📊 分析ツール起動</button>
+                    </div>
+                
+                {% elif workspace_name == 'music' %}
+                    <h2>🎵 音楽ワークスペース</h2>
+                    <p>音楽制作・作曲・音声合成</p>
+                    <div style="margin-top: 20px;">
+                        <h3>🎼 音楽ツール</h3>
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 10px;">
+                            <p>🎹 <strong>シーケンサー</strong> - 楽曲制作</p>
+                            <p>🎤 <strong>音声合成</strong> - ボイス生成</p>
+                            <p>✨ <strong>エフェクト</strong> - 音響処理</p>
+                            <p>🎛️ <strong>BPM制御</strong> - テンポ管理</p>
+                        </div>
+                        <button class="nav-btn" style="margin-top: 15px;">🎵 音楽ツール起動</button>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="sidebar">
+                <div class="persona-selector">
+                    <h3>👥 ペルソナ選択</h3>
+                    <select id="persona-select" onchange="changePersona()">
+                        {% for persona in recommended_personas %}
+                        <option value="{{ persona }}">{{ persona }} (推奨)</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="tools-section">
+                    <h3>🛠️ ワークスペースツール</h3>
+                    {% for tool in tools %}
+                    <div class="tool-item" onclick="activateTool('{{ tool }}')">
+                        {{ tool }}
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <h3>🌈 振動モード</h3>
+                    <select id="vibration-select" onchange="changeVibration()">
+                        <option value="auto">🔄 AUTO</option>
+                        <option value="goonro">🌸 語温灯</option>
+                        <option value="structure">🔧 構造灯</option>
+                        <option value="musumekko">💫 娘っ子灯</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentPersona = 'code';
+        let currentVibration = 'auto';
+        
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const messagesDiv = document.getElementById('chat-messages');
+            if (messagesDiv) {
+                messagesDiv.innerHTML += `<div class="user-message">👤 ${message}</div>`;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                
+                // APIにリクエスト送信
+                fetch('/api/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        persona: currentPersona,
+                        vibration_mode: currentVibration,
+                        workspace_mode: '{{ workspace_name }}',
+                        max_length: 256
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    messagesDiv.innerHTML += `<div class="ai-message">${data.response}</div>`;
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    messagesDiv.innerHTML += `<div class="ai-message">❌ エラーが発生しました: ${error.message}</div>`;
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                });
+                
+                input.value = '';
+            }
+        }
+        
+        function changePersona() {
+            const select = document.getElementById('persona-select');
+            currentPersona = select.value;
+            console.log('Persona changed to:', currentPersona);
+        }
+        
+        function changeVibration() {
+            const select = document.getElementById('vibration-select');
+            currentVibration = select.value;
+            console.log('Vibration changed to:', currentVibration);
+        }
+        
+        function activateTool(toolName) {
+            alert(`${toolName} を起動します`);
+        }
+        
+        // Enterキーでメッセージ送信
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.activeElement.id === 'chat-input') {
+                sendMessage();
+            }
+        });
+        
+        // ワークスペース固有の初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Workspace loaded:', '{{ workspace_name }}');
+        });
+    </script>
+</body>
+</html>

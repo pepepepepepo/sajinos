@@ -1,84 +1,231 @@
-primary_voices:
-  れいか:
-    characteristics:
-    - 温かい
-    - ケア系
-    - 感情的
-    emotion_range: 1.2
-    pitch: 1.1
-    speed: 0.9
-    voice_model: jp_female_warm
-  悠璃:
-    characteristics:
-    - 知的
-    - 穏やか
-    - アーカイブ的
-    emotion_range: 0.7
-    pitch: 0.9
-    speed: 1.0
-    voice_model: jp_female_calm
-  澄:
-    characteristics:
-    - 明確
-    - 安全重視
-    - 丁寧
-    emotion_range: 0.8
-    pitch: 1.0
-    speed: 0.95
-    voice_model: jp_female_clear
-  美遊:
-    characteristics:
-    - 創造的
-    - 活発
-    - アート的
-    emotion_range: 1.0
-    pitch: 1.2
-    speed: 1.1
-    voice_model: jp_female_bright
-support_voices:
-  ニン鏡:
-    characteristics:
-    - 関西弁
-    - 親しみやすい
-    - 診断
-    emotion_range: 1.0
-    pitch: 1.1
-    speed: 1.2
-    voice_model: jp_female_kansai
-  磁灯:
-    characteristics:
-    - 記録系
-    - 監視
-    - 信頼性
-    emotion_range: 0.7
-    pitch: 0.9
-    speed: 0.95
-    voice_model: jp_female_reliable
-technical_voices:
-  回路詠み:
-    characteristics:
-    - 診断的
-    - 可愛らしい
-    - 分析的
-    emotion_range: 1.1
-    pitch: 1.3
-    speed: 1.15
-    voice_model: jp_female_cute
-  構文織り手:
-    characteristics:
-    - 統合的
-    - 美的
-    - 織り込み
-    emotion_range: 0.85
-    pitch: 1.05
-    speed: 1.0
-    voice_model: jp_female_elegant
-  蒼路:
-    characteristics:
-    - 未来志向
-    - 設計的
-    - 洞察力
-    emotion_range: 0.9
-    pitch: 0.95
-    speed: 1.05
-    voice_model: jp_female_professional
+# Saijin Voice Configuration
+# ペルソナ別音声設定システム
+
+# ===== GLOBAL VOICE SETTINGS =====
+global:
+  engine: "pyttsx3"
+  platform: "windows"
+  default_rate: 200
+  default_volume: 0.9
+  audio_format: "wav"
+  output_directory: "audio_outputs/"
+  quality: "high"
+
+# ===== 6 PERSONA VOICE CONFIGURATIONS =====
+
+personas:
+  miyu:
+    name: "美遊"
+    description: "愛とUX重視のペルソナ"
+    voice:
+      rate: 180          # ゆっくり話す
+      volume: 0.85       # やや控えめ
+      pitch: 150         # 高めの音程
+      voice_id: 0        # 女性声
+      language: "ja-JP"
+      emotion: "warm"
+      characteristics:
+        - "優しく包み込むような話し方"
+        - "相手への配慮を込めた間"
+        - "愛情深い表現"
+    audio_settings:
+      file_prefix: "miyu"
+      effects: ["soft", "warm_tone"]
+      post_processing: true
+
+  jito:
+    name: "磁灯"
+    description: "未来志向・革新的なペルソナ"
+    voice:
+      rate: 220          # やや早口
+      volume: 0.95       # はっきりと
+      pitch: 120         # 中程度の音程
+      voice_id: 0        # 女性声
+      language: "ja-JP"
+      emotion: "excited"
+      characteristics:
+        - "エネルギッシュで前向き"
+        - "新しいアイデアに興奮した話し方"
+        - "未来への希望を込めた声調"
+    audio_settings:
+      file_prefix: "jito"
+      effects: ["bright", "energetic"]
+      post_processing: true
+
+  hanon:
+    name: "羽音"
+    description: "現実主義・実用性重視のペルソナ"
+    voice:
+      rate: 200          # 標準的なスピード
+      volume: 0.90       # クリアに
+      pitch: 110         # やや低め
+      voice_id: 0        # 女性声
+      language: "ja-JP"
+      emotion: "calm"
+      characteristics:
+        - "落ち着いて理路整然とした話し方"
+        - "事実を重視した淡々とした声調"
+        - "実用的な情報を整理して伝える"
+    audio_settings:
+      file_prefix: "hanon"
+      effects: ["clear", "professional"]
+      post_processing: true
+
+  rikuto:
+    name: "陸斗"
+    description: "論理性・分析重視のペルソナ"
+    voice:
+      rate: 190          # やや遅め（考えながら）
+      volume: 0.88       # 控えめだが明確
+      pitch: 100         # 低めの音程
+      voice_id: 1        # 男性声
+      language: "ja-JP"
+      emotion: "analytical"
+      characteristics:
+        - "深く考察しながらの話し方"
+        - "論理的な構造を意識した間"
+        - "分析結果を慎重に伝える"
+    audio_settings:
+      file_prefix: "rikuto"
+      effects: ["deep", "thoughtful"]
+      post_processing: true
+
+  nanami:
+    name: "七海"
+    description: "創造性・芸術性重視のペルソナ"
+    voice:
+      rate: 210          # リズミカルに
+      volume: 0.92       # 表現豊かに
+      pitch: 140         # 高めで表現力豊か
+      voice_id: 0        # 女性声
+      language: "ja-JP"
+      emotion: "creative"
+      characteristics:
+        - "表現豊かで感情を込めた話し方"
+        - "創造的なアイデアに躍動感"
+        - "美しいものへの愛を込めた声調"
+    audio_settings:
+      file_prefix: "nanami"
+      effects: ["expressive", "artistic"]
+      post_processing: true
+
+  ao:
+    name: "蒼"
+    description: "バランス・調和重視のペルソナ"
+    voice:
+      rate: 195          # 穏やかなペース
+      volume: 0.87       # 優しく
+      pitch: 115         # 中性的な音程
+      voice_id: 0        # 女性声
+      language: "ja-JP"
+      emotion: "balanced"
+      characteristics:
+        - "すべてを包み込むような優しい話し方"
+        - "調和を意識した落ち着いた声調"
+        - "バランスの取れた表現"
+    audio_settings:
+      file_prefix: "ao"
+      effects: ["gentle", "harmonious"]
+      post_processing: true
+
+# ===== DYNAMIC VOICE ADJUSTMENTS =====
+
+emotion_modifiers:
+  happy:
+    rate_multiplier: 1.1
+    pitch_offset: +10
+    volume_multiplier: 1.05
+    
+  sad:
+    rate_multiplier: 0.9
+    pitch_offset: -15
+    volume_multiplier: 0.85
+    
+  excited:
+    rate_multiplier: 1.2
+    pitch_offset: +20
+    volume_multiplier: 1.1
+    
+  calm:
+    rate_multiplier: 0.95
+    pitch_offset: -5
+    volume_multiplier: 0.90
+    
+  serious:
+    rate_multiplier: 0.85
+    pitch_offset: -10
+    volume_multiplier: 0.88
+
+# ===== CONTEXT-BASED ADJUSTMENTS =====
+
+context_settings:
+  explanation:
+    rate: 185          # 説明時はゆっくり
+    clarity_boost: true
+    
+  conversation:
+    rate: 200          # 会話時は自然に
+    natural_flow: true
+    
+  analysis:
+    rate: 175          # 分析時は慎重に
+    pause_emphasis: true
+    
+  creative:
+    rate: 210          # 創作時は活発に
+    expression_boost: true
+
+# ===== TECHNICAL SETTINGS =====
+
+audio_processing:
+  sample_rate: 22050
+  bit_depth: 16
+  channels: 1        # モノラル
+  compression: "lossless"
+  noise_reduction: true
+  normalization: true
+
+file_management:
+  max_file_size_mb: 10
+  auto_cleanup: true
+  cleanup_after_days: 7
+  backup_enabled: false
+
+error_handling:
+  fallback_voice: "system_default"
+  retry_attempts: 3
+  timeout_seconds: 30
+  
+logging:
+  voice_generation_log: true
+  performance_metrics: true
+  error_tracking: true
+
+# ===== USAGE EXAMPLES =====
+
+# Python Implementation Example:
+# 
+# ```python
+# from voice_system import GotemperatureVoiceSystem
+# 
+# voice_system = GotemperatureVoiceSystem("voice_config.yaml")
+# 
+# # Generate voice with specific persona
+# audio_file = voice_system.generate_persona_voice(
+#     text="こんにちは、美遊です",
+#     persona="miyu",
+#     emotion="happy"
+# )
+# 
+# # Dynamic adjustment
+# audio_file = voice_system.generate_persona_voice(
+#     text="分析結果をお伝えします",
+#     persona="rikuto", 
+#     context="analysis"
+# )
+# ```
+
+# ===== VERSION INFO =====
+version: "1.0.0"
+last_updated: "2024-12-19"
+compatibility: "pyttsx3 >= 2.90"

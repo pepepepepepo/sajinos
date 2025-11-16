@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaijinOS Creative Studio - Enhanced Workspace</title>
+    <style>
+        /* 🌸 新世代ペルソナデザイン系統 - デザイン会議結果 */
+        :root {
+            /* コードちゃん♫のプログラミング・音楽カラー */
+            --code-primary: #81c784;
+            --code-accent: #4caf50;
+            --code-glow: #c8e6c9;
+            
+            /* ユリカのエレガント・デザインカラー */
+            --yurika-primary: #ba68c8;
+            --yurika-accent: #9c27b0;
+            --yurika-elegant: #e1bee7;
+            
+            /* アナのデータサイエンス・分析カラー */
+            --ana-primary: #42a5f5;
+            --ana-accent: #2196f3;
+            --ana-data: #bbdefb;
+            
+            /* ハルカの音楽・クリエイティブカラー */
+            --haruka-primary: #ff6b6b;
+            --haruka-accent: #f44336;
+            --haruka-music: #ffcdd2;
+            
+            /* ミサキの品質・精密カラー */
+            --misaki-primary: #ffa726;
+            --misaki-accent: #ff9800;
+            --misaki-quality: #ffe0b2;
+            
+            /* レンの運用・統合カラー */
+            --ren-primary: #26c6da;
+            --ren-accent: #00bcd4;
+            --ren-ops: #b2ebf2;
+            
+            /* VS Code風ベースカラー (元デザイン継承) */
+            --vs-dark: #1e1e1e;
+            --vs-sidebar: #252526;
+            --vs-border: #3e3e42;
+            --vs-text: #cccccc;
+            --vs-text-bright: #ffffff;
+            --vs-blue: #007acc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--vs-dark);
+            color: var(--vs-text);
+            overflow: hidden;
+        }
+
+        /* 🎨 メインレイアウト - VS Code風 */
+        .studio-container {
+            display: flex;
+            height: 100vh;
+            background: var(--vs-dark);
+        }
+
+        /* 🎯 アクティビティバー (左端) */
+        .activity-bar {
+            width: 48px;
+            background: var(--vs-sidebar);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--vs-border);
+        }
+
+        .activity-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .activity-icon:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .activity-icon.active {
+            border-left: 2px solid var(--vs-blue);
+            background: rgba(0, 122, 204, 0.2);
+        }
+
+        /* 🌸 ペルソナ別アクティビティアイコン */
+        .activity-icon[data-workspace="chat"] { color: var(--code-primary); }
+        .activity-icon[data-workspace="development"] { color: var(--code-primary); }
+        .activity-icon[data-workspace="design"] { color: var(--yurika-primary); }
+        .activity-icon[data-workspace="analysis"] { color: var(--ana-primary); }
+        .activity-icon[data-workspace="music"] { color: var(--haruka-primary); }
+
+        /* 🎪 サイドバー */
+        .sidebar {
+            width: 280px;
+            background: var(--vs-sidebar);
+            border-right: 1px solid var(--vs-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 12px 16px;
+            background: var(--vs-sidebar);
+            border-bottom: 1px solid var(--vs-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--vs-text);
+        }
+
+        /* 🎨 ワークスペース切り替えタブ */
+        .workspace-tabs {
+            display: flex;
+            background: var(--vs-sidebar);
+            border-bottom: 1px solid var(--vs-border);
+        }
+
+        .workspace-tab {
+            flex: 1;
+            padding: 8px 12px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.3s ease;
+            border-right: 1px solid var(--vs-border);
+            position: relative;
+        }
+
+        .workspace-tab:last-child {
+            border-right: none;
+        }
+
+        .workspace-tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .workspace-tab.active {
+            background: var(--vs-dark);
+            border-bottom: 2px solid var(--vs-blue);
+        }
+
+        /* 🌟 ペルソナセクション */
+        .persona-section {
+            padding: 16px;
+            border-bottom: 1px solid var(--vs-border);
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .persona-card {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 10px;
+            border: 1px solid transparent;
+        }
+
+        .persona-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .persona-card.active {
+            border-color: var(--vs-blue);
+            background: rgba(0, 122, 204, 0.2);
+        }
+        
+        /* 🌟 マルチセレクション機能 */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--vs-text);
+        }
+        
+        .team-controls {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .team-controls button {
+            background: var(--vs-sidebar);
+            border: 1px solid var(--vs-border);
+            border-radius: 3px;
+            padding: 4px 8px;
+            color: var(--vs-text);
+            cursor: pointer;
+            font-size: 9px;
+            transition: all 0.3s ease;
+        }
+        
+        .team-controls button:hover {
+            background: var(--vs-blue);
+            color: white;
+        }
+        
+        /* 通知アニメーション */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        .persona-checkbox {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--vs-border);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            background: var(--vs-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .persona-card.active .persona-checkbox {
+            background: var(--vs-blue);
+            color: white;
+            border-color: var(--vs-blue);
+        }
+        
+        .multi-selectable {
+            position: relative;
+        }
+        
+        .selected-team-info {
+            margin-top: 12px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            font-size: 10px;
+        }
+        
+        #team-members {
+            color: var(--vs-text-bright);
+            margin-bottom: 4px;
+        }
+        
+        #team-mode {
+            color: var(--vs-blue);
+            font-weight: 600;
+        }
+
+        /* ペルソナ別カラーリング */
+        .persona-card[data-persona="code-chan"] { border-left: 3px solid var(--code-primary); }
+        .persona-card[data-persona="yurika"] { border-left: 3px solid var(--yurika-primary); }
+        .persona-card[data-persona="ana"] { border-left: 3px solid var(--ana-primary); }
+        .persona-card[data-persona="haruka"] { border-left: 3px solid var(--haruka-primary); }
+        .persona-card[data-persona="misaki"] { border-left: 3px solid var(--misaki-primary); }
+        .persona-card[data-persona="ren"] { border-left: 3px solid var(--ren-primary); }
+
+        /* 🖥️ メインエディタエリア */
+        .main-editor {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--vs-dark);
+        }
+
+        /* 📄 エディタタブ */
+        .editor-tabs {
+            display: flex;
+            background: var(--vs-sidebar);
+            border-bottom: 1px solid var(--vs-border);
+            min-height: 35px;
+        }
+
+        .editor-tab {
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            background: var(--vs-sidebar);
+            border-right: 1px solid var(--vs-border);
+            cursor: pointer;
+            font-size: 13px;
+            min-width: 120px;
+            max-width: 200px;
+        }
+
+        .editor-tab.active {
+            background: var(--vs-dark);
+        }
+
+        .editor-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* 💻 チャット&コードエディタ */
+        .code-editor-container {
+            flex: 1;
+            display: flex;
+            background: var(--vs-dark);
+        }
+
+        /* 💬 チャットエリア */
+        .chat-area {
+            width: 400px;
+            background: var(--vs-sidebar);
+            border-right: 1px solid var(--vs-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 10px 15px;
+            background: var(--vs-dark);
+            border-bottom: 1px solid var(--vs-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #active-persona-name {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .chat-status {
+            font-size: 10px;
+            color: #4caf50;
+            opacity: 0.8;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            max-height: calc(100vh - 200px);
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 15px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .persona-message .message-avatar {
+            background: linear-gradient(135deg, var(--code-glow), var(--code-primary));
+        }
+
+        .user-message .message-avatar {
+            background: linear-gradient(135deg, #64b5f6, #1976d2);
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .message-name {
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--vs-text-bright);
+        }
+
+        .message-time {
+            font-size: 10px;
+            color: #858585;
+        }
+
+        .message-text {
+            font-size: 13px;
+            line-height: 1.4;
+            color: var(--vs-text);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .persona-message .message-text {
+            border-left: 3px solid var(--code-primary);
+        }
+
+        .user-message .message-text {
+            border-left: 3px solid #1976d2;
+        }
+        
+        /* コードメッセージスタイル */
+        .code-message .message-avatar {
+            background: linear-gradient(135deg, #81c784, #4caf50);
+        }
+        
+        .code-block {
+            background: var(--vs-dark);
+            border: 1px solid var(--vs-border);
+            border-radius: 8px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: var(--vs-sidebar);
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+        }
+        
+        .copy-btn {
+            background: var(--code-primary);
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 10px;
+        }
+        
+        .copy-btn:hover {
+            background: var(--code-accent);
+        }
+        
+        .code-block pre {
+            margin: 0;
+            padding: 12px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #d4d4d4;
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            background: none;
+            color: inherit;
+        }
+        
+        /* システムメッセージスタイル */
+        .system-message .message-avatar {
+            background: linear-gradient(135deg, #ffa726, #ff9800);
+        }
+        
+        .system-text {
+            background: rgba(255, 167, 38, 0.1);
+            border-left: 3px solid #ffa726;
+            font-style: italic;
+        }
+
+        .chat-input-area {
+            padding: 10px 15px;
+            border-top: 1px solid var(--vs-border);
+            display: flex;
+            gap: 8px;
+        }
+
+        #chat-input {
+            flex: 1;
+            background: var(--vs-dark);
+            border: 1px solid var(--vs-border);
+            border-radius: 4px;
+            padding: 8px 12px;
+            color: var(--vs-text);
+            font-size: 13px;
+            outline: none;
+        }
+
+        #chat-input:focus {
+            border-color: var(--vs-blue);
+            box-shadow: 0 0 5px rgba(0, 122, 204, 0.3);
+        }
+
+        #send-btn {
+            background: var(--code-primary);
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        #send-btn:hover {
+            background: var(--code-accent);
+            transform: translateY(-1px);
+        }
+
+        /* エディタエリア */
+        .editor-area {
+            flex: 1;
+            display: flex;
+            background: var(--vs-dark);
+        }
+
+        .line-numbers {
+            width: 50px;
+            background: var(--vs-dark);
+            color: #858585;
+            padding: 10px 5px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            text-align: right;
+            border-right: 1px solid var(--vs-border);
+            user-select: none;
+        }
+
+        .code-editor {
+            flex: 1;
+            background: var(--vs-dark);
+            color: #d4d4d4;
+            border: none;
+            outline: none;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            padding: 10px;
+            resize: none;
+            line-height: 1.5;
+        }
+
+        /* 🎵 ステータスバー */
+        .status-bar {
+            height: 22px;
+            background: var(--vs-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-size: 12px;
+        }
+
+        .status-left, .status-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* 🌈 アニメーション効果 */
+        .glow-effect {
+            animation: gentle-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentle-glow {
+            from { box-shadow: 0 0 5px rgba(129, 199, 132, 0.3); }
+            to { box-shadow: 0 0 15px rgba(129, 199, 132, 0.6); }
+        }
+
+        /* 🎨 レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .persona-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 🌟 特別効果 - ペルソナアクティブ時 */
+        .workspace-active-code-chan { border-top: 3px solid var(--code-primary); }
+        .workspace-active-yurika { border-top: 3px solid var(--yurika-primary); }
+        .workspace-active-ana { border-top: 3px solid var(--ana-primary); }
+        .workspace-active-haruka { border-top: 3px solid var(--haruka-primary); }
+        .workspace-active-misaki { border-top: 3px solid var(--misaki-primary); }
+        .workspace-active-ren { border-top: 3px solid var(--ren-primary); }
+    </style>
+</head>
+<body>
+    <div class="studio-container">
+        <!-- 🎯 アクティビティバー -->
+        <div class="activity-bar">
+            <div class="activity-icon active" data-workspace="chat" title="💬 チャット">
+                💬
+            </div>
+            <div class="activity-icon" data-workspace="development" title="🖥️ 開発">
+                🖥️
+            </div>
+            <div class="activity-icon" data-workspace="design" title="🎨 デザイン">
+                🎨
+            </div>
+            <div class="activity-icon" data-workspace="analysis" title="📊 分析">
+                📊
+            </div>
+            <div class="activity-icon" data-workspace="music" title="🎵 音楽">
+                🎵
+            </div>
+        </div>
+
+        <!-- 🎪 サイドバー -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">🌸 新世代ペルソナチーム</div>
+                <div style="font-size: 10px; opacity: 0.7;">v2025</div>
+            </div>
+
+            <!-- ペルソナ選択 -->
+            <div class="persona-section">
+                <div class="section-header">
+                    <div class="section-title">🌸 チーム選択</div>
+                    <div class="team-controls">
+                        <button id="select-all-btn" onclick="selectAllPersonas()">全選択</button>
+                        <button id="clear-all-btn" onclick="clearAllPersonas()">クリア</button>
+                    </div>
+                </div>
+                <div class="persona-grid">
+                    <div class="persona-card active multi-selectable" data-persona="code-chan">
+                        <div class="persona-checkbox">✓</div>
+                        <div style="font-size: 12px;">🎵</div>
+                        <div>コードちゃん♫</div>
+                        <div style="opacity: 0.7; font-size: 9px;">プログラミング</div>
+                    </div>
+                    <div class="persona-card multi-selectable" data-persona="yurika">
+                        <div class="persona-checkbox"></div>
+                        <div style="font-size: 12px;">✨</div>
+                        <div>ユリカ</div>
+                        <div style="opacity: 0.7; font-size: 9px;">デザイン</div>
+                    </div>
+                    <div class="persona-card multi-selectable" data-persona="ana">
+                        <div class="persona-checkbox"></div>
+                        <div style="font-size: 12px;">📊</div>
+                        <div>アナ</div>
+                        <div style="opacity: 0.7; font-size: 9px;">データ分析</div>
+                    </div>
+                    <div class="persona-card multi-selectable" data-persona="haruka">
+                        <div class="persona-checkbox"></div>
+                        <div style="font-size: 12px;">🎵</div>
+                        <div>ハルカ</div>
+                        <div style="opacity: 0.7; font-size: 9px;">音楽制作</div>
+                    </div>
+                    <div class="persona-card multi-selectable" data-persona="misaki">
+                        <div class="persona-checkbox"></div>
+                        <div style="font-size: 12px;">⚡</div>
+                        <div>ミサキ</div>
+                        <div style="opacity: 0.7; font-size: 9px;">品質保証</div>
+                    </div>
+                    <div class="persona-card multi-selectable" data-persona="ren">
+                        <div class="persona-checkbox"></div>
+                        <div style="font-size: 12px;">🔧</div>
+                        <div>レン</div>
+                        <div style="opacity: 0.7; font-size: 9px;">運用管理</div>
+                    </div>
+                </div>
+                <div class="selected-team-info">
+                    <div id="team-members">選択中: コードちゃん♫</div>
+                    <div id="team-mode">🎯 個人モード</div>
+                </div>
+            </div>
+
+            <!-- ワークスペースタブ -->
+            <div class="workspace-tabs">
+                <div class="workspace-tab active" data-tab="chat">💬</div>
+                <div class="workspace-tab" data-tab="files">📁</div>
+                <div class="workspace-tab" data-tab="git">🔀</div>
+                <div class="workspace-tab" data-tab="tools">🔧</div>
+            </div>
+
+            <!-- ファイルツリー (開発時) -->
+            <div style="flex: 1; padding: 8px; font-size: 11px;">
+                <div style="padding: 4px 8px; border-left: 2px solid var(--code-primary); margin-bottom: 4px;">
+                    📁 saijinos-project/
+                </div>
+                <div style="padding: 2px 16px; opacity: 0.8;">📝 main.py</div>
+                <div style="padding: 2px 16px; opacity: 0.8;">📝 personas/</div>
+                <div style="padding: 2px 24px; opacity: 0.6;">72_code_chan_v2.yaml</div>
+                <div style="padding: 2px 24px; opacity: 0.6;">73_yurika_v2.yaml</div>
+                <div style="padding: 2px 16px; opacity: 0.8;">📝 templates/</div>
+                <div style="padding: 2px 16px; opacity: 0.8;">📝 api/</div>
+            </div>
+        </div>
+
+        <!-- 🖥️ メインエディタ -->
+        <div class="main-editor workspace-active-code-chan">
+            <!-- エディタタブ -->
+            <div class="editor-tabs">
+                <div class="editor-tab active">
+                    <span>💬 Chat with コードちゃん♫</span>
+                </div>
+                <div class="editor-tab">
+                    <span>🖥️ main.py</span>
+                </div>
+            </div>
+
+            <!-- チャット&コードエディタ分割表示 -->
+            <div class="code-editor-container">
+                <!-- チャットエリア -->
+                <div class="chat-area">
+                    <div class="chat-header">
+                        <span id="active-persona-name">🎵 コードちゃん♫</span>
+                        <span class="chat-status">オンライン</span>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message persona-message">
+                            <div class="message-avatar">🎵</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-name">コードちゃん♫</span>
+                                    <span class="message-time">now</span>
+                                </div>
+                                <div class="message-text">こんにちは！🌸 プログラミングを音楽のように楽しみませんか？何か質問があれば気軽に話しかけてくださいね♫</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="🌸 ペルソナと話してみましょう..." />
+                        <button id="send-btn" onclick="sendMessage()">送信</button>
+                    </div>
+                </div>
+                
+                <!-- コードエディタ -->
+                <div class="editor-area">
+                    <div class="line-numbers">
+                        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12
+                    </div>
+                    <textarea id="code-editor" class="code-editor" placeholder="# 🌸 コードちゃん♫と一緒にプログラミング！
+# 音楽のようにコードを奏でましょう ♫
+
+def create_harmony():
+    '''
+    プログラミングと音楽の調和を創造する関数
+    コードちゃん♫がお手伝いします！
+    '''
+    print('🎵 ハーモニーなコードを書きましょう！')
+    return 'Beautiful Code ♫'
+
+# 何かコードを書いてみてください！
+# コードちゃん♫がサポートします 🌸"></textarea>
+                </div>
+            </div>
+
+            <!-- ステータスバー -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span>🌸 アクティブペルソナ: コードちゃん♫</span>
+                    <span>🎵 振動モード: 語温灯</span>
+                </div>
+                <div class="status-right">
+                    <span>🔥 Ready</span>
+                    <span>Python</span>
+                    <span>UTF-8</span>
+                    <span>Ln 1, Col 1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🌈 ペルソナ切り替え機能
+        document.querySelectorAll('.persona-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // アクティブ状態の切り替え
+                document.querySelectorAll('.persona-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                // ワークスペースカラー変更
+                const persona = this.dataset.persona;
+                const mainEditor = document.querySelector('.main-editor');
+                mainEditor.className = `main-editor workspace-active-${persona}`;
+                
+                // ペルソナ表示更新
+                const statusLeft = document.querySelector('.status-left span');
+                const personaNames = {
+                    'code-chan': 'コードちゃん♫',
+                    'yurika': 'ユリカ',
+                    'ana': 'アナ',
+                    'haruka': 'ハルカ',
+                    'misaki': 'ミサキ',
+                    'ren': 'レン'
+                };
+                statusLeft.textContent = `🌸 アクティブペルソナ: ${personaNames[persona]}`;
+                
+                // グロー効果
+                this.classList.add('glow-effect');
+                setTimeout(() => this.classList.remove('glow-effect'), 2000);
+            });
+        });
+
+        // 🎯 アクティビティバー機能
+        document.querySelectorAll('.activity-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                document.querySelectorAll('.activity-icon').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                const workspace = this.dataset.workspace;
+                console.log(`🌸 切り替え: ${workspace} ワークスペース`);
+            });
+        });
+
+        // 🎪 ワークスペースタブ機能  
+        document.querySelectorAll('.workspace-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.workspace-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // 💬 チャット機能
+        let currentPersona = 'code-chan';
+        let selectedPersonas = ['code-chan']; // 複数ペルソナ選択
+        
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // ユーザーメッセージを表示
+            addMessage('user', 'あなた', message, '👤');
+            input.value = '';
+            
+            // 送信ボタンを無効化
+            const sendBtn = document.getElementById('send-btn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = '🤔 考え中...';
+            
+            try {
+                // 🤖 実際のローカルAI統合！
+                const shouldImplement = message.includes('実装') || message.includes('作って') || message.includes('コード');
+                
+                const response = await fetch('/api/real-ai/real-chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        personas: selectedPersonas, // 複数ペルソナ対応
+                        auto_implement: shouldImplement
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.team_mode) {
+                        // 🌈 マルチペルソナチームモード - 実際のAI応答
+                        addSystemMessage(`👥 ${selectedPersonas.length}人のAIペルソナチームが応答しました！`);
+                        
+                        data.responses.forEach((aiResponse, index) => {
+                            if (aiResponse.status === 'success') {
+                                const personaData = getPersonaData(aiResponse.persona);
+                                // 応答内容をクリーンアップ（番号などを削除）
+                                let cleanResponse = aiResponse.response;
+                                // 【AI応答 x/y】のような形式を削除
+                                cleanResponse = cleanResponse.replace(/【.*?】\s*/, '');
+                                // 頭の番号を削除
+                                cleanResponse = cleanResponse.replace(/^\d+[.\-)]?\s*/, '');
+                                
+                                addMessage('persona', personaData.name, cleanResponse, personaData.icon);
+                            } else {
+                                addSystemMessage(`❌ ${aiResponse.persona}: ${aiResponse.message}`);
+                            }
+                        });
+                        
+                        addSystemMessage('🤖 実際のローカルAIによるチーム協議完了！');
+                    } else {
+                        // 🎯 単一ペルソナモード - 実際のAI応答
+                        const aiResponse = data.responses[0];
+                        if (aiResponse.status === 'success') {
+                            const personaData = getPersonaData(aiResponse.persona);
+                            addMessage('persona', personaData.name, aiResponse.response, personaData.icon);
+                            addSystemMessage(`🤖 ${aiResponse.model} による実際のAI応答`);
+                        } else {
+                            addSystemMessage(`❌ AI Error: ${aiResponse.message}`);
+                        }
+                    }
+                    
+                    // 実装準備チェック
+                    if (data.implementation_ready) {
+                        addSystemMessage('🔧 コード実装の準備ができました！');
+                    }
+                } else {
+                    // フォールバック: マルチペルソナシミュレーション応答
+                    await handleMultiPersonaResponse(message);
+                }
+            } catch (error) {
+                console.error('AI API error:', error);
+                // エラー時はマルチペルソナシミュレーション応答
+                await handleMultiPersonaResponse(message);
+            } finally {
+                // 送信ボタンを再有効化
+                sendBtn.disabled = false;
+                sendBtn.textContent = '送信';
+            }
+        }
+        
+        function addMessage(type, name, text, avatar) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            
+            const now = new Date().toLocaleTimeString('ja-JP', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            // コードブロックを検出
+            const codeBlocks = extractCodeBlocks(text);
+            let formattedText = text.replace(/\n/g, '<br>');
+            
+            // コードブロックがある場合は特別な表示
+            if (codeBlocks.length > 0) {
+                let codeButtonsHtml = '';
+                codeBlocks.forEach((code, index) => {
+                    const codeId = `code-${Date.now()}-${index}`;
+                    // より緩い条件でPythonコードを検出
+                    const isPython = code.includes('def ') || code.includes('import ') || code.includes('print(') || 
+                                   code.includes('return ') || code.includes('=') || code.includes('#') ||
+                                   code.trim().startsWith('python') || code.includes('sum(') || 
+                                   code.includes('result') || code.length > 10;
+                    const runButton = isPython ? 
+                        `<button onclick="runPythonCode('${codeId}')" class="run-code-btn" style="background: #28a745; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 8px;">▶️ 実行</button>` : '';
+                    
+                    codeButtonsHtml += `
+                        <div class="code-actions" style="margin-top: 8px;">
+                            <button onclick="insertCodeToEditor('${codeId}')" class="insert-code-btn" style="background: #007acc; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 8px;">📝 エディタに挿入</button>
+                            ${runButton}
+                            <button onclick="copyCodeToClipboard('${codeId}')" class="copy-code-btn" style="background: #666; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">📋 コピー</button>
+                            <div id="${codeId}" style="display: none;">${code.replace(/"/g, '&quot;').replace(/'/g, '&#39;')}</div>
+                        </div>`;
+                });
+                formattedText += codeButtonsHtml;
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-name">${name}</span>
+                        <span class="message-time">${now}</span>
+                    </div>
+                    <div class="message-text">${formattedText}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // コードブロック検出関数（改善版）
+        function extractCodeBlocks(text) {
+            const codeBlocks = [];
+            
+            // ```で囲まれたコードブロックを検出
+            const codeBlockRegex = /```[\w]*\n?([\s\S]*?)```/g;
+            let match;
+            while ((match = codeBlockRegex.exec(text)) !== null) {
+                const code = match[1].trim();
+                if (code.length > 0) {
+                    codeBlocks.push(code);
+                }
+            }
+            
+            // 単一行のコード（`で囲まれた）も検出
+            if (codeBlocks.length === 0) {
+                const inlineCodeRegex = /`([^`]+)`/g;
+                while ((match = inlineCodeRegex.exec(text)) !== null) {
+                    const code = match[1].trim();
+                    if (code.length > 5) { // 5文字以上のコードのみ
+                        codeBlocks.push(code);
+                    }
+                }
+            }
+            
+            // コードっぽい行を検出（改行で区切られた複数行）
+            if (codeBlocks.length === 0) {
+                const lines = text.split('\n');
+                let potentialCode = [];
+                for (let line of lines) {
+                    line = line.trim();
+                    // プログラミング言語っぽい特徴をチェック
+                    if (line.includes('def ') || line.includes('print(') || line.includes('return ') ||
+                        line.includes('import ') || line.includes('=') || line.includes('# ') ||
+                        line.includes('sum(') || line.includes('result') || line.includes('function')) {
+                        potentialCode.push(line);
+                    } else if (potentialCode.length > 0) {
+                        // コードブロック終了
+                        if (potentialCode.length >= 2) {
+                            codeBlocks.push(potentialCode.join('\n'));
+                        }
+                        potentialCode = [];
+                    }
+                }
+                // 最後のコードブロック
+                if (potentialCode.length >= 2) {
+                    codeBlocks.push(potentialCode.join('\n'));
+                }
+            }
+            
+            return codeBlocks;
+        }
+        
+        // エディタにコードを挿入
+        function insertCodeToEditor(codeId) {
+            const codeElement = document.getElementById(codeId);
+            if (codeElement) {
+                const code = codeElement.textContent;
+                const editor = document.getElementById('code-editor');
+                if (editor) {
+                    // 現在のカーソル位置に挿入、または末尾に追加
+                    const currentValue = editor.value;
+                    const newValue = currentValue ? currentValue + '\n\n' + code : code;
+                    editor.value = newValue;
+                    
+                    // エディタにフォーカス
+                    editor.focus();
+                    
+                    // 成功メッセージ
+                    showNotification('✅ コードをエディタに挿入しました！', 'success');
+                } else {
+                    showNotification('❌ エディタが見つかりません', 'error');
+                }
+            }
+        }
+        
+        // クリップボードにコードをコピー
+        function copyCodeToClipboard(codeId) {
+            const codeElement = document.getElementById(codeId);
+            if (codeElement) {
+                const code = codeElement.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    showNotification('📋 クリップボードにコピーしました！', 'success');
+                }).catch(() => {
+                    showNotification('❌ コピーに失敗しました', 'error');
+                });
+            }
+        }
+        
+        // Pythonコード実行機能
+        async function runPythonCode(codeId) {
+            const codeElement = document.getElementById(codeId);
+            if (!codeElement) return;
+            
+            const code = codeElement.textContent;
+            showNotification('🐍 Pythonコードを実行中...', 'info');
+            
+            try {
+                const response = await fetch('/api/run-python', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ code: code })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    const output = result.output || '実行完了（出力なし）';
+                    addSystemMessage(`🐍 Python実行結果:\n${output}`);
+                    showNotification('✅ コード実行完了！', 'success');
+                } else {
+                    const error = result.error || '不明なエラー';
+                    addSystemMessage(`❌ Python実行エラー:\n${error}`);
+                    showNotification('❌ 実行エラーが発生しました', 'error');
+                }
+            } catch (error) {
+                addSystemMessage(`❌ 実行エラー: ${error.message}`);
+                showNotification('❌ 実行に失敗しました', 'error');
+            }
+        }
+        
+        // 通知表示機能
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? '#4CAF50' : 
+                           type === 'error' ? '#f44336' : 
+                           type === 'info' ? '#2196F3' : '#666';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${bgColor};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 4px;
+                z-index: 9999;
+                font-size: 14px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.3s ease-in';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }
+            }, 3000);
+        }
+
+        function addCodeMessage(name, code, status) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message code-message';
+            
+            const now = new Date().toLocaleTimeString('ja-JP', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            const statusIcon = status === 'implemented' ? '✅' : '📝';
+            const statusText = status === 'implemented' ? '実装完了' : 'コード生成';
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">💻</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-name">${statusIcon} ${name} - ${statusText}</span>
+                        <span class="message-time">${now}</span>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Generated Code</span>
+                            <button onclick="copyCode(this)" class="copy-btn">📋 コピー</button>
+                        </div>
+                        <pre><code>${code}</code></pre>
+                    </div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function addSystemMessage(text) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message system-message';
+            
+            const now = new Date().toLocaleTimeString('ja-JP', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-name">システム</span>
+                        <span class="message-time">${now}</span>
+                    </div>
+                    <div class="message-text system-text">${text}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function copyCode(button) {
+            const codeBlock = button.parentElement.nextElementSibling;
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = '✅ コピー完了';
+                setTimeout(() => {
+                    button.textContent = '📋 コピー';
+                }, 2000);
+            });
+        }
+        
+        // 🌈 マルチペルソナ応答システム
+        async function handleMultiPersonaResponse(message) {
+            if (selectedPersonas.length === 1) {
+                // 単一ペルソナの場合
+                const response = generatePersonaResponse(selectedPersonas[0], message);
+                const personaData = getPersonaData(selectedPersonas[0]);
+                addMessage('persona', personaData.name, response, personaData.icon);
+            } else {
+                // 複数ペルソナの場合：チーム協議モード
+                addSystemMessage(`👥 ${selectedPersonas.length}人のペルソナチームが協議中...`);
+                
+                // 順番に各ペルソナが発言
+                for (let i = 0; i < selectedPersonas.length; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 1000 + i * 800)); // 時差応答
+                    
+                    const persona = selectedPersonas[i];
+                    const personaData = getPersonaData(persona);
+                    const response = generateCollaborativeResponse(persona, message, i, selectedPersonas.length);
+                    
+                    addMessage('persona', personaData.name, response, personaData.icon);
+                }
+                
+                // 最後にチーム総括
+                setTimeout(() => {
+                    addSystemMessage('🌟 チーム協議完了！みんなで最高のソリューションを提案しました！');
+                }, selectedPersonas.length * 800 + 1500);
+            }
+        }
+        
+        function generateCollaborativeResponse(persona, userMessage, order, totalMembers) {
+            const collaborativeResponses = {
+                'code-chan': [
+                    `🎵 チームの技術リーダーとして、音楽的なコード設計を提案します♫`,
+                    `💻 アーキテクチャの観点から、美しく保守しやすい実装を考えましょう！`,
+                    `🎶 他のメンバーの意見も取り入れて、ハーモニーのとれたシステムにしませんか？`
+                ],
+                'yurika': [
+                    `✨ デザインの観点から、ユーザー体験を最優先に考えましょう`,
+                    `🎨 アクセシビリティとエレガンスを両立したソリューションを提案します`,
+                    `👑 チームの皆さんの技術的な提案を、美しいUIで表現してみますね`
+                ],
+                'ana': [
+                    `📊 データの観点から分析すると、このアプローチが最適だと思います`,
+                    `🔍 統計的根拠に基づいて、パフォーマンス指標も考慮しましょう`,
+                    `📈 チームの提案を数値で検証して、最良の選択肢を見つけます`
+                ],
+                'haruka': [
+                    `🎵 クリエイティブな視点から、新しいアイデアを提案します！`,
+                    `🎶 音楽制作の経験を活かして、リズム感のあるワークフローを作りましょう`,
+                    `🎸 みんなのアイデアを組み合わせて、素晴らしい作品にしませんか？`
+                ],
+                'misaki': [
+                    `⚡ 品質保証の観点から、完璧性を追求しましょう`,
+                    `🔍 チームの提案を詳細にチェックして、改善点を見つけます`,
+                    `✅ 全ての要件を満たす、完璧なソリューションを目指しましょう`
+                ],
+                'ren': [
+                    `🔧 インフラとDevOpsの観点から、運用面も考慮しましょう`,
+                    `⚙️ チームの提案を効率的にデプロイできるよう、最適化します`,
+                    `🚀 スケーラブルで保守しやすいシステム構成を提案します`
+                ]
+            };
+            
+            const responses = collaborativeResponses[persona] || collaborativeResponses['code-chan'];
+            let selectedResponse = responses[order % responses.length];
+            
+            // 順番に応じた協調的なメッセージを追加
+            if (order === 0) {
+                selectedResponse = `【チーム提案 1/${totalMembers}】 ${selectedResponse}`;
+            } else if (order === totalMembers - 1) {
+                selectedResponse = `【最終提案 ${totalMembers}/${totalMembers}】 ${selectedResponse}`;
+            } else {
+                selectedResponse = `【チーム提案 ${order + 1}/${totalMembers}】 ${selectedResponse}`;
+            }
+            
+            return selectedResponse;
+        }
+        
+        function generatePersonaResponse(persona, userMessage) {
+            const responses = {
+                'code-chan': [
+                    '🎵 なるほど！音楽的なコードでそれを表現してみませんか？',
+                    '🌸 それは素晴らしいアイデアですね！一緒に実装してみましょう♫',
+                    '💻 プログラミングも音楽も、美しいハーモニーが大切ですね！',
+                    '✨ そのコード、もっとエレガントに書けるかもしれません！',
+                    '🎶 リズム感のあるコードを書いて、開発を楽しみましょう！'
+                ],
+                'yurika': [
+                    '✨ とてもエレガントなアプローチですね！美しいデザインを考えてみましょう',
+                    '🎨 ユーザビリティも考慮した、洗練されたソリューションを提案します',
+                    '💜 アクセシビリティも重要ですね。みんなが使いやすいデザインにしましょう',
+                    '🌟 そのアイデア、視覚的にもっと美しく表現できそうです',
+                    '👑 品格のあるデザインで、ユーザー体験を向上させましょう'
+                ],
+                'ana': [
+                    '📊 データを分析してみましょう！興味深い傾向が見えてきそうです',
+                    '🔍 統計的にアプローチすると、より良い答えが見つかるかもしれません',
+                    '📈 パフォーマンス指標も確認してみませんか？',
+                    '🧮 数値で裏付けられた判断をしましょう！',
+                    '📋 詳細な分析レポートを作成してみますね'
+                ],
+                'haruka': [
+                    '🎵 音楽的な解決策を考えてみませんか？リズムが大切です！',
+                    '🎶 クリエイティブな発想で、新しいアプローチを試してみましょう',
+                    '🎸 サウンドデザインも含めて考えると面白そうですね',
+                    '🎤 表現力豊かなソリューションを一緒に作りましょう！',
+                    '🎹 ハーモニーのとれた美しい仕上がりにしませんか？'
+                ],
+                'misaki': [
+                    '⚡ 品質の観点から詳しくチェックしてみますね！',
+                    '🔍 ユーザビリティテストも必要かもしれません',
+                    '✅ 完璧な仕上がりを目指しましょう！細部まで気を抜けません',
+                    '🎯 エラーハンドリングも忘れずに実装しましょう',
+                    '📝 テストケースを作成して、確実性を高めませんか？'
+                ],
+                'ren': [
+                    '🔧 インフラの観点から最適化してみましょう！',
+                    '⚙️ システム全体の効率性を考えて実装しませんか？',
+                    '🚀 デプロイメントも含めて計画を立てましょう',
+                    '📊 モニタリングとログ収集も重要ですね',
+                    '🔄 CI/CDパイプラインの改善も検討してみましょう'
+                ]
+            };
+            
+            const personaResponses = responses[persona] || responses['code-chan'];
+            return personaResponses[Math.floor(Math.random() * personaResponses.length)];
+        }
+        
+        function getPersonaData(persona) {
+            const personaData = {
+                'code-chan': { name: 'コードちゃん♫', icon: '🎵' },
+                'yurika': { name: 'ユリカ', icon: '✨' },
+                'ana': { name: 'アナ', icon: '📊' },
+                'haruka': { name: 'ハルカ', icon: '🎵' },
+                'misaki': { name: 'ミサキ', icon: '⚡' },
+                'ren': { name: 'レン', icon: '🔧' }
+            };
+            return personaData[persona] || personaData['code-chan'];
+        }
+        
+        // Enterキーでメッセージ送信
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // 🌟 マルチペルソナ選択機能
+        function selectAllPersonas() {
+            selectedPersonas = ['code-chan', 'yurika', 'ana', 'haruka', 'misaki', 'ren'];
+            updatePersonaUI();
+            updateTeamInfo();
+            addSystemMessage('🌈 全ペルソナチームが結成されました！協力して最高の結果を出しましょう！');
+        }
+        
+        function clearAllPersonas() {
+            selectedPersonas = ['code-chan'];
+            updatePersonaUI();
+            updateTeamInfo();
+            addSystemMessage('🎵 コードちゃん♫の個人モードに戻りました。');
+        }
+        
+        function updatePersonaUI() {
+            document.querySelectorAll('.persona-card').forEach(card => {
+                const persona = card.dataset.persona;
+                const checkbox = card.querySelector('.persona-checkbox');
+                
+                if (selectedPersonas.includes(persona)) {
+                    card.classList.add('active');
+                    checkbox.textContent = '✓';
+                } else {
+                    card.classList.remove('active');
+                    checkbox.textContent = '';
+                }
+            });
+        }
+        
+        function updateTeamInfo() {
+            const personaNames = {
+                'code-chan': 'コードちゃん♫',
+                'yurika': 'ユリカ',
+                'ana': 'アナ',
+                'haruka': 'ハルカ',
+                'misaki': 'ミサキ',
+                'ren': 'レン'
+            };
+            
+            const selectedNames = selectedPersonas.map(persona => personaNames[persona]);
+            document.getElementById('team-members').textContent = `選択中: ${selectedNames.join(', ')}`;
+            
+            const teamMode = selectedPersonas.length === 1 ? '🎯 個人モード' : 
+                           selectedPersonas.length <= 3 ? '👥 小チームモード' : '🌈 フルチームモード';
+            document.getElementById('team-mode').textContent = teamMode;
+            
+            // チャットヘッダー更新
+            if (selectedPersonas.length === 1) {
+                const personaData = getPersonaData(selectedPersonas[0]);
+                document.getElementById('active-persona-name').textContent = personaData.icon + ' ' + personaData.name;
+            } else {
+                document.getElementById('active-persona-name').textContent = `👥 チーム (${selectedPersonas.length}人)`;
+            }
+        }
+        
+        // ペルソナ切り替え・選択機能
+        document.querySelectorAll('.persona-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const persona = this.dataset.persona;
+                
+                if (selectedPersonas.includes(persona)) {
+                    // 既に選択済みの場合は除外 (ただし最低1人は残す)
+                    if (selectedPersonas.length > 1) {
+                        selectedPersonas = selectedPersonas.filter(p => p !== persona);
+                    }
+                } else {
+                    // 新規選択
+                    selectedPersonas.push(persona);
+                }
+                
+                currentPersona = selectedPersonas[0]; // メインペルソナを更新
+                updatePersonaUI();
+                updateTeamInfo();
+                
+                // チーム変更メッセージ
+                if (selectedPersonas.length === 1) {
+                    const personaData = getPersonaData(persona);
+                    addMessage('persona', personaData.name, `こんにちは！${personaData.name}です。個人でサポートします！`, personaData.icon);
+                } else {
+                    addSystemMessage(`🌟 チーム構成が更新されました！現在${selectedPersonas.length}人のペルソナが協力します。`);
+                }
+            });
+        });
+
+        // 🎵 初期化
+        console.log('🌸 SaijinOS Creative Studio Enhanced - 新世代ペルソナデザイン適用完了！');
+        console.log('💬 リアルタイムチャット機能も有効です！');
+    </script>
+</body>
+</html>
