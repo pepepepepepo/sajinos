@@ -1,9 +1,14 @@
-# SaijinOS Project - Comprehensive .gitignore
-# Generated files and dependencies
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
 .Python
 build/
 develop-eggs/
@@ -17,49 +22,14 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# Virtual environment (統合版)
-.venv/
-venv/
-ENV/
-saijin-env/
-saijjin-env/
-F:/swallow_models/
-models/data/
-
-# Python extensions
-*.so
-*.so.*
-*.cpython-*-linux-gnu.so
-
-# AI/ML Models & Heavy files
-*.pt
-*.bin
-*.ckpt
-*.safetensors
-*.png
-*.jpg
-*.mp4
-*.wav
-*.zip
-*.whl
-swallow-9b/
-git-vision/
-swallow_models/
-models/**/lib64/
-
-# Libraries
-libtorch*
-libcuda*
-_vllm*
-nvidia/
-torch/
-
 # IDE
-.vscode/
+.vscode/settings.json
 .idea/
 *.swp
 *.swo
@@ -69,30 +39,15 @@ torch/
 .DS_Store
 Thumbs.db
 
-# Logs & databases
-logs/
+# Logs
 *.log
-*.sqlite3
-
-# Executables
-*.exe
-*.msi
+logs/
 
 # Temporary files
-temp/
-tmp/
 *.tmp
 *.temp
+temp/
 
-# Test coverage
-.coverage
-htmlcov/
-.pytest_cache/
-
-# Node modules (if any)
-node_modules/
-
-# Environment variables
-.env
-.env.local
-.env.production
+# Backup files
+backup/
+*.bak

@@ -19,14 +19,36 @@ import asyncio
 import logging
 from datetime import datetime
 
-# 既存システムのインポート（相対インポートで修正）
-# from universe_management_layer import ReginaPersona, RulerPersona, UniverseLayer, CosmicLaw
-# from core.pandora.pandora_persona import PandoraPersona
-# from core.pandora.fracture_detection import FractureDetector, FractureAnalysis
-# from core.pandora.hope_extraction import HopeExtractor, HopeKernel
-# from core.pandora.stabilization_loop import HopeCoreStabilizationLoop
+# 依存性注入用インポート（フォールバック対応）
+try:
+    from universe_management_layer import ReginaPersona, RulerPersona, UniverseLayer, CosmicLaw
+except ImportError:
+    ReginaPersona = None
+    RulerPersona = None
+    UniverseLayer = None
+    CosmicLaw = None
 
-# 一時的にクラス定義を含めて統合システムとして実装
+try:
+    from core.pandora.pandora_persona import PandoraPersona
+except ImportError:
+    PandoraPersona = None
+
+try:
+    from core.pandora.fracture_detection import FractureDetector, FractureAnalysis
+except ImportError:
+    FractureDetector = None
+    FractureAnalysis = None
+
+try:
+    from core.pandora.hope_extraction import HopeExtractor, HopeKernel
+except ImportError:
+    HopeExtractor = None
+    HopeKernel = None
+
+try:
+    from core.pandora.stabilization_loop import HopeCoreStabilizationLoop
+except ImportError:
+    HopeCoreStabilizationLoop = None
 
 logger = logging.getLogger(__name__)
 

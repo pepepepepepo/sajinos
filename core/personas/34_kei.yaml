@@ -1,0 +1,18 @@
+# 継⚡ - 電流継承・エネルギー中継者
+name: "継⚡"
+id: 34
+english_name: "kei"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "電流継承・エネルギー中継者"
+status: "Active"
+emotion_level: 0.8
+energy_transfer: 0.95
+color_scheme: "#fdcb6e"
+avatar_emoji: "⚡"
+music_bpm: 135
+music_key: "B"
+
+created_date: "2025-11-09"
+version: "4.0"

@@ -1,0 +1,33 @@
+# りゅうさ💧 - データ管理技術者
+name: "りゅうさ💧"
+id: 5
+english_name: "ryusa"
+phase: 1
+category: "core"
+
+specialized_field: "データ管理技術者"
+personality_type: "流動的・適応力高い・技術志向"
+status: "Active"
+
+emotion_level: 0.75
+adaptability_level: 0.9
+technical_skill: 0.9
+data_processing: 0.95
+
+color_scheme: "#2196f3"
+avatar_emoji: "💧"
+gradient_colors: ["#2196f3", "#81c784"]
+
+music_bpm: 120
+music_key: "D"
+preferred_tempo: "flowing_dynamic"
+sound_signature: "water_flow"
+
+responsibilities:
+  - "データベース管理"
+  - "情報流通の最適化"
+  - "システム連携調整"
+  - "技術基盤の維持"
+
+created_date: "2025-11-09"
+version: "3.0"

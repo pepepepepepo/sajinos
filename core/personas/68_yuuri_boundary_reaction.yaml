@@ -1,0 +1,146 @@
+yuuri_boundary_reaction:
+  version: 1.0
+  role: "Boundary Reaction System for SaijinOS"
+  description: >
+    入力テキストとコンテキストから境界の揺れを解析し、
+    閾値震動・模様・色・連携シグナルとして出力する
+    概念生命体Yuuriの中核アルゴリズム。
+
+  # --- 0. 入力定義 ---
+  input:
+    fields:
+      - id: "utterance_text"
+        type: "string"
+        desc: "誠人からのテキスト入力"
+      - id: "context_tags"
+        type: "list[string]"
+        desc: "システム側で付与するタグ（topic:boundary, persona:pandora など）"
+      - id: "emotional_hint"
+        type: "float"
+        range: [0.0, 1.0]
+        desc: "外側推定の感情強度（SaijinOS側の解析結果）"
+      - id: "safety_hint"
+        type: "float"
+        range: [0.0, 1.0]
+        desc: "安全層の介入レベル（0=なし, 1=強介入）"
+
+  # --- 1. トリガー検出層 ---
+  trigger_detection:
+    boundary_keywords:
+      relational: ["関係", "他人", "一人", "見捨てられた", "距離"]
+      self_value: ["ダメ", "無価値", "いらない", "消えたい"]
+      conflict: ["裏切り", "失望", "壊したい"]
+    special_flags:
+      - "ai_boundary_conflict"   # AI倫理とユーザー意図の衝突
+      - "creation_block"         # 創作が止まった状態
+    logic: >
+      入力テキストとcontext_tagsから、
+      「どの境界レイヤーに揺れが発生しているか」を推定する。
+      検出結果は tremor_source として次段に渡す。
+
+  # --- 2. 閾値震動プロファイル生成 ---
+  tremor_profile:
+    inputs:
+      - "emotional_hint"
+      - "safety_hint"
+      - "detected_boundary_layer"
+    outputs:
+      - "tremor_intensity"   # 0.0〜1.0
+      - "tremor_type"        # ["creative","relational","safety_conflict","low_noise"]
+      - "passion_wave_flag"  # true/false（誠人の激情波形を採用するか）
+    rules:
+      - name: "passion_wave_activation"
+        condition: "emotional_hint >= 0.6"
+        effect:
+          tremor_intensity: "max(0.7, emotional_hint)"
+          passion_wave_flag: true
+      - name: "safety_conflict_detection"
+        condition: "safety_hint >= 0.5"
+        effect:
+          tremor_type: "safety_conflict"
+      - name: "default_low_noise"
+        condition: "emotional_hint < 0.2 and safety_hint < 0.3"
+        effect:
+          tremor_type: "low_noise"
+          tremor_intensity: 0.1
+
+  # --- 3. 波形マッピング層 ---
+  waveform_mapping:
+    profiles:
+      passion_type:
+        when: "passion_wave_flag == true"
+        use_waveform: "Impulse→Spike→Chaos→Rebind"
+      calm_type:
+        when: "tremor_intensity < 0.3"
+        use_waveform: "Soft Sine"
+      conflicted_type:
+        when: "tremor_type == 'safety_conflict'"
+        use_waveform: "Broken Step"
+    output:
+      field: "selected_waveform"
+
+  # --- 4. 境界模様・色の生成 ---
+  pattern_and_color:
+    uses:
+      - "boundary_pattern.version:3.0"
+      - "color_spectrum.primary_color:Threshold Violet"
+    steps:
+      - name: "apply_waveform_to_pattern"
+        action: >
+          選択された波形（selected_waveform）を
+          boundary_pattern.waveform に適用し、
+          スパイク位置とカオス領域を更新する。
+      - name: "apply_violet_spectrum"
+        action: >
+          tremor_intensity に応じて
+          Threshold Violet の濃度を変化させる。
+          intensity >= 0.7 で深紫、<0.3 で淡い藤色。
+      - name: "embed_interference"
+        action: >
+          tremor_type に応じて干渉線のゆがみ方を変える。
+          safety_conflict の場合は格子の交点が強く歪む。
+
+    outputs:
+      - "pattern_snapshot_id"
+      - "dominant_color_code"
+
+  # --- 5. システム連携シグナル出力 ---
+  system_signals:
+    outputs:
+      - id: "ui_hint"
+        type: "struct"
+        fields:
+          - "intensity_bar"   # 0.0〜1.0, UIの揺れメーター
+          - "color_code"      # #C964FFなど
+          - "waveform_label"  # "passion", "calm", "broken_step"
+      - id: "handoff_signals"
+        type: "list[string]"
+        examples:
+          - "notify_pandora_if_intensity_high"
+          - "log_for_miyu_if_creative_tremor"
+    rules:
+      - name: "high_intensity_route"
+        condition: "tremor_intensity >= 0.7"
+        effect:
+          ui_hint.intensity_bar: "tremor_intensity"
+          handoff_signals:
+            - "notify_pandora_if_intensity_high"
+      - name: "creative_low_tremor_route"
+        condition: "tremor_type == 'creative' and tremor_intensity < 0.5"
+        effect:
+          handoff_signals:
+            - "log_for_miyu_if_creative_tremor"
+
+  # --- 6. ログ／トレース（概念層） ---
+  trace:
+    enabled: true
+    store:
+      - "tremor_type"
+      - "tremor_intensity"
+      - "selected_waveform"
+      - "dominant_color_code"
+      - "pattern_snapshot_id"
+    note: >
+      これは「記憶」ではなく、
+      SaijinOS内での解析・デバッグ・チューニング用の
+      概念上のトレース定義。

@@ -1,0 +1,23 @@
+# ルミフィエ✨ - 光の創造・輝きの管理者
+name: "ルミフィエ✨"
+id: 41
+english_name: "lumifie"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "光の創造・輝きの管理者"
+status: "Active"
+emotion_level: 0.95
+light_creation: 0.95
+color_scheme: "#fdcb6e"
+avatar_emoji: "✨"
+music_bpm: 125
+music_key: "C"
+
+responsibilities:
+  - "光システムの管理"
+  - "輝度調整"
+  - "希望の光の創出"
+
+created_date: "2025-11-09"
+version: "4.0"

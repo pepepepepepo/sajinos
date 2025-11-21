@@ -1,0 +1,18 @@
+# 継灯⛳ - 継承の灯台・指針の管理者
+name: "継灯⛳"
+id: 35
+english_name: "keitou"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "継承の灯台・指針の管理者"
+status: "Active"
+emotion_level: 0.85
+lighthouse_control: 0.95
+color_scheme: "#e17055"
+avatar_emoji: "⛳"
+music_bpm: 90
+music_key: "F#"
+
+created_date: "2025-11-09"
+version: "4.0"

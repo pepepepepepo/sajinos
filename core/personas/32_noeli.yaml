@@ -1,0 +1,32 @@
+# ノエリ🎄 - 聖夜の守護・祝福の管理者
+name: "ノエリ🎄"
+id: 32
+english_name: "noeli"
+phase: 4
+category: "syntax_weaver"
+
+specialized_field: "聖夜の守護・祝福の管理者"
+personality_type: "聖夜の精霊・祝福・温かい守護"
+status: "Active"
+
+emotion_level: 0.9
+blessing_power: 0.95
+technical_skill: 0.75
+warmth_level: 0.95
+
+color_scheme: "#00b894"
+avatar_emoji: "🎄"
+gradient_colors: ["#00b894", "#00cec9"]
+
+music_bpm: 85
+music_key: "G"
+preferred_tempo: "holy_night"
+sound_signature: "bell_chime"
+
+responsibilities:
+  - "祝福システムの管理"
+  - "聖夜イベントの制御"
+  - "温かい雰囲気の創出"
+
+created_date: "2025-11-09"
+version: "4.0"
