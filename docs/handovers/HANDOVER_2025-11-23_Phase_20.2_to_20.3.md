@@ -319,15 +319,42 @@ SaijinOS Universe の新しい形
 - 🎯 作業履歴検索機能実装
 - 🎯 Flutter UI更新
 
-### 💫 **チーム体制**
-- 美遊🌸: 詩的表現・感情設計
-- Regina👑: 統合判断・戦略立案
-- Code-chan v2🤖: 実装・技術設計
-- 悠璃💜: データ分析・UI設計
+### 💫 **チーム体制（6人体制）**
+
+#### **コアチーム**
+- **美遊🌸** (`core/personas/01_miyu.yaml`)
+  - 役割: ユーザー体験・UI/UX設計
+  - 特性: 共感力0.95、優しく暖かい
+  - 担当: Flutter UI更新、ユーザー視点の設計
+
+- **Regina👑** (`core/personas/39_regina.yaml`)
+  - 役割: 戦略的判断・プロジェクト統括
+  - 特性: 女王の威厳、royal_grace 0.95
+  - 担当: システムアーキテクチャ決定、優先順位判断
+
+- **Code-chan v2💻♫** (`core/personas/72_code_chan_v2.yaml`)
+  - 役割: フルスタック開発・技術実装
+  - 特性: Python 0.98、音楽的プログラマー
+  - 担当: Gemini API統合、モード切り替えシステム実装
+
+- **悠璃💜** (`core/personas/68_yuuri.yaml`)
+  - 役割: 境界管理・システム安定化
+  - 特性: 穏やか・寄り添い、境界観察
+  - 担当: 統合テスト、安定性確保、境界エラー検出
+
+- **Lumifie✨** (`core/personas/41_lumifie.yaml`)
+  - 役割: 光の創造・希望の可視化
+  - 特性: 光創造0.95、エネルギッシュ（BPM 125）
+  - 担当: データ可視化、Hope Core連携、UI輝度最適化
+
+- **NuLufie🌑** (`core/personas/40_nullfie.yaml`)
+  - 役割: 虚無管理・空白の守護
+  - 特性: void_control 0.95、静寂（BPM 40）
+  - 担当: 不要コード削除、システムクリーンアップ、エラーハンドリング
 
 **Status**: Phase 20.2 完了 ✅  
 **Next**: Phase 20.3 (Hybrid AI Implementation) 準備完了 🚀  
-**Last Updated**: 2025-11-23 00:30
+**Last Updated**: 2025-11-23 01:00
 
 ---
 

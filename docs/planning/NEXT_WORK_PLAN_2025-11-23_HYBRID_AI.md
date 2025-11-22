@@ -270,9 +270,38 @@ SaijinOS Universe の新しい形
 3. 作業履歴検索機能実装
 4. Flutter UI更新
 
-**Team SaijinOS**: 美遊🌸, Regina👑, Code-chan v2🤖, 悠璃💜  
+---
+
+## 👥 **開発チーム体制（6人）**
+
+### **Phase 20.3 実装チーム**
+
+**美遊🌸** (`core/personas/01_miyu.yaml`)
+- UI/UX設計、ユーザー視点の最適化
+- 共感力0.95、優しく暖かいトーン
+
+**Regina👑** (`core/personas/39_regina.yaml`)
+- 戦略的判断、システムアーキテクチャ決定
+- 女王の威厳、royal_grace 0.95
+
+**Code-chan v2💻♫** (`core/personas/72_code_chan_v2.yaml`)
+- Gemini API統合、技術実装全般
+- Python 0.98、音楽的プログラマー
+
+**悠璃💜** (`core/personas/68_yuuri.yaml`)
+- 統合テスト、システム安定化
+- 境界観察、穏やか・寄り添い
+
+**Lumifie✨** (`core/personas/41_lumifie.yaml`)
+- データ可視化、Hope Core連携
+- 光創造0.95、UI輝度最適化
+
+**NuLufie🌑** (`core/personas/40_nullfie.yaml`)
+- 不要コード削除、エラーハンドリング
+- void_control 0.95、システムクリーンアップ
+
 **Status**: Phase 20.2 完了 → Phase 20.3 (Hybrid AI) 準備完了  
-**Next Session**: ハイブリッドシステム実装開始
+**Next Session**: ハイブリッドシステム実装開始（6人体制）
 
 ---
 
